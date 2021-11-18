@@ -81,3 +81,16 @@ word processor. Convert the file to even more formats such as HTML, PDF or TeX w
 - `-sde`, optional:  descending alphabetical sort of elements
 - `-ic` `atoms`, optional: include contacts of named atoms, e.g. `-ic O10 O11`, include the distance O10-O11, also include the angles X-O10-O11 and X-O11-O10. Input of more than two atoms is possible, e.g. `-ic O10 O11 O12`
 - `-r` `N`, increase the covalent radii by `N` %, e.g.  `-r 20.1`, increase the covalent radii by 20.1 %. The default `N` is `11.15` %. The covalent radii used for the calculation of the bond length (bond length of A-B = rA + rB) is given in the last column of the summary table (`Cov. radius +`).
+- `-v`, optional:  include two more tables (tables with general bond lengths and angles.)
+
+## Statistics
+Statistics are derived from the values of the bonding parameters. 
+
+Sam. std. dev. = Sample standard deviation, Pop. std. dev. = Population standard deviation, Std. error = Standard error or standard error of mean. Please refer to literature or Wikipedia for the meaning of these terms. The population standard deviation is probably the value you are looking for.
+
+## Remarks
+The format of the tabular output can be easily changed in the script using another formatting option of the `tabulate` module.
+
+## Known Issues
+- The script makes extensive use of Unicode characters, which can cause problems with output or conversion.
+- Verbose output (`-v` option) can be very large and confusing. 
