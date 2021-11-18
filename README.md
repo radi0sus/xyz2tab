@@ -11,6 +11,7 @@ python3 xyz2tab.py filename.xyz
 ```
 to open the XYZ. It gives the following output:
 
+A tables with general information.
 ```
 -------------------  ------------
 Filename          :  aspirine.xyz
@@ -29,3 +30,13 @@ Covalent Radius + :  11.15 %
 | H         |            8 |               4.48 |             0.31 |               0.34 |
 | O         |            4 |              35.52 |             0.66 |               0.73 |
 ```
+A table of bond lengths. Please note that the number after the element indicates the position in the xyz file. The numbering starts with zero due to ORCA conventions.
+```
+| Atoms   |   Bond length /Å |
+|---------|------------------|
+| C0–C2   |           1.3983 |
+| C0–C5   |           1.4051 |
+| C0–H14  |           1.0893 |
+| ...     | ....             |
+```
+
