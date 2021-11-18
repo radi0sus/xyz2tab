@@ -2,16 +2,16 @@
 # -*- coding: utf-8 -*-
 #xyz2tab
 
-import sys													#stdout
-import argparse												#argument parser
-import re													#regex
-import itertools												#for r-length tuples, in sorted order, no repeated elements
-import pandas as pd											#pandas tables
-import numpy as np											#for calculations
-from scipy.spatial.distance import pdist, squareform			#for the calculations of the distance matrix
-from tabulate import tabulate								#nice table output
-import gemmi													#covalence radii, molecular weight; can be replaced by own or other
-															#covalent radii and mol. weight lists
+import sys                                                  #stdout
+import argparse                                             #argument parser
+import re                                                   #regex
+import itertools	                                            #for r-length tuples, in sorted order, no repeated elements
+import pandas as pd                                         #pandas tables
+import numpy as np                                          #for calculations
+from scipy.spatial.distance import pdist, squareform	        #for the calculations of the distance matrix
+from tabulate import tabulate                               #nice table output
+import gemmi	                                                #covalence radii, molecular weight; can be replaced by own or other
+                                                            #covalent radii and mol. weight lists
 
 #for windows console
 sys.stdout.reconfigure(encoding='utf-8')  
