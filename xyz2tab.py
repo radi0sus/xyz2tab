@@ -5,12 +5,12 @@
 import sys                                                  #stdout
 import argparse                                             #argument parser
 import re                                                   #regex
-import itertools	                                    #for r-length tuples, in sorted order, no repeated elements
+import itertools	                                            #for r-length tuples, in sorted order, no repeated elements
 import pandas as pd                                         #pandas tables
 import numpy as np                                          #for calculations
-from scipy.spatial.distance import pdist, squareform	    #for the calculations of the distance matrix
+from scipy.spatial.distance import pdist, squareform	        #for the calculations of the distance matrix
 from tabulate import tabulate                               #nice table output
-import gemmi	                                            #covalence radii, molecular weight; can be replaced by own or other
+import gemmi	                                                #covalence radii, molecular weight; can be replaced by own or other
                                                             #covalent radii and mol. weight lists
 
 #for windows console
@@ -66,8 +66,8 @@ def calc_angle(xyzarr, i, j, k):
 
 #argument parser
 parser = argparse.ArgumentParser(
-		prog='xyz-reader', 
-		description = "Print bond lengths, angles and more from xyz files.")
+		prog='xyz2tab', 
+		description = "Print bond, lengths angles and more from xyz files.")
 
 #filename is required
 parser.add_argument("filename", 
@@ -119,7 +119,7 @@ parser.add_argument('-ic','--includeCon',
 parser.add_argument('-r','--radius',
 	default=11.15,
 	type=float,
-	help='enlarge atomic radii by x%, e.g. -r 15.2, default is 11.15%')
+	help='enlarge atomic radii by x %%, e.g. -r 15.2, default is 11.15 %%')
 
 #verbose
 parser.add_argument('-v','--verbose',
