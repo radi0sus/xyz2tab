@@ -11,7 +11,7 @@ python3 xyz2tab.py filename.xyz
 ```
 to open the XYZ. It gives the following output:
 
-Tables with general information.
+Tables with general information. Please note that the covalent radius (`Cov. radius /Å`) has been increased by `Covalent Radius + :11.15 %` and bonds have been calculated by the sum of the radii given in the column `Cov. radius + /Å`.
 ```
 -------------------  ------------
 Filename          :  aspirine.xyz
