@@ -10,3 +10,20 @@ A Python 3 script for printing tables of bond lengths and angles from xyz files 
 python3 xyz2tab.py filename.xyz
 ```
 to open the XYZ. It gives the following output:
+
+-------------------  ------------
+Filename          :  aspirine.xyz
+Number of atoms   :  21
+Sum formula       :  C₉H₈O₄
+Formula weight    :  180.16 g/mol
+Excluded atoms    :  None
+Excluded elements :  None
+Included contacts :  None
+Covalent Radius + :  11.15 %
+-------------------  ------------
+
+| Element   |   Atom count |   Mass fraction /% |   Cov. radius /Å |   Cov. radius + /Å |
+|-----------|--------------|--------------------|------------------|--------------------|
+| C         |            9 |              60.00 |             0.73 |               0.81 |
+| H         |            8 |               4.48 |             0.31 |               0.34 |
+| O         |            4 |              35.52 |             0.66 |               0.73 |
