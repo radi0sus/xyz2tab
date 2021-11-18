@@ -11,6 +11,7 @@ python3 xyz2tab.py filename.xyz
 ```
 to open the XYZ. It gives the following output:
 
+```console
 -------------------  ------------
 Filename          :  aspirine.xyz
 Number of atoms   :  21
@@ -27,3 +28,4 @@ Covalent Radius + :  11.15 %
 | C         |            9 |              60.00 |             0.73 |               0.81 |
 | H         |            8 |               4.48 |             0.31 |               0.34 |
 | O         |            4 |              35.52 |             0.66 |               0.73 |
+```
