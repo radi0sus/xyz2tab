@@ -89,7 +89,8 @@ Statistics are derived from the values of the bonding parameters.
 Sam. std. dev. = Sample standard deviation, Pop. std. dev. = Population standard deviation, Std. error = Standard error or standard error of mean. Please refer to literature or Wikipedia for the meaning of these terms. The population standard deviation is probably the value you are looking for.
 
 ## Remarks
-The format of the tabular output can be easily changed in the script using another formatting option of the `tabulate` module.
+- The format of the tabular output can be easily changed in the script using another formatting option of the `tabulate` module.
+- The `gemmi` library is only needed for covalent radii and molecular weigths.
 
 ## Known Issues
 - The script makes extensive use of Unicode characters, which can cause problems with output or conversion.
