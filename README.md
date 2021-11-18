@@ -11,7 +11,7 @@ python3 xyz2tab.py filename.xyz
 ```
 to open the XYZ. It gives the following output:
 
-```console
+```
 -------------------  ------------
 Filename          :  aspirine.xyz
 Number of atoms   :  21
