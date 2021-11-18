@@ -79,4 +79,5 @@ word processor. Convert the file to even more formats such as HTML, PDF or TeX w
 - `-sd`, optional: sort values for bond lengths and angles descending
 - `-sae`, optional: ascending alphabetical sort of elements
 - `-sde`, optional:  descending alphabetical sort of elements
-- `-ic` `N N`, optional: include contacts of named atoms, e.g. `-ic O10 O11`, include the distance of O10 to O11, also include the angles X-O10-O11 and X-O11-O10.
+- `-ic` `atoms`, optional: include contacts of named atoms, e.g. `-ic O10 O11`, include the distance O10-O11, also include the angles X-O10-O11 and X-O11-O10. Input of more than two atoms is possible, e.g. `-ic O10 O11 O12`
+- `-r` `N`, increase the covalent radii by `N` %, e.g.  `-r 20.1`, increase the covalent radii by 20.1 %. The default `N` is `11.15` %. The covalent radii used for the calculation of the bond length (bond length = rA + rB) is given in the last column of the summary table.
