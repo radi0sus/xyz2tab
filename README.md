@@ -72,3 +72,11 @@ This will convert the markdown file to a docx file. Open it with your favorite
 word processor. Convert the file to even more formats such as HTML, PDF or TeX with PANDOC.
 
 ## Command-line options
+- `filename` , required: filename, e.g. `my_xyz.xyz`, first two lines will be ignored, file format must be `element x y z`, cartesian coordinates, units in Å
+- `-ea` `atom(s)`, optional: exclude atoms, e.g. `-ea H18` exclude bonds to H18, `-ea H18 H19` exclude bonds to H18 and H19
+- `-ee` `elements(s)`,  optional: exlude elements,  e.g. `-ee H` exclude bonds to hydrogen, `-ea H O` exclude bonds to hydrogen and oxygen
+- `-sa`, optional: sort values for bond lengths and angles ascending
+- `-sd`, optional: sort values for bond lengths and angles descending
+- `-sae`, optional: ascending alphabetical sort of elements
+- `-sde`, optional:  descending alphabetical sort of elements
+- `-ic` `N N`, optional: include contacts of named atoms, e.g. `-ic O10 O11`, include the distance of O10 to O11, also include the angles X-O10-O11 and X-O11-O10.
