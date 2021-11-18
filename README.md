@@ -14,7 +14,7 @@ to open the XYZ. It gives the following output:
 Tables with general information. Please note that the covalent radius (column `Cov. radius`) has been increased by `Covalent Radius +  = 11.15 %` and bonds have been calculated by the sum of the radii given in the column `Cov. radius +`.
 ```
 -------------------  ------------
-Filename          :  aspirine.xyz
+Filename          :  asa.xyz
 Number of atoms   :  21
 Sum formula       :  C₉H₈O₄
 Formula weight    :  180.16 g/mol
