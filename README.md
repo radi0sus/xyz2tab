@@ -166,7 +166,7 @@ Covalent Radius + :  11.15 %
 
 ### Example 2:
 ```console
-python3 xyz2tab.py asa.xyz -ee H -ic O11 O12  -sa -v
+python3 xyz2tab.py asa.xyz -ee H -ic O11 O12 -sa -v
 ```
 Open `asa.xyz`, exclude bonds to hydrogen atoms (`-ee H`), include the contat O11 O12 (`-ic O11 O12`), sort values ascending (`-sa`) and show verbose tables (`-v`).
 
