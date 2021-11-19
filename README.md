@@ -19,7 +19,7 @@ Number of atoms   :  21
 Sum formula       :  C₉H₈O₄
 Formula weight    :  180.16 g/mol
 Excluded atoms    :  None
-Excluded elements :  None
+Excluded elements :  H
 Included contacts :  None
 Covalent Radius + :  11.15 %
 -------------------  ------------
