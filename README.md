@@ -104,7 +104,7 @@ python3 cifpal.py asa.xyz
 ```
 Open `asa.xyz` and show tables.
 
-
+<code>
 -------------------  ------------
 Filename          :  asa.xyz
 Number of atoms   :  21
@@ -115,6 +115,7 @@ Excluded elements :  None
 Included contacts :  None
 Covalent Radius + :  11.15 %
 -------------------  ------------
+</code>
 
 | Element   |   Atom count |   Mass fraction /% |   Cov. radius /Å |   Cov. radius + /Å |
 |-----------|--------------|--------------------|------------------|--------------------|
