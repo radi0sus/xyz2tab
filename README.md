@@ -100,7 +100,7 @@ Sam. std. dev. = Sample standard deviation, Pop. std. dev. = Population standard
 
 ### Example 1:
 ```console
-python3 cifpal.py asa.xyz -ee H
+python3 xyz2tab.py asa.xyz -ee H
 ```
 Open `asa.xyz`, exclude bonds to hydrogen atoms (`-ee H`) and show tables.
 
@@ -164,4 +164,38 @@ Covalent Radius + :  11.15 %
 
 ### Example 2:
 ```console
-python3 cifpal.py 2103396.cif Cu1 Cu2 -ee K -f 12
+python3 xyz2tab.py asa.xyz -ee H -ic O11 O12  -sa -v
+```
+Open `asa.xyz`, exclude bonds to hydrogen atoms (`-ee H`), include the contat O11 O12 (`-ic O11 O12`), sort values ascending (`-sa`) and show verbose tables (`-v`).
+
+...
+
+| Atoms   |   Bond length /Å |
+|---------|------------------|
+| C7–O9   |           1.2189 |
+| C8–O10  |           1.2241 |
+| ...     | ...              |
+| C4–C8   |           1.4993 |
+| O11–O12 |           2.6355 |
+
+| Atoms   | Bond lengths /Å                                                |
+|---------|----------------------------------------------------------------|
+| C–O     | 1.2189, 1.2241, 1.3438, 1.3900, 1.3969                         |
+| C–C     | 1.3933, 1.3936, 1.3983, 1.4006, 1.4013, 1.4051, 1.4850, 1.4993 |
+| O–O     | 2.6355                                                         |
+
+| Atoms   | Bond lengths /Å   |
+|---------|-------------------|
+| C–O     | 1.2189 - 1.3969   |
+| C–C     | 1.3933 - 1.4993   |
+| O–O     | 2.6355            |
+
+...
+
+| Atoms      |   Angle /° |
+|------------|------------|
+| C6–O12–O11 |      84.47 |
+| C8–O12–O11 |      89.59 |
+| C7–O11–O12 |      92.58 |
+
+...
