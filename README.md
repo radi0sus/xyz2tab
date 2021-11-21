@@ -102,6 +102,14 @@ Sam. std. dev. = Sample standard deviation, Pop. std. dev. = Population standard
 
 ### Example 1:
 ```console
+python3 xyt2tab.py asa.xyz
+```
+Open `asa.xyz` and show tables.
+
+![show](/examples/example1.gif)
+
+### Example 2:
+```console
 python3 xyz2tab.py asa.xyz -ee H
 ```
 Open `asa.xyz`, exclude bonds to hydrogen atoms (`-ee H`) and show tables.
@@ -166,7 +174,7 @@ Covalent Radius + :  11.15 %
 | C–O–C   |       1 |    112.52 |      112.52 |           nan    |             0    |       nan    |     nan    |
 
 
-### Example 2:
+### Example 3:
 ```console
 python3 xyz2tab.py asa.xyz -ee H -ic O11 O12 -sa -v
 ```
