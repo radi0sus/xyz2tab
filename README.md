@@ -92,6 +92,7 @@ Sam. std. dev. = Sample standard deviation, Pop. std. dev. = Population standard
 - The format of the tabular output can be easily changed in the script using another formatting option of the `tabulate` module.
 - With the standard covalent radii, many potential bonds will not be considered. An 8% larger covalent radius includes almost all expected bonds. All C-C distances below 1.6 Å are considered as bonds, for example. 
 - For extreme cases (like in Jahn-Teller distorted geometries), radii can be increased even more (`-r` option) or contacts can be defined (`-ic` option).
+- `-r 0` uses the unaltered covalent radii.
 
 ## Known Issues
 - The script makes extensive use of Unicode characters, which can cause problems with output or conversion.
