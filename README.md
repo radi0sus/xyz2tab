@@ -2,7 +2,7 @@
 A Python 3 script for printing tables of bond lengths and angles from xyz files to the console. The script furthermore calculates average values, including a variety of statistical parameters, and is able to group bonding parameters. Named atoms or elements can be excluded from bond or angle tables. Contacts of two or more atoms can be included. The output should result in nicely rendered mark down tables. 
 
 ## External modules
- `gemmi`,  `pandas`, `numpy`, `scipy`, `tabulate`
+`pandas`, `numpy`, `scipy`, `tabulate`
  
 ## Quick start
  Start the script with:
@@ -11,7 +11,7 @@ python3 xyz2tab.py filename.xyz
 ```
 to open the XYZ. It gives the following output:
 
-Tables with general information. Please note that the covalent radius (column `Cov. radius`) has been increased by `Covalent Radius +  = 11.15 %` and bonds have been calculated by the sum of the radii given in the column `Cov. radius +`.
+Tables with general information. Please note that the covalent radius (column `Cov. radius`) has been increased by `Covalent Radius +  = 8 %` and bonds have been calculated by the sum of the radii given in the column `Cov. radius +`.
 ```
 -------------------  ------------
 Filename          :  asa.xyz
@@ -21,14 +21,14 @@ Formula weight    :  180.16 g/mol
 Excluded atoms    :  None
 Excluded elements :  None
 Included contacts :  None
-Covalent Radius + :  11.15 %
+Covalent Radius + :  8.00 %
 -------------------  ------------
 
 | Element   |   Atom count |   Mass fraction /% |   Cov. radius /Å |   Cov. radius + /Å |
 |-----------|--------------|--------------------|------------------|--------------------|
-| C         |            9 |              60.00 |             0.73 |               0.81 |
-| H         |            8 |               4.48 |             0.31 |               0.34 |
-| O         |            4 |              35.52 |             0.66 |               0.73 |
+| C         |            9 |              60.00 |             0.76 |               0.82 |
+| H         |            8 |               4.48 |             0.31 |               0.33 |
+| O         |            4 |              35.52 |             0.66 |               0.71 |
 ```
 A table of bond lengths. Please note that the number after the element indicates the position in the xyz file. The numbering starts with zero due to [ORCA](https://orcaforum.kofo.mpg.de) conventions.
 ```
@@ -80,7 +80,7 @@ word processor. Convert the file to even more formats such as HTML, PDF or TeX w
 - `-sae`, optional: ascending alphabetical sort of elements
 - `-sde`, optional:  descending alphabetical sort of elements
 - `-ic` `atoms`, optional: include contacts of named atoms, e.g. `-ic O10 O11`, include the distance O10-O11, also include the angles X-O10-O11 and X-O11-O10. Input of more than two atoms is possible, e.g. `-ic O10 O11 O12`
-- `-r` `N`, increase the covalent radii by `N` %, e.g.  `-r 20.1`, increase the covalent radii by 20.1 %. The default `N` is `11.15` %. The covalent radii used for the calculation of the bond length (bond length of A-B = rA + rB) is given in the last column of the summary table (`Cov. radius +`).
+- `-r` `N`, increase the covalent radii by `N` %, e.g.  `-r 20.1`, increase the covalent radii by 20.1 %. The default `N` is `8` %. The covalent radii used for the calculation of the bond length (bond length of A-B = rA + rB) is given in the last column of the summary table (`Cov. radius +`).
 - `-v`, optional:  include two more tables (tables with general bond lengths and angles)
 
 ## Statistics
@@ -90,8 +90,7 @@ Sam. std. dev. = Sample standard deviation, Pop. std. dev. = Population standard
 
 ## Remarks
 - The format of the tabular output can be easily changed in the script using another formatting option of the `tabulate` module.
-- The `gemmi` library is only needed for covalent radii and molecular weigths.
-- With the standard covalent radii, many potential bonds will not be considered. An 11% larger covalent radius includes almost all expected bonds. All C-C distances below 1.6 Å are considered as bonds, for example. 
+- With the standard covalent radii, many potential bonds will not be considered. An 8% larger covalent radius includes almost all expected bonds. All C-C distances below 1.6 Å are considered as bonds, for example. 
 - For extreme cases (like in Jahn-Teller distorted geometries), radii can be increased even more (`-r` option) or contacts can be defined (`-ic` option).
 
 ## Known Issues
