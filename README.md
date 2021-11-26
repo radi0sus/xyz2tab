@@ -102,9 +102,9 @@ Sam. std. dev. = Sample standard deviation, Pop. std. dev. = Population standard
 
 ### Example 1:
 ```console
-python3 xyt2tab.py asa.xyz
+python3 xyt2tab.py formaldehyde.xyz
 ```
-Open `asa.xyz` and show tables.
+Open `formaldehyde.xyz` and show tables... Several options are shown.
 
 ![show](/examples/example1b.gif)
 
