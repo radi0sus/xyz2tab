@@ -106,7 +106,7 @@ python3 xyt2tab.py asa.xyz
 ```
 Open `asa.xyz` and show tables.
 
-![show](/examples/example1.gif)
+![show](/examples/example1b.gif)
 
 ### Example 2:
 ```console
