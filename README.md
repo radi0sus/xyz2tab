@@ -218,7 +218,7 @@ Open `asa.xyz`, exclude bonds to hydrogen atoms (`-ee H`), include the contat O1
 ```console
 python3 xyz2tab.py asa.xyz -d C6 O12 C8 O10
 ```
-Open `asa.xyz` and calulcate the dihedral angle C6-O12_C8-O10.
+Open `asa.xyz` and calulcate the dihedral angle C6-O12-C8-O10.
 
 ...
 ```
