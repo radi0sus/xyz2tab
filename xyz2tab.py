@@ -5,10 +5,10 @@
 import sys                                                      #stdout
 import argparse                                                 #argument parser
 import re                                                       #regex
-import itertools	                                                #for r-length tuples, in sorted order, no repeated elements
+import itertools	                                        #for r-length tuples, in sorted order, no repeated elements
 import pandas as pd                                             #pandas tables
 import numpy as np                                              #for calculations
-from scipy.spatial.distance import pdist, squareform	, cosine    #for the calculations of the distance matrix and angles (cosine)
+from scipy.spatial.distance import pdist, squareform, cosine    #for the calculations of the distance matrix and angles (cosine)
 from tabulate import tabulate                                   #nice table output
 #import gemmi	                                                #covalence radii, molecular weight
 
