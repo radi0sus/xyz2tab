@@ -2,15 +2,15 @@
 # -*- coding: utf-8 -*-
 #xyz2tab
 
-import sys                                                   #stdout
-import argparse                                              #argument parser
-import re                                                    #regex
-import itertools	                                     #for r-length tuples, in sorted order, no repeated elements
-import pandas as pd                                          #pandas tables
-import numpy as np                                           #for calculations
-from scipy.spatial.distance import pdist, squareform, cosine #for the calculations of the distance matrix and angles (cosine)
-from tabulate import tabulate                                #nice table output
-#import gemmi	                                             #covalence radii, molecular weight
+import sys                                                      #stdout
+import argparse                                                 #argument parser
+import re                                                       #regex
+import itertools	                                                #for r-length tuples, in sorted order, no repeated elements
+import pandas as pd                                             #pandas tables
+import numpy as np                                              #for calculations
+from scipy.spatial.distance import pdist, squareform	, cosine    #for the calculations of the distance matrix and angles (cosine)
+from tabulate import tabulate                                   #nice table output
+#import gemmi	                                                #covalence radii, molecular weight
 
 #for windows console
 sys.stdout.reconfigure(encoding='utf-8')  
@@ -111,7 +111,7 @@ def dm_to_series1(df):
 	#return and drop all nan
 	return df.unstack().dropna()
 
-#calculate angle from 3 vectors / atomic coordinates: j(x,y,z); k(x,y,z); l(x,y,z) 
+#calculate angle from 3 vectors / atomic coordinates: i(x,y,z); j(x,y,z); k(x,y,z) 
 #xyzarr is the array of all atomic coordinates
 def calc_angle(xyzarr, i, j, k):
 	rij = xyzarr[i] - xyzarr[j]
@@ -124,6 +124,20 @@ def calc_angle(xyzarr, i, j, k):
 	theta = cosine(rij,rkj)
 	theta = np.arccos(1-theta)
 	return 	np.degrees(theta)
+
+#calculate the dihedral angle from 4 vectors / atomic coordinates: i(x,y,z); j(x,y,z); k(x,y,z); l(x,y,z)
+def calc_d_angle(xyzarr, i, j, k, l):
+	#no warning if division by zero
+	np.seterr(invalid='ignore')
+	rji = -1*(xyzarr[j] - xyzarr[i])
+	rkj = xyzarr[k] - xyzarr[j]
+	rlk = xyzarr[l] - xyzarr[k]
+	rkj /= np.linalg.norm(rkj)
+	v = rji - np.dot(rji, rkj)*rkj
+	w = rlk - np.dot(rlk, rkj)*rkj
+	x = np.dot(v, w)
+	y = np.dot(np.cross(rkj, v), w)
+	return 	np.degrees(np.arctan2(y,x))
 
 #argument parser
 parser = argparse.ArgumentParser(
@@ -175,6 +189,12 @@ parser.add_argument('-ic','--includeCon',
 	nargs="+",
 	type=str,
 	help='include contacts, e.g. -ee C0 C11 or -ee C0 C11 N14')
+
+#include contacts
+parser.add_argument('-d','--dihedral',
+	nargs=4,
+	type=str,
+	help='calculate the dihedral angle of 4 atoms, e.g. -d C0 C11 C12 N13')
 
 #include contacts
 parser.add_argument('-r','--radius',
@@ -269,6 +289,7 @@ print(tabulate(info_df,
 			tablefmt='github',
 			floatfmt=(".2f"),
 			showindex=False))
+
 #calculate the full distance matrix & put to square form, e.g.:
 #
 #   C0  C1  C2
@@ -494,8 +515,9 @@ group1 = sel_dist2.groupby('atom1_idx',sort=False)['atom2_idx']
 #group2=sel_dist2.groupby('atom2_idx',sort=False)['atom1_idx']
 
 #xyz array with coordinates of all atoms is needed
-#angle calculation is not as fast as bond length calculation
+#needed for (dihedral) angle calculation
 xyzarr = xyz_df.iloc[:,3:6].to_numpy()
+#angle calculation is not as fast as bond length calculation
 
 #make 4 empty lists
 atom1 = list()
@@ -654,3 +676,20 @@ print(tabulate(summary_angle_table_3,
 	 'Pop. std. dev.','Std. error','Skewness'], 
 	  tablefmt='github',
 	  showindex=False))
+	
+#print the dihedral angle on request
+if args.dihedral:
+	a1=xyz_df.index[xyz_df['atom1_idx'] == args.dihedral[0]].tolist()
+	a2=xyz_df.index[xyz_df['atom1_idx'] == args.dihedral[1]].tolist()
+	a3=xyz_df.index[xyz_df['atom1_idx'] == args.dihedral[2]].tolist()
+	a4=xyz_df.index[xyz_df['atom1_idx'] == args.dihedral[3]].tolist()
+	try:
+		d_angle = calc_d_angle(xyzarr, *a1, *a2, *a3, *a4)
+	except TypeError:
+		print('')
+		print('Warning! Dihedral angle: One or more atoms could not be found in the input file.')
+		sys.exit(1)
+	print('')
+	print('Dihedral angle ' + args.dihedral[0] + '-' +args.dihedral[1] + '-' + \
+		    args.dihedral[2] + '-' + args.dihedral[3] + ':', f'{d_angle:.2f}°')
+	
