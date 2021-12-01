@@ -212,13 +212,13 @@ parser.add_argument('-d','--dihedral',
 parser.add_argument('-p1','--plane1',
 	nargs='+',
 	type=str,
-	help='calculate the best plane trough selected or all atoms and show the distances to plane 1, e.g. -p1 C0 C11 C12 N13 N14 or -p1 all')
+	help='calculate the best plane through selected or all atoms and show the distances to plane 1, e.g. -p1 C0 C11 C12 N13 N14 or -p1 all')
 
 #calculate the best plane 2
 parser.add_argument('-p2','--plane2',
 	nargs='+',
 	type=str,
-	help='calculate the best plane trough selected atoms and show the distances to plane 1 and 2 and the angle to plane 1, e.g. -p2 C21 C22 C23 N23 N24')
+	help='calculate the best plane through selected atoms and show the distances to plane 1 and 2 and the angle to plane 1, e.g. -p2 C21 C22 C23 N23 N24')
 
 #add +x% to radius
 parser.add_argument('-r','--radius',
@@ -717,7 +717,7 @@ if args.dihedral:
 	print('Dihedral angle ' + args.dihedral[0] + '-' +args.dihedral[1] + '-' + \
 		    args.dihedral[2] + '-' + args.dihedral[3] + ':', f'{d_angle:.2f}°')
 
-#Plane No. 1 trough selected or all atoms on request
+#Plane No. 1 through selected or all atoms on request
 if args.plane1:
 	#empty lists for x,y,z coordinated and atom names of the selected atoms
 	xyz_pl1_arr = []
@@ -757,7 +757,7 @@ if args.plane1:
 	#plane1_df['Distance_abs'] = plane1_df['Distance'].apply(lambda x: abs(x)**2)
 	
 	print('')
-	print('Best-fit Plane 1 trough', len(atom_names1), 'atoms.')
+	print('Best-fit Plane 1 through', len(atom_names1), 'atoms.')
 	
 	#print some plane related parameters
 	#print('Centroid: ', *c1, 'Å')
@@ -772,7 +772,7 @@ if args.plane1:
 	floatfmt=(".4f"),
 	showindex=False))
 	
-#Plane No. 2 trough selected atoms on request
+#Plane No. 2 through selected atoms on request
 if args.plane2:
 	#check ist plane 1 was defined, otherwise exit
 	if not args.plane1:
@@ -816,7 +816,7 @@ if args.plane2:
 	#plane2_df['DistanceP2_abs'] = plane2_df['DistanceP2'].apply(lambda x: abs(x)**2)
 	
 	print('')
-	print('Best-fit Plane 2 trough', len(atom_names2), 'atoms.')
+	print('Best-fit Plane 2 through', len(atom_names2), 'atoms.')
 	
 	#print some plane related parameters
 	#print('Centroid: ', *c2, 'Å')
