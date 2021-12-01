@@ -81,6 +81,8 @@ word processor. Convert the file to even more formats such as HTML, PDF or TeX w
 - `-sde`, optional:  descending alphabetical sort of elements
 - `-ic` `atoms`, optional: include contacts of named atoms, e.g. `-ic O10 O11`, include the distance O10-O11, also include the angles X-O10-O11 and X-O11-O10. Input of more than two atoms is possible, e.g. `-ic O10 O11 O12`
 - `-d` `atom1 atom2 atom3 atom4`, optional: calculate the dihedral angle of the selected atoms, e.g. `-d C1 C2 O3 N4`, calculates the dihedral angle C1-C2-O3-N4
+- `-p1` `atom(s)` or `all`, optional: calculate the best-fit plane through selected or `all` atoms and prints the distance of the selected or `all` atoms to the plane, e.g. `-p1 C1 C2 O3 N4 N5`, calculates the best-fit plane through C1 C2 O3 N4 and N5 and prints the distances.
+- `-p2` `atom(s)`, optional: calculate the best-fit plane through selected atoms and prints the distance of the selected or atoms to the plane and to the first plane 1 and prints the angle between plane 1 and 2, e.g. `-p1 C11 C12 O13 N14 N15`, calculates the best-fit plane through C11 C12 O13 N14 N15 and prints the distance and the interplanar angle.
 - `-r` `N`, increase the covalent radii by `N` %, e.g.  `-r 20.1`, increase the covalent radii by 20.1 %. The default `N` is `8` %. The covalent radii used for the calculation of the bond length (bond length of A-B = rA + rB) is given in the last column of the summary table (`Cov. radius +`).
 - `-v`, optional:  include two more tables (tables with general bond lengths and angles)
 
@@ -94,6 +96,8 @@ Sam. std. dev. = Sample standard deviation, Pop. std. dev. = Population standard
 - With the standard covalent radii, many potential bonds will not be considered. An 8% larger covalent radius includes almost all expected bonds. All C-C distances below 1.6 Å are considered as bonds, for example. 
 - For extreme cases (like in Jahn-Teller distorted geometries), radii can be increased even more (`-r` option) or contacts can be defined (`-ic` option).
 - `-r 0` uses the unaltered covalent radii.
+- `-d`, `-p1` and `-p2` ignore excluded atoms (`-ea`) or elements (`-ee`) and sorting (`-s...`).
+- Distances are in Å (Angstrom) and angles are in ° (Degree). Input coordinates are assumed to be in Å (Angstrom) as well.
 
 ## Known Issues
 - The script makes extensive use of Unicode characters, which can cause problems with output or conversion.
