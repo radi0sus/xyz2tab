@@ -139,6 +139,19 @@ def calc_d_angle(xyzarr, i, j, k, l):
 	y = np.dot(np.cross(rkj, v), w)
 	return 	np.degrees(np.arctan2(y,x))
 
+#calculation of the best-fit plane
+#https://gist.github.com/bdrown/a2bc1da0123b142916c2f343a20784b4
+def svd_fit(X):
+	C = np.average(X, axis=0)
+	# Create CX vector (centroid to point) matrix
+	CX = X - C
+	# Singular value decomposition
+	U, S, V = np.linalg.svd(CX)
+	# The last row of V matrix indicate the eigenvectors of
+	# smallest eigenvalues (singular values).
+	N = V[-1]
+	return C, N
+
 #argument parser
 parser = argparse.ArgumentParser(
 		prog='xyz2tab', 
@@ -188,15 +201,27 @@ parser.add_argument('-sde','--sortdesEl',
 parser.add_argument('-ic','--includeCon',
 	nargs="+",
 	type=str,
-	help='include contacts, e.g. -ee C0 C11 or -ee C0 C11 N14')
+	help='include contacts, e.g. -ic C0 C11 or -ic C0 C11 N14')
 
-#include contacts
+#calculate dihedral angle of selected atoms
 parser.add_argument('-d','--dihedral',
 	nargs=4,
 	type=str,
 	help='calculate the dihedral angle of 4 atoms, e.g. -d C0 C11 C12 N13')
+	
+#calculate the best plane 1
+parser.add_argument('-p1','--plane1',
+	nargs='+',
+	type=str,
+	help='calculate the best plane trough selected or all atoms and show the distances to plane 1, e.g. -p1 C0 C11 C12 N13 N14 or -p1 all')
 
-#include contacts
+#calculate the best plane 2
+parser.add_argument('-p2','--plane2',
+	nargs='+',
+	type=str,
+	help='calculate the best plane trough selected atoms and show the distances to plane 1 and 2 and the angle to plane 1, e.g. -p2 C21 C22 C23 N23 N24')
+
+#add +x% to radius
 parser.add_argument('-r','--radius',
 	default=8,
 	type=float,
@@ -692,4 +717,120 @@ if args.dihedral:
 	print('')
 	print('Dihedral angle ' + args.dihedral[0] + '-' +args.dihedral[1] + '-' + \
 		    args.dihedral[2] + '-' + args.dihedral[3] + ':', f'{d_angle:.2f}°')
+
+#Plane No. 1 trough selected or all atoms on request
+if args.plane1:
+	#empty lists for x,y,z coordinated and atom names of the selected atoms
+	xyz_pl1_arr = []
+	atom_names1 = []
+	if args.plane1 == ['all']:
+		#if 'all', take all atoms
+		xyz_pl1_arr = xyzarr 
+		atom_names1 = xyz_df.iloc[:,1].tolist()
+	else:
+		#otherwise get the x,y,z coordinates from the selected atoms
+		for atom in args.plane1:
+			a1 = xyz_df.index[xyz_df['atom1_idx'] == atom].tolist()
+			if not a1:
+				#atom name is not in the input
+				print('')
+				print('Warning! One or more atoms could not be found in the input file.')
+			elif a1:
+				#add x,y,z coordinates and atom names to the lists
+				xyz_pl1_arr.append(*xyzarr[a1].tolist())
+				atom_names1.append(*xyz_df.iloc[a1,1].tolist())
 	
+	if len(xyz_pl1_arr) == 0:
+		#if the list is empty --> exit
+		print('')
+		print('Warning! No atoms for Plane 1. Exit.')
+		sys.exit(1)
+	
+	#calculate the best fit plane
+	c1, n1 = svd_fit(np.asarray(xyz_pl1_arr))
+	
+	#create data frame for output
+	plane1_df = pd.DataFrame()
+	plane1_df['Atom'] = atom_names1
+	#calculate the distance of each atom to the plane 
+	plane1_df['Distance'] = np.dot(np.asarray(xyz_pl1_arr)-c1, n1)
+	#plane1_df['Distance_abs'] = plane1_df['Distance'].apply(lambda x: abs(x))
+	
+	print('')
+	print('Best-fit Plane 1 trough', len(atom_names1), 'atoms.')
+	
+	#print some plane related parameters
+	#print('Centroid: ', *c1)
+	#print('Plane normal: ', *n1)
+	#print('Error:', f'{plane1_df.Distance_abs.sum():.4f} Å')
+	
+	#print the table with atom names and distances to the plane
+	print('')
+	print(tabulate(plane1_df,
+	headers=['Atoms','Distance to Plane 1 /Å'], 
+	tablefmt='github',
+	floatfmt=(".4f"),
+	showindex=False))
+	
+#Plane No. 2 trough selected atoms on request
+if args.plane2:
+	#check ist plane 1 was defined, otherwise exit
+	if not args.plane1:
+		print('')
+		print('Warning! Plane 1 must be defined first. Exit')
+		sys.exit(1)
+		
+	#empty lists for x,y,z coordinated and atom names of the selected atoms
+	xyz_pl2_arr = []
+	atom_names2 = []
+	
+	for atom in args.plane2:
+		#get the x,y,z coordinates from the selected atoms
+		a2 = xyz_df.index[xyz_df['atom1_idx'] == atom].tolist()
+		if not a2:
+			#atom name is not in the input
+			print('')
+			print('Warning! One or more atoms could not be found in the input file.')
+		elif a2:
+			#add x,y,z coordinates and atom names to the lists
+			xyz_pl2_arr.append(*xyzarr[a2].tolist())
+			atom_names2.append(*xyz_df.iloc[a2,1].tolist())
+				
+	if len(xyz_pl2_arr) == 0:
+		#if the list is empty --> exit
+		print('')
+		print('Warning! No atoms for Plane 2. Exit.')
+		sys.exit(1)
+		
+	#calculate the best fit plane
+	c2, n2 = svd_fit(np.asarray(xyz_pl2_arr))
+	
+	#create data frame for output
+	plane2_df = pd.DataFrame()
+	plane2_df['Atom'] = atom_names2
+	#calculate the distance of each atom to plane 2 
+	plane2_df['DistanceP2'] = np.dot(np.asarray(xyz_pl2_arr)-c2, n2)
+	#calculate the distance of each atom to plane 1 
+	plane2_df['DistanceP1'] = np.dot(np.asarray(xyz_pl2_arr)-c1, n1)
+	#plane2_df['DistanceP2_abs'] = plane2_df['DistanceP2'].apply(lambda x: abs(x))
+	
+	print('')
+	print('Best-fit Plane 2 trough', len(atom_names2), 'atoms.')
+	
+	#print some plane related parameters
+	#print('Centroid: ', *c2)
+	#print('Plane normal: ', *n2)
+	#print('Error:', f'{plane2_df.DistanceP2_abs.sum():.4f} Å')
+	
+	#print the table with atom names and distances to the plane 2 and plane 1 
+	print('')
+	print(tabulate(plane2_df,
+	headers=['Atoms','Distance to Plane 2 /Å','Distance to Plane 1 /Å'], 
+	tablefmt='github',
+	floatfmt=(".4f"),
+	showindex=False))
+	
+	#calculate the angle between plane 1 and plane 2
+	phi = np.arccos(np.dot(n1,n2))
+	print('')
+	print('Angle between Plane 1 and Plane 2:', f'{np.degrees(phi):.2f}°')
