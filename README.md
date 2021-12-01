@@ -228,3 +228,37 @@ Open `asa.xyz` and calculate the dihedral angle C6-O12-C8-O10.
 ```
 Dihedral angle C6-O12-C8-O10: 2.85°
 ```
+
+### Example 5:
+```console
+python3 xyz2tab.py asa.xyz -p1 C0 C1 C2 C3 C5 C6 C7 O9 O11 -p2 C4 C8 O10 O12
+```
+Open `asa.xyz` and calculate the best-fit plane number one (`-p1`) through C0, C1, C2, C3, C4, C5, C6, C7, O9, O11 and the the best-fit plane number two (`-p2`) through C4, C8, O10, O12 and print the distances and the angle between the planes.
+
+...
+```
+Best-fit Plane 1 through 9 atoms.
+
+| Atoms   |   Distance to Plane 1 /Å |
+|---------|--------------------------|
+| C0      |                  -0.0056 |
+| C1      |                   0.0079 |
+| C2      |                  -0.0204 |
+| C3      |                  -0.0170 |
+| C5      |                   0.0167 |
+| C6      |                   0.0399 |
+| C7      |                   0.0040 |
+| O9      |                   0.0276 |
+| O11     |                  -0.0532 |
+
+Best-fit Plane 2 through 4 atoms.
+
+| Atoms   |   Distance to Plane 2 /Å |   Distance to Plane 1 /Å |
+|---------|--------------------------|--------------------------|
+| C4      |                  -0.0006 |                   1.2181 |
+| C8      |                   0.0023 |                   1.3202 |
+| O10     |                  -0.0009 |                   2.3736 |
+| O12     |                  -0.0007 |                   0.0405 |
+
+Angle between Plane 1 and Plane 2: 93.69°
+```
