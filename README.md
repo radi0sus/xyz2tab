@@ -80,7 +80,7 @@ word processor. Convert the file to even more formats such as HTML, PDF or TeX w
 - `-sae`, optional: ascending alphabetical sort of elements
 - `-sde`, optional:  descending alphabetical sort of elements
 - `-ic` `atoms`, optional: include contacts of named atoms, e.g. `-ic O10 O11`, include the distance O10-O11, also include the angles X-O10-O11 and X-O11-O10. Input of more than two atoms is possible, e.g. `-ic O10 O11 O12`
-- `-d` `atom1 atom2 atom3 atom4`, optional: calculate the dihedral angle of the named atoms, e.g. `-d C1 C2 O3 N4`, calculates the dihedral angle C1-C2-O3-N4
+- `-d` `atom1 atom2 atom3 atom4`, optional: calculate the dihedral angle of the selected atoms, e.g. `-d C1 C2 O3 N4`, calculates the dihedral angle C1-C2-O3-N4
 - `-r` `N`, increase the covalent radii by `N` %, e.g.  `-r 20.1`, increase the covalent radii by 20.1 %. The default `N` is `8` %. The covalent radii used for the calculation of the bond length (bond length of A-B = rA + rB) is given in the last column of the summary table (`Cov. radius +`).
 - `-v`, optional:  include two more tables (tables with general bond lengths and angles)
 
