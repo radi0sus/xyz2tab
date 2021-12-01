@@ -5,12 +5,11 @@
 import sys                                                      #stdout
 import argparse                                                 #argument parser
 import re                                                       #regex
-import itertools	                                        #for r-length tuples, in sorted order, no repeated elements
+import itertools                                                #for r-length tuples, in sorted order, no repeated elements
 import pandas as pd                                             #pandas tables
 import numpy as np                                              #for calculations
 from scipy.spatial.distance import pdist, squareform, cosine    #for the calculations of the distance matrix and angles (cosine)
 from tabulate import tabulate                                   #nice table output
-#import gemmi	                                                #covalence radii, molecular weight
 
 #for windows console
 sys.stdout.reconfigure(encoding='utf-8')  
@@ -754,15 +753,16 @@ if args.plane1:
 	plane1_df['Atom'] = atom_names1
 	#calculate the distance of each atom to the plane 
 	plane1_df['Distance'] = np.dot(np.asarray(xyz_pl1_arr)-c1, n1)
-	#plane1_df['Distance_abs'] = plane1_df['Distance'].apply(lambda x: abs(x))
+	#sum of squares error
+	#plane1_df['Distance_abs'] = plane1_df['Distance'].apply(lambda x: abs(x)**2)
 	
 	print('')
 	print('Best-fit Plane 1 trough', len(atom_names1), 'atoms.')
 	
 	#print some plane related parameters
-	#print('Centroid: ', *c1)
-	#print('Plane normal: ', *n1)
-	#print('Error:', f'{plane1_df.Distance_abs.sum():.4f} Å')
+	#print('Centroid: ', *c1, 'Å')
+	#print('Plane normal: ', *n1, 'Å')
+	#print('Sum of squares error:', f'{plane1_df.Distance_abs.sum():.4f} Å²')
 	
 	#print the table with atom names and distances to the plane
 	print('')
@@ -812,15 +812,16 @@ if args.plane2:
 	plane2_df['DistanceP2'] = np.dot(np.asarray(xyz_pl2_arr)-c2, n2)
 	#calculate the distance of each atom to plane 1 
 	plane2_df['DistanceP1'] = np.dot(np.asarray(xyz_pl2_arr)-c1, n1)
-	#plane2_df['DistanceP2_abs'] = plane2_df['DistanceP2'].apply(lambda x: abs(x))
+	#sum of squares error
+	#plane2_df['DistanceP2_abs'] = plane2_df['DistanceP2'].apply(lambda x: abs(x)**2)
 	
 	print('')
 	print('Best-fit Plane 2 trough', len(atom_names2), 'atoms.')
 	
 	#print some plane related parameters
-	#print('Centroid: ', *c2)
-	#print('Plane normal: ', *n2)
-	#print('Error:', f'{plane2_df.DistanceP2_abs.sum():.4f} Å')
+	#print('Centroid: ', *c2, 'Å')
+	#print('Plane normal: ', *n2, 'Å')
+	#print('Sum of squares error:', f'{plane2_df.DistanceP2_abs.sum():.4f} Å²')
 	
 	#print the table with atom names and distances to the plane 2 and plane 1 
 	print('')
