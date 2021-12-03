@@ -85,9 +85,9 @@ word processor. Convert the file to even more formats such as HTML, PDF or TeX w
     - `-p1 C0 C1 O2 N3 N4`, calculates the best-fit plane through C0 C1 O2 N3 and N4 and prints the distances
     - `-p1 C0 : N4`, calculates the best-fit plane through C0 C1 O2 N3 and N4 and prints the distances 
     - `-p1 : N5`, calculates the best-fit plane through C0 C1 O2 N3 and N4 and prints the distances
-    - `-p1 C0 :`,calculates the best-fit plane through C0 C1 O2 N3 and N4 and prints the distances
-    - `-p1 :`,calculates the best-fit plane through C0 C1 O2 N3 and N4 and prints the distances
-    - `-p1 C0 : O2 N4`,calculates the best-fit plane through C0 C1 O2 and N4 and prints the distances
+    - `-p1 C0 :`, calculates the best-fit plane through C0 C1 O2 N3 and N4 and prints the distances
+    - `-p1 :`, calculates the best-fit plane through C0 C1 O2 N3 and N4 and prints the distances
+    - `-p1 C0 : O2 N4`, calculates the best-fit plane through C0 C1 O2 and N4 and prints the distances
 - `-p2` `atom(s)` or `atom(s) : atom(s)` or `atom(s) :`  or `: atom(s)`  or `:`, optional: calculate the best-fit plane through selected atoms and prints the distance of the selected or atoms to the plane and to the first plane 1 and prints the angle between plane 1 and 2, e.g. `-p1 C0 : N4` `-p2 C11 : N15`, calculates the best-fit planes through C0 C1 O2 N3 N4 and C11 C12 O13 N14 N15 and prints the distances and the interplanar angle.
 - `-r` `N`, increase the covalent radii by `N` %, e.g.  `-r 20.1`, increase the covalent radii by 20.1 %. The default `N` is `8` %. The covalent radii used for the calculation of the bond length (bond length of A-B = rA + rB) is given in the last column of the summary table (`Cov. radius +`).
 - `-v`, optional:  include two more tables (tables with general bond lengths and angles)
