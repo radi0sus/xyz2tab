@@ -212,13 +212,17 @@ parser.add_argument('-d','--dihedral',
 parser.add_argument('-p1','--plane1',
 	nargs='+',
 	type=str,
-	help='calculate the best plane through selected or all atoms and show the distances to plane 1, e.g. -p1 C0 C11 C12 N13 N14 or -p1 all')
+	help='calculate the best plane through selected (A B C), a range of (A : C) or all atoms (:)\
+		and show the distances to plane 1, \
+		e.g. -p1 C0 C11 C12 N13 or -p1 C0 : N13 or -p1 :')
 
 #calculate the best plane 2
 parser.add_argument('-p2','--plane2',
 	nargs='+',
 	type=str,
-	help='calculate the best plane through selected atoms and show the distances to plane 1 and 2 and the angle to plane 1, e.g. -p2 C21 C22 C23 N23 N24')
+	help='calculate the best plane through selected (A B C), a range of (A : C) or all atoms (:)\
+		and show the distances to plane 1 and 2 and the angle to plane 1, \
+		e.g. -p2 C21 C22 C23 N23 or -p2 C21 : N23 or -p2 :')
 
 #add +x% to radius
 parser.add_argument('-r','--radius',
@@ -719,26 +723,52 @@ if args.dihedral:
 
 #Plane No. 1 through selected or all atoms on request
 if args.plane1:
-	#empty lists for x,y,z coordinated and atom names of the selected atoms
-	xyz_pl1_arr = []
-	atom_names1 = []
-	if args.plane1 == ['all']:
-		#if 'all', take all atoms
-		xyz_pl1_arr = xyzarr 
-		atom_names1 = xyz_df.iloc[:,1].tolist()
-	else:
-		#otherwise get the x,y,z coordinates from the selected atoms
-		for atom in args.plane1:
-			a1 = xyz_df.index[xyz_df['atom1_idx'] == atom].tolist()
-			if not a1:
-				#atom name is not in the input
-				print('')
-				print('Warning! One or more atoms could not be found in the input file.')
-			elif a1:
-				#add x,y,z coordinates and atom names to the lists
-				xyz_pl1_arr.append(*xyzarr[a1].tolist())
-				atom_names1.append(*xyz_df.iloc[a1,1].tolist())
+	#get the index of the selected atoms
+	a1 = xyz_df.index[xyz_df['atom1_idx'].isin(args.plane1)].tolist()
+	#check for range notation symbol ':'
+	if ':' in args.plane1:
+		#get indices for ':'
+		sep_indices = [i for i, x in enumerate(args.plane1) if x == ":"]
+		#avoid error message for strange input
+		start = xyz_df.index[0]
+		#loop over indices for ':'
+		for sep_idx in sep_indices: 
+			#start is at atom index 0 if 0
+			if sep_idx == 0:
+				start = xyz_df.index[0]
+			else:
+				try:
+					#start index is the atom index of the atom in input, left from ':'
+					start = xyz_df.index[xyz_df['atom1_idx'] == args.plane1[sep_idx-1]].values.astype(int)[0]
+				except IndexError:
+					#catch malformed inputs
+					print('')
+					print('Warning! Malformed input.')
+			try: 
+				#stop index is the atom index of the atom in input, right from ':'
+				stop = xyz_df.index[xyz_df['atom1_idx'] == args.plane1[sep_idx+1]].values.astype(int)[0]
+			except IndexError:
+				#if there is no atom right from ':' take the last atom
+				stop = xyz_df.index[-1]	
+			#atom index range, stop+1 because of numpy 
+			atm_range = np.arange(start, stop+1)
+			#get unique index, avoid duplicates from range input and singel ato input 
+			#e.g. 1 2 4 + range 3 4 5 --> 1 2 3 4 4 5 --> 1 2 3 4 5
+			a1 = np.unique(list(a1) + list(atm_range))
+		
+	#get atom names from the selected atoms
+	atom_names1 = xyz_df.iloc[a1,1].tolist()
+	#get the x,y,z coordinates from the selected atoms
+	xyz_pl1_arr = xyzarr[a1]
 	
+	#check if atom names from input are in the atom list
+	#if not, warning
+	atom_names_in_arg = [x for x in args.plane1 if x != ':']
+	if not all(elem in atom_names1 for elem in atom_names_in_arg):
+		print('')
+		print('Warning! One or more atoms could not be found in the input file.')
+	
+	#no atoms / coordinates for calculation --> exit
 	if len(xyz_pl1_arr) == 0:
 		#if the list is empty --> exit
 		print('')
@@ -754,15 +784,16 @@ if args.plane1:
 	#calculate the distance of each atom to the plane 
 	plane1_df['Distance'] = np.dot(np.asarray(xyz_pl1_arr)-c1, n1)
 	#sum of squares error
-	#plane1_df['Distance_abs'] = plane1_df['Distance'].apply(lambda x: abs(x)**2)
+	#sosqf_p1  = plane1_df['Distance'].apply(lambda x: abs(x)**2)
 	
 	print('')
 	print('Best-fit Plane 1 through', len(atom_names1), 'atoms.')
 	
 	#print some plane related parameters
+	#print('')
 	#print('Centroid: ', *c1, 'Å')
 	#print('Plane normal: ', *n1, 'Å')
-	#print('Sum of squares error:', f'{plane1_df.Distance_abs.sum():.4f} Å²')
+	#print('Sum-of-squares error:', f'{sosqf_p1.sum():.4f} Å²')
 	
 	#print the table with atom names and distances to the plane
 	print('')
@@ -773,29 +804,43 @@ if args.plane1:
 	showindex=False))
 	
 #Plane No. 2 through selected atoms on request
+#check comments for plane 1
 if args.plane2:
-	#check ist plane 1 was defined, otherwise exit
-	if not args.plane1:
-		print('')
-		print('Warning! Plane 1 must be defined first. Exit')
-		sys.exit(1)
-		
-	#empty lists for x,y,z coordinated and atom names of the selected atoms
-	xyz_pl2_arr = []
-	atom_names2 = []
+	#get the index of the selected atoms
+	a2 = xyz_df.index[xyz_df['atom1_idx'].isin(args.plane2)].tolist()
 	
-	for atom in args.plane2:
-		#get the x,y,z coordinates from the selected atoms
-		a2 = xyz_df.index[xyz_df['atom1_idx'] == atom].tolist()
-		if not a2:
-			#atom name is not in the input
-			print('')
-			print('Warning! One or more atoms could not be found in the input file.')
-		elif a2:
-			#add x,y,z coordinates and atom names to the lists
-			xyz_pl2_arr.append(*xyzarr[a2].tolist())
-			atom_names2.append(*xyz_df.iloc[a2,1].tolist())
+	if ':' in args.plane2:
+		
+		sep_indices2 = [i for i, x in enumerate(args.plane2) if x == ":"]
+		start2 = xyz_df.index[0]
+		for sep_idx2 in sep_indices2: 
+			
+			if sep_idx2 == 0:
+				start2 = xyz_df.index[0]
+			else:
+				try:
+					start2 = xyz_df.index[xyz_df['atom1_idx'] == args.plane2[sep_idx2-1]].values.astype(int)[0]
+				except IndexError:
+					print('')
+					print('Warning! Malformed input.')
+			try: 
+				stop2 = xyz_df.index[xyz_df['atom1_idx'] == args.plane2[sep_idx2+1]].values.astype(int)[0]
+			except IndexError:
+				stop2 = xyz_df.index[-1]	
 				
+			atm_range2 = np.arange(start2, stop2+1)
+			a2 = np.unique(list(a2) + list(atm_range2))
+			
+	#get atom names from the selected atoms
+	atom_names2 = xyz_df.iloc[a2,1].tolist()
+	#get the x,y,z coordinates from the selected atoms
+	xyz_pl2_arr = xyzarr[a2]
+	
+	atom_names_in_arg2 = [x for x in args.plane2 if x != ':']
+	if not all(elem in atom_names2 for elem in atom_names_in_arg2):
+		print('')
+		print('Warning! One or more atoms could not be found in the input file.')
+
 	if len(xyz_pl2_arr) == 0:
 		#if the list is empty --> exit
 		print('')
@@ -813,15 +858,16 @@ if args.plane2:
 	#calculate the distance of each atom to plane 1 
 	plane2_df['DistanceP1'] = np.dot(np.asarray(xyz_pl2_arr)-c1, n1)
 	#sum of squares error
-	#plane2_df['DistanceP2_abs'] = plane2_df['DistanceP2'].apply(lambda x: abs(x)**2)
+	#sosqf_p2 = plane2_df['DistanceP2'].apply(lambda x: abs(x)**2)
 	
 	print('')
 	print('Best-fit Plane 2 through', len(atom_names2), 'atoms.')
 	
 	#print some plane related parameters
+	#print('')
 	#print('Centroid: ', *c2, 'Å')
 	#print('Plane normal: ', *n2, 'Å')
-	#print('Sum of squares error:', f'{plane2_df.DistanceP2_abs.sum():.4f} Å²')
+	#print('Sum-of-squares error:', f'{sosqf_p2.sum():.4f} Å²')
 	
 	#print the table with atom names and distances to the plane 2 and plane 1 
 	print('')
@@ -832,6 +878,8 @@ if args.plane2:
 	showindex=False))
 	
 	#calculate the angle between plane 1 and plane 2
+	#no warning if senseless result, e.g. plane 1 = plane 2
+	np.seterr(invalid='ignore')
 	phi = np.arccos(np.dot(n1,n2))
 	print('')
 	print('Angle between Plane 1 and Plane 2:', f'{np.degrees(phi):.2f}°')
