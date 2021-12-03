@@ -104,10 +104,10 @@ Sam. std. dev. = Sample standard deviation, Pop. std. dev. = Population standard
 - `-r 0` uses the unaltered covalent radii.
 - `-d`, `-p1` and `-p2` ignore excluded atoms (`-ea`) or elements (`-ee`) and sorting (`-s...`).
 - Distances are in Å (Angstrom) and angles are in ° (Degree). Input coordinates are assumed to be in Å (Angstrom) as well.
-- `-px : N11` considers all atoms from first atom in the xyz-file to N11.
-- `-px N11 : ` considers all atoms form N11 to the last atom in the xyz-file.
-- `-px C0 N11 : ` considers atom C0 and all atoms form N11 to the last atom in the xyz-file.
-- `-px C0 : C4 N11 : `considers atom from C0 to C4 and all atoms form N11 to the last atom in the xyz-file.
+- `-px : N11` considers all atoms from the first atom in the xyz-file to N11.
+- `-px N11 : ` considers all atoms from N11 to the last atom in the xyz-file.
+- `-px C0 N11 : ` considers atom C0 and all atoms from N11 to the last atom in the xyz-file.
+- `-px C0 : C4 N11 : `considers atom from C0 to C4 and all atoms from N11 to the last atom in the xyz-file.
 
 ## Known Issues
 - The script makes extensive use of Unicode characters, which can cause problems with output or conversion.
