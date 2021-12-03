@@ -107,7 +107,7 @@ Sam. std. dev. = Sample standard deviation, Pop. std. dev. = Population standard
 - `-px : N11` considers all atoms from the first atom in the xyz-file to N11.
 - `-px N11 : ` considers all atoms from N11 to the last atom in the xyz-file.
 - `-px C0 N11 : ` considers atom C0 and all atoms from N11 to the last atom in the xyz-file.
-- `-px C0 : C4 N11 : `considers atom from C0 to C4 and all atoms from N11 to the last atom in the xyz-file.
+- `-px C0 : C4 N11 : ` considers all atoms from C0 to C4 and all atoms from N11 to the last atom in the xyz-file.
 
 ## Known Issues
 - The script makes extensive use of Unicode characters, which can cause problems with output or conversion.
@@ -232,7 +232,7 @@ Open `asa.xyz`, exclude bonds to hydrogen atoms (`-ee H`), include the contat O1
 ```console
 python3 xyz2tab.py asa.xyz -d C6 O12 C8 O10
 ```
-Open `asa.xyz` and calculate the dihedral angle C6-O12-C8-O10.
+Open `asa.xyz` and calculate the dihedral angle (`-d`) C6-O12-C8-O10.
 
 ...
 ```
@@ -277,4 +277,34 @@ Best-fit Plane 2 through 4 atoms.
 | O12     |                   -0.0007 |                    0.0405 |
 
 Angle between Plane 1 and Plane 2: 93.69°
+```
+
+### Example 6:
+```console
+python3 xyz2tab.py h2o2.xyz -r 10 -d H2 O0 O1 H3 -p1 O0 O1 H2 -p2 O0 O1 H3
+```
+
+Open `h2o2.xyz`, add +10% to radii (`-r 10`), calculate the dihedral angle (`-d`) H2-O0-O1-H3 and calculate the best-fit plane number one (`-p1`) through O0, O1, H3 and the the best-fit plane number two (`-p2`) through O0, O1, H3 and print the distances and the angle between the planes.
+
+...
+```
+Dihedral angle H2-O0-O1-H3: 113.89°
+
+Best-fit Plane 1 through 3 atoms.
+
+| Atoms   |   Distances to Plane 1 /Å |
+|---------|---------------------------|
+| O0      |                    0.0000 |
+| O1      |                   -0.0000 |
+| H2      |                    0.0000 |
+
+Best-fit Plane 2 through 3 atoms.
+
+| Atoms   |   Distances to Plane 2 /Å |   Distances to Plane 1 /Å |
+|---------|---------------------------|---------------------------|
+| O0      |                   -0.0000 |                    0.0000 |
+| O1      |                   -0.0000 |                   -0.0000 |
+| H3      |                    0.0000 |                    0.8686 |
+
+Angle between Plane 1 and Plane 2: 113.89°
 ```
