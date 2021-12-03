@@ -81,7 +81,7 @@ word processor. Convert the file to even more formats such as HTML, PDF or TeX w
 - `-sde`, optional:  descending alphabetical sort of elements
 - `-ic` `atoms`, optional: include contacts of named atoms, e.g. `-ic O10 O11`, include the distance O10-O11, also include the angles X-O10-O11 and X-O11-O10. Input of more than two atoms is possible, e.g. `-ic O10 O11 O12`
 - `-d` `atom1 atom2 atom3 atom4`, optional: calculate the dihedral angle of the selected atoms, e.g. `-d C1 C2 O3 N4`, calculates the dihedral angle C1-C2-O3-N4
-- `-p1` `atom(s)` or `atom(s) : atom(s)` or `atom(s) :`  or `: atom(s)`  or `:`, optional: calculate the best-fit plane through selected or all (`:`) atoms and prints the distance of the selected or all (`:`) for all atoms to the plane, e.g. xyz file consists of 5 atoms:
+- `-p1` `atom(s)` or `atom(s) : atom(s)` or `atom(s) :`  or `: atom(s)`  or `:`, optional: calculate the best-fit plane through selected or all (`:`) atoms and prints the distance of the selected or all (`:`) for all atoms to the plane, e.g. an xyz-file containing 5 atoms:
     - `-p1 C0 C1 O2 N3 N4`, calculates the best-fit plane through C0 C1 O2 N3 and N4 and prints the distances
     - `-p1 C0 : N4`, calculates the best-fit plane through C0 C1 O2 N3 and N4 and prints the distances 
     - `-p1 : N5`, calculates the best-fit plane through C0 C1 O2 N3 and N4 and prints the distances
