@@ -10,6 +10,8 @@ import pandas as pd                                             #pandas tables
 import numpy as np                                              #for calculations
 from scipy.spatial.distance import pdist, squareform, cosine    #for the calculations of the distance matrix and angles (cosine)
 from tabulate import tabulate                                   #nice table output
+import matplotlib.pyplot as plt                                 #for molecule display
+from mpl_toolkits.mplot3d import Axes3D                         #for molecule display
 
 #for windows console
 sys.stdout.reconfigure(encoding='utf-8')  
@@ -151,6 +153,35 @@ def svd_fit(X):
 	N = V[-1]
 	return C, N
 
+def set_axes_equal(ax):
+	'''Make axes of 3D plot have equal scale so that spheres appear as spheres,
+	cubes as cubes, etc..  This is one possible solution to Matplotlib's
+	ax.set_aspect('equal') and ax.axis('equal') not working for 3D.
+
+	Input
+		ax: a matplotlib axis, e.g., as output from plt.gca().
+	'''
+	#https://stackoverflow.com/questions/13685386/matplotlib-equal-unit-length-with-equal-aspect-ratio-z-axis-is-not-equal-to
+	
+	x_limits = ax.get_xlim3d()
+	y_limits = ax.get_ylim3d()
+	z_limits = ax.get_zlim3d()
+	
+	x_range = abs(x_limits[1] - x_limits[0])
+	x_middle = np.mean(x_limits)
+	y_range = abs(y_limits[1] - y_limits[0])
+	y_middle = np.mean(y_limits)
+	z_range = abs(z_limits[1] - z_limits[0])
+	z_middle = np.mean(z_limits)
+	
+	# The plot bounding box is a sphere in the sense of the infinity
+	# norm, hence I call half the max range the plot radius.
+	plot_radius = 0.5*max([x_range, y_range, z_range])
+	
+	ax.set_xlim3d([x_middle - plot_radius, x_middle + plot_radius])
+	ax.set_ylim3d([y_middle - plot_radius, y_middle + plot_radius])
+	ax.set_zlim3d([z_middle - plot_radius, z_middle + plot_radius])
+	
 #argument parser
 parser = argparse.ArgumentParser(
 		prog='xyz2tab', 
@@ -234,6 +265,11 @@ parser.add_argument('-r','--radius',
 parser.add_argument('-v','--verbose',
 	default=0, action='store_true',
 	help='verbose print, includes 2 more tables')
+
+#plot
+parser.add_argument('-s','--show',
+	default=0, action='store_true',
+	help='plot xyz coordinates, bonds and planes')
 
 #parse arguments
 args = parser.parse_args()
@@ -806,6 +842,12 @@ if args.plane1:
 #Plane No. 2 through selected atoms on request
 #check comments for plane 1
 if args.plane2:
+	
+	if not args.plane1:
+		print('')
+		print('Warning! Plane 1 must be defined first. Exit.')
+		sys.exit()
+	
 	#get the index of the selected atoms
 	a2 = xyz_df.index[xyz_df['atom1_idx'].isin(args.plane2)].tolist()
 	
@@ -883,3 +925,110 @@ if args.plane2:
 	phi = np.arccos(np.dot(n1,n2))
 	print('')
 	print('Angle between Plane 1 and Plane 2:', f'{np.degrees(phi):.2f}°')
+
+if args.show:
+	
+	metals = ['Ac', 'Ag', 'Al', 'Am', 'Ar', 'As', 'At', 'Au', 'Ba', 'Be', \
+				'Bi', 'Ca', 'Cd', 'Ce', 'Cf', 'Cm', 'Co', 'Cr', 'Cs', 'Cu', \
+				'Db', 'Dy', 'Er', 'Es', 'Eu', 'Fe', 'Fm', 'Fr', 'Ga', 'Gd', \
+				'Ge', 'Hf', 'Hg', 'Ho', 'Hs', 'In', 'Ir', 'K', 'La', 'Li', \
+				'Lr', 'Lu', 'Md', 'Mg', 'Mn', 'Mo', 'Na', 'Nb', 'Nd', 'Ni', \
+				'Np', 'Os', 'Pa', 'Pb', 'Pd', 'Pm', 'Po', 'Pr', 'Pt', 'Pu', \
+				'Ra', 'Rb', 'Re', 'Rf', 'Rh', 'Rn', 'Ru', 'Sc', 'Sm', 'Sn', \
+				'Sr', 'Ta', 'Tb', 'Tc', 'Te', 'Th', 'Ti', 'Tl', 'Tm', 'U', \
+				'V', 'W', 'Y', 'Yb', 'Zn', 'Zr']
+	
+	green = ['F','Cl']
+	brown = ['Br']
+	purple = ['P','I']
+	orange = ['Si']
+	
+	
+	atom1_num = sel_dist2['atom1_idx'].apply(lambda x: re.sub(r'\D+','', x)).astype(int).tolist()
+	atom2_num = sel_dist2['atom2_idx'].apply(lambda x: re.sub(r'\D+','', x)).astype(int).tolist()
+	atom_label = xyz_df['atom1_idx'].tolist()
+	
+	atom1_coord = xyzarr[atom1_num] 
+	atom2_coord = xyzarr[atom2_num]
+	atom1_2_coord = np.array(list(zip(atom1_coord,atom2_coord)))
+	
+	#clumsy but safe
+	carr = xyz_df.index[xyz_df['element'].isin(['C'])].tolist()
+	harr = xyz_df.index[xyz_df['element'].isin(['H'])].tolist()
+	narr = xyz_df.index[xyz_df['element'].isin(['N'])].tolist()
+	oarr = xyz_df.index[xyz_df['element'].isin(['O'])].tolist()
+	sarr = xyz_df.index[xyz_df['element'].isin(['S'])].tolist()
+	marr = xyz_df.index[xyz_df['element'].isin(metals)].tolist()
+	grarr = xyz_df.index[xyz_df['element'].isin(green)].tolist()
+	brarr = xyz_df.index[xyz_df['element'].isin(brown)].tolist()
+	parr = xyz_df.index[xyz_df['element'].isin(purple)].tolist()
+	orarr = xyz_df.index[xyz_df['element'].isin(orange)].tolist()
+	restarr = [item for item in atom1_num if item not in carr]
+	restarr = [item for item in restarr if item not in harr]
+	restarr = [item for item in restarr if item not in narr]
+	restarr = [item for item in restarr if item not in oarr]
+	restarr = [item for item in restarr if item not in sarr]
+	restarr = [item for item in restarr if item not in marr]
+	restarr = [item for item in restarr if item not in grarr]
+	restarr = [item for item in restarr if item not in brarr]
+	restarr = [item for item in restarr if item not in parr]
+	restarr = [item for item in restarr if item not in orarr]
+	
+	atom_coord_name = zip(xyzarr,atom_label)
+	#scatter plot
+	fig = plt.figure(figsize=(10,8))
+	ax = plt.axes(projection='3d')
+	ax.set_box_aspect((1, 1, 1))
+	
+	#clumsy but safe
+	ax.scatter(*xyzarr[carr].T,s=100/len(xyzarr) * 50,color='black')
+	ax.scatter(*xyzarr[harr].T,s=80/len(xyzarr) * 50,color='tan')
+	ax.scatter(*xyzarr[narr].T,s=100/len(xyzarr) * 50,color='blue')
+	ax.scatter(*xyzarr[oarr].T,s=100/len(xyzarr) * 50,color='green')
+	ax.scatter(*xyzarr[sarr].T,s=200/len(xyzarr) * 50,color='yellow')
+	ax.scatter(*xyzarr[marr].T,s=300/len(xyzarr) * 50,color='red',alpha=0.85)
+	ax.scatter(*xyzarr[grarr].T,s=200/len(xyzarr) * 50,color='green')
+	ax.scatter(*xyzarr[brarr].T,s=200/len(xyzarr) * 50,color='brown')
+	ax.scatter(*xyzarr[parr].T,s=200/len(xyzarr) * 50,color='purple')
+	ax.scatter(*xyzarr[orarr].T,s=200/len(xyzarr) * 50,color='orange')
+	ax.scatter(*xyzarr[restarr].T,s=100/len(xyzarr) * 50,color='gray')
+	
+	
+	for coord, label in atom_coord_name:
+		ax.text(*(coord+0.12).T, label, fontsize=100/len(xyzarr) + 8 , color='black')
+	
+	for bonds in atom1_2_coord:
+		ax.plot(*bonds.T, color='gray', linewidth=3.0)
+	
+	
+	x_pl=np.sort(xyzarr[:,0])
+	y_pl=np.sort(xyzarr[:,1])
+	z_pl=np.sort(xyzarr[:,2])
+
+	if args.plane1:
+		xx1, yy1 = np.meshgrid((x_pl[0],x_pl[-1]),(y_pl[0],y_pl[-1]))
+		if args.plane2:
+			xx2, yy2 = np.meshgrid((x_pl[0],x_pl[-1]),(y_pl[0],y_pl[-1]))
+	
+		d1 = -c1.dot(n1)
+		
+		if args.plane2:
+			d2 = -c2.dot(n2)
+	
+		z1 = (-n1[0] * xx1 - n1[1] * yy1 - d1) * 1. /n1[2]
+		
+		if args.plane2:
+			z2 = (-n2[0] * xx2 - n2[1] * yy2 - d2) * 1. /n2[2]
+	
+	
+		ax.plot_surface(xx1, yy1, z1, color='blue', alpha=0.3, label='Plane 1')
+		
+		if args.plane2:
+			ax.plot_surface(xx2, yy2, z2, color='red', alpha=0.3, label='Plane 2')
+	
+	ax.set_axis_off()
+	fig.tight_layout()
+	#ax.legend(loc='upper left')
+	plt.gca().set_zlim(z_pl[0],z_pl[-1])
+	set_axes_equal(ax)
+	plt.show()
