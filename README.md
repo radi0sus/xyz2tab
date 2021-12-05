@@ -59,7 +59,7 @@ A table with statistical parameters.
 | C–O     |       5 |    1.3147 |      1.3438 |           0.0876 |           0.0783 |       0.0392 |    -0.3848 |
 | O–H     |       1 |    0.9806 |      0.9806 |         nan      |           0      |     nan      |   nan      |
 ```
-Four tables with angles in a likewise manner.
+Three tables with angles in a likewise manner.
 
 Start the script with:
 ```console
