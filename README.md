@@ -119,7 +119,7 @@ Sam. std. dev. = Sample standard deviation, Pop. std. dev. = Population standard
 ## Known Issues
 - The script makes extensive use of Unicode characters, which can cause problems with output or conversion.
 - Verbose output (`-v` option) can be very large and confusing (looks nicer after formatting).
-- When rotating the molecule in the matplotlib window, planes are sometimes shown in wrong positions.
+- When rotating the molecule in the matplotlib window, planes are sometimes misplaced.
 - Xyz files containing more than one molecule are not supported. However, if you delete the two header lines between different molecules you can read the xyz as a whole.
 
 ## Examples
@@ -134,9 +134,13 @@ Open `formaldehyde.xyz` and show tables... Several options are shown.
 
 ### Example 2:
 ```console
-python3 xyz2tab.py asa.xyz -ee H
+python3 xyz2tab.py asa.xyz -ee H -s
 ```
-Open `asa.xyz`, exclude bonds to hydrogen atoms (`-ee H`) and show tables.
+Open `asa.xyz`, exclude bonds to hydrogen atoms (`-ee H`), show tables and the molecule (`-s`).
+
+<p align="center">
+<img width="500" alt="asa" src="/examples/asa.png">
+</p>
 
 ```
 -------------------  ------------
