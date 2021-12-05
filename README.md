@@ -93,7 +93,7 @@ word processor. Convert the file to even more formats such as HTML, PDF or TeX w
     - `-p1 C0 : O2 N4`, calculates the best-fit plane through C0 C1 O2 and N4 and prints the distances
 - `-p2` `atom(s)` or `atom(s) : atom(s)` or `atom(s) :`  or `: atom(s)`  or `:`, optional: calculate the best-fit plane through selected atoms and prints the distance of the selected or atoms to the plane and to the first plane 1 and prints the angle between plane 1 and 2, e.g. `-p1 C0 : N4` `-p2 C11 : N15`, calculates the best-fit planes through C0 C1 O2 N3 N4 and C11 C12 O13 N14 N15 and prints the distances and the interplanar angle.
 - `-r` `N`, optional: increase the covalent radii by `N` %, e.g.  `-r 20.1`, increase the covalent radii by 20.1 %. The default `N` is `8` %. The covalent radii used for the calculation of the bond length (bond length of A-B = rA + rB) is given in the last column of the summary table (`Cov. radius +`).
-- `-s`, optional: displays the molecule and planes (if defined). Plane 1 is blue, plane 2 is red colored. 
+- `-s`, optional: displays the molecule (atoms & bonds) and planes (if defined). Plane 1 is blue, plane 2 is red colored. Only bonds that have been calculated by the script are shown.
 - `-v`, optional:  include two more tables (tables with general bond lengths and angles)
 
 ## Statistics
@@ -113,7 +113,7 @@ Sam. std. dev. = Sample standard deviation, Pop. std. dev. = Population standard
 - `-px C0 N11 : ` considers atom C0 and all atoms from N11 to the last atom in the xyz-file.
 - `-px C0 : C4 N11 : ` considers all atoms from C0 to C4 and all atoms from N11 to the last atom in the xyz-file.
 - To print more plane related parameters, remove the appropriate comments in the plane(s) section of the script.
-- If the `-s` option is invoked, the molecule and calculated planes will be shown. Plane 1 is blue colored and plane 2 red. It gives a quick overview over the atomic numbering / labeling and the positions of the planes. 
+- If the `-s` option is invoked, the molecule and calculated planes will be shown. Plane 1 is blue colored and plane 2 red. It gives a quick overview over the atomic numbering / labeling and the positions of the planes. One can also check whether all bonds have been calculated and adjust bonding with the `-r' or `-ic` options in case.
 
 ## Known Issues
 - The script makes extensive use of Unicode characters, which can cause problems with output or conversion.
