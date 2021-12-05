@@ -252,8 +252,8 @@ is similar to:
 python3 xyz2tab.py asa.xyz -p1 C0 : C3 C5 : C7 O9 O11 -p2 C4 C8 O10 O12
 ```
 
-Open `asa.xyz` and calculate the best-fit plane number one (`-p1`) through C0, C1, C2, C3, C4, C5, C6, C7, O9, O11 and the the best-fit plane number two (`-p2`) through C4, C8, O10, O12 and print the distances and the angle between the planes.
-
+Open `asa.xyz` and calculate the best-fit plane number one (`-p1`) through C0, C1, C2, C3, C4, C5, C6, C7, O9, O11 and the the best-fit plane number two (`-p2`) through C4, C8, O10, O12, print the distances and the angle between the planes and show the molecule and the planes (`-s`).
+![show](/examples/asa2.png)
 ...
 ```
 Best-fit Plane 1 through 9 atoms.
@@ -284,11 +284,11 @@ Angle between Plane 1 and Plane 2: 93.69°
 
 ### Example 6:
 ```console
-python3 xyz2tab.py h2o2.xyz -r 10 -d H2 O0 O1 H3 -p1 O0 O1 H2 -p2 O0 O1 H3
+python3 xyz2tab.py h2o2.xyz -r 10 -d H2 O0 O1 H3 -p1 O0 O1 H2 -p2 O0 O1 H3 -s
 ```
 
-Open `h2o2.xyz`, add +10% to radii (`-r`), calculate the dihedral angle (`-d`) H2-O0-O1-H3 and calculate the best-fit plane number one (`-p1`) through O0, O1, H3 and the the best-fit plane number two (`-p2`) through O0, O1, H3 and print the distances and the angle between the planes.
-
+Open `h2o2.xyz`, add +10% to radii (`-r`), calculate the dihedral angle (`-d`) H2-O0-O1-H3 and calculate the best-fit plane number one (`-p1`) through O0, O1, H3 and the the best-fit plane number two (`-p2`) through O0, O1, H3, print the distances and the angle between the planes and show the molecule and the planes (`-s`).
+![show](/examples/h2o2.png)
 ...
 ```
 Dihedral angle H2-O0-O1-H3: 113.89°
