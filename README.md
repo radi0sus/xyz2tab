@@ -94,7 +94,7 @@ word processor. Convert the file to even more formats such as HTML, PDF or TeX w
 - `-p2` `atom(s)` or `atom(s) : atom(s)` or `atom(s) :`  or `: atom(s)`  or `:`, optional: calculate the best-fit plane through selected atoms and prints the distance of the selected or atoms to the plane and to the first plane 1 and prints the angle between plane 1 and 2, e.g. `-p1 C0 : N4` `-p2 C11 : N15`, calculates the best-fit planes through C0 C1 O2 N3 N4 and C11 C12 O13 N14 N15 and prints the distances and the interplanar angle.
 - `-r` `N`, optional: increase the covalent radii by `N` %, e.g.  `-r 20.1`, increase the covalent radii by 20.1 %. The default `N` is `8` %. The covalent radii used for the calculation of the bond length (bond length of A-B = rA + rB) is given in the last column of the summary table (`Cov. radius +`).
 - `-s`, optional: displays the molecule (atoms & bonds) and planes (if defined). Plane 1 is blue, plane 2 is red colored. Only bonds that have been calculated by the script are shown.
-- `-sb`, optional: same as `-sb` with labeled bonds.
+- `-sb`, optional: same as `-s` with labeled bonds.
 - `-v`, optional:  include two more tables (tables with general bond lengths and angles)
 
 ## Statistics
