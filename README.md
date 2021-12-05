@@ -1,7 +1,7 @@
 # xyz2tab
 A Python 3 script for printing tables of bond lengths and (dihedral) angles from xyz files to the console. The script furthermore calculates average values, including a variety of statistical parameters, and is able to group bonding parameters. Two best-fit planes through selected or all atoms can be defined and atomic distances and angles between the planes can be calculated. Selected atoms or elements can be excluded from bond or angle tables. Contacts of two or more atoms can be included. The output should result in nicely rendered mark down tables. Molecules (atom positions anc bonds) and planes can be visualized. 
 
-<img width="800" alt="asa" src="/examples/examples.png">
+<img width="800" align="center" alt="asa" src="/examples/examples.png">
 
 ## External modules
 `pandas`, `numpy`, `scipy`, `tabulate`
@@ -256,8 +256,9 @@ python3 xyz2tab.py asa.xyz -p1 C0 : C3 C5 : C7 O9 O11 -p2 C4 C8 O10 O12
 
 Open `asa.xyz` and calculate the best-fit plane number one (`-p1`) through C0, C1, C2, C3, C4, C5, C6, C7, O9, O11 and the the best-fit plane number two (`-p2`) through C4, C8, O10, O12, print the distances and the angle between the planes and show the molecule and the planes (`-s`).
 
-<img width="500" alt="asa" src="/examples/asa2.png">
+<img width="500" align="center" alt="asa" src="/examples/asa2.png">
 ...
+
 ```
 Best-fit Plane 1 through 9 atoms.
 
@@ -292,8 +293,9 @@ python3 xyz2tab.py h2o2.xyz -r 10 -d H2 O0 O1 H3 -p1 O0 O1 H2 -p2 O0 O1 H3 -s
 
 Open `h2o2.xyz`, add +10% to radii (`-r`), calculate the dihedral angle (`-d`) H2-O0-O1-H3 and calculate the best-fit plane number one (`-p1`) through O0, O1, H3 and the the best-fit plane number two (`-p2`) through O0, O1, H3, print the distances and the angle between the planes and show the molecule and the planes (`-s`).
 
-<img width="500" alt="h2o2" src="/examples/h2o2png.png">
+<img width="500" align="center" alt="h2o2" src="/examples/h2o2png.png">
 ...
+
 ```
 Dihedral angle H2-O0-O1-H3: 113.89°
 
