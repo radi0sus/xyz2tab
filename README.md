@@ -102,6 +102,7 @@ Statistics are derived from the values of the bonding parameters.
 Sam. std. dev. = Sample standard deviation, Pop. std. dev. = Population standard deviation, Std. error = Standard error or standard error of mean. Please refer to literature or Wikipedia for the meaning of these terms. The population standard deviation is probably the value you are looking for.
 
 ## Remarks
+- Labels are in the format `Element + Position in xyz file`, e.g. `C11` is a carbon atom at position 11 in the xyz file.
 - The format of the tabular output can be easily changed in the script using another formatting option of the `tabulate` module.
 - With the standard covalent radii, many potential bonds will not be considered. An 8% larger covalent radius includes almost all expected bonds. All C-C distances below 1.6 Å are considered as bonds, for example. 
 - For extreme cases (like in Jahn-Teller distorted geometries), radii can be increased even more (`-r` option) or contacts can be defined (`-ic` option).
@@ -118,7 +119,8 @@ Sam. std. dev. = Sample standard deviation, Pop. std. dev. = Population standard
 ## Known Issues
 - The script makes extensive use of Unicode characters, which can cause problems with output or conversion.
 - Verbose output (`-v` option) can be very large and confusing (looks nicer after formatting).
-- When rotating the molecule in the matplotlib window, planes are sometimes shown in wrong positions. 
+- When rotating the molecule in the matplotlib window, planes are sometimes shown in wrong positions.
+- Xyz files containing more than one molecule are not supported. However, if you delete the two header lines between different molecules you can read the xyz as a whole.
 
 ## Examples
 
