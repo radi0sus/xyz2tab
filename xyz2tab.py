@@ -268,6 +268,11 @@ parser.add_argument('-s','--show',
 	default=0, action='store_true',
 	help='plot xyz coordinates, bonds and planes')
 
+#plot with bond lengths
+parser.add_argument('-sb','--showbl',
+	default=0, action='store_true',
+	help='same as -s with bond lengths')
+
 #parse arguments
 args = parser.parse_args()
 
@@ -923,7 +928,7 @@ if args.plane2:
 	print('')
 	print('Angle between Plane 1 and Plane 2:', f'{np.degrees(phi):.2f}°')
 
-if args.show:
+if args.show or args.showbl:
 	#show the molecule and planes
 	#lists for color asignment
 	metals = ['Ac', 'Ag', 'Al', 'Am', 'Ar', 'As', 'At', 'Au', 'Ba', 'Be', \
@@ -945,13 +950,14 @@ if args.show:
 	atom2_num = sel_dist2['atom2_idx'].apply(lambda x: re.sub(r'\D+','', x)).astype(int).tolist()
 	#get atom labels from xyz_df
 	atom_label = xyz_df['atom1_idx'].tolist()
-	
+	#distance as bond label
+	bond_label = sel_dist2['distance_calc'].apply(lambda x: '{:.3f}'.format(x)).tolist()
 	#atom1 and atom 2 coordinates
 	atom1_coord = xyzarr[atom1_num]
 	atom2_coord = xyzarr[atom2_num]
 	#put atom1 and atom2 coordinats in an numpy array (for bonds display)
 	atom1_2_coord = np.array(list(zip(atom1_coord,atom2_coord)))
-	
+
 	#clumsy but safe
 	#for assigning colors to different elemments
 	carr = xyz_df.index[xyz_df['element'].isin(['C'])].tolist()
@@ -977,7 +983,7 @@ if args.show:
 	
 	#for atom labeling
 	atom_coord_name = zip(xyzarr,atom_label)
-	
+
 	#prepare plot
 	fig = plt.figure(figsize=(10,8))
 	ax = plt.axes(projection='3d')
@@ -1003,9 +1009,13 @@ if args.show:
 		ax.text(*(coord+0.12).T, label, fontsize=100/len(xyzarr) + 8 , color='black')
 	
 	#draw bonds
-	for bonds in atom1_2_coord:
+	for bonds, labels in zip(atom1_2_coord, bond_label):
 		ax.plot(*bonds.T, color='gray', linewidth=3.0)
+		if args.showbl:
+			#show bond labels
+			ax.text(*np.average(bonds+0.06,axis=0).T,labels,fontsize=(100/len(xyzarr) + 8)/1.5,color='gray')
 	
+	ax.scatter(*xyzarr[restarr].T,s=100/len(xyzarr) * 50,color='red')
 	#define ranges forplanes
 	x_pl=np.sort(xyzarr[:,0])
 	y_pl=np.sort(xyzarr[:,1])
