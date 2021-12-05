@@ -253,7 +253,7 @@ python3 xyz2tab.py asa.xyz -p1 C0 : C3 C5 : C7 O9 O11 -p2 C4 C8 O10 O12
 ```
 
 Open `asa.xyz` and calculate the best-fit plane number one (`-p1`) through C0, C1, C2, C3, C4, C5, C6, C7, O9, O11 and the the best-fit plane number two (`-p2`) through C4, C8, O10, O12, print the distances and the angle between the planes and show the molecule and the planes (`-s`).
-![show](/examples/asa2.png | width=100)
+![show](/examples/asa2.png){:height="50%" width="50%"}
 ...
 ```
 Best-fit Plane 1 through 9 atoms.
