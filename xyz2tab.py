@@ -153,16 +153,12 @@ def svd_fit(X):
 	N = V[-1]
 	return C, N
 
+#https://stackoverflow.com/questions/13685386/matplotlib-equal-unit-length-with-equal-aspect-ratio-z-axis-is-not-equal-to
 def set_axes_equal(ax):
 	'''Make axes of 3D plot have equal scale so that spheres appear as spheres,
 	cubes as cubes, etc..  This is one possible solution to Matplotlib's
 	ax.set_aspect('equal') and ax.axis('equal') not working for 3D.
-
-	Input
-		ax: a matplotlib axis, e.g., as output from plt.gca().
 	'''
-	#https://stackoverflow.com/questions/13685386/matplotlib-equal-unit-length-with-equal-aspect-ratio-z-axis-is-not-equal-to
-	
 	x_limits = ax.get_xlim3d()
 	y_limits = ax.get_ylim3d()
 	z_limits = ax.get_zlim3d()
@@ -176,7 +172,8 @@ def set_axes_equal(ax):
 	
 	# The plot bounding box is a sphere in the sense of the infinity
 	# norm, hence I call half the max range the plot radius.
-	plot_radius = 0.5*max([x_range, y_range, z_range])
+	# set to 0.38 --> bigger molecules 
+	plot_radius = 0.35*max([x_range, y_range, z_range])
 	
 	ax.set_xlim3d([x_middle - plot_radius, x_middle + plot_radius])
 	ax.set_ylim3d([y_middle - plot_radius, y_middle + plot_radius])
@@ -927,7 +924,8 @@ if args.plane2:
 	print('Angle between Plane 1 and Plane 2:', f'{np.degrees(phi):.2f}°')
 
 if args.show:
-	
+	#show the molecule and planes
+	#lists for color asignment
 	metals = ['Ac', 'Ag', 'Al', 'Am', 'Ar', 'As', 'At', 'Au', 'Ba', 'Be', \
 				'Bi', 'Ca', 'Cd', 'Ce', 'Cf', 'Cm', 'Co', 'Cr', 'Cs', 'Cu', \
 				'Db', 'Dy', 'Er', 'Es', 'Eu', 'Fe', 'Fm', 'Fr', 'Ga', 'Gd', \
@@ -937,22 +935,25 @@ if args.show:
 				'Ra', 'Rb', 'Re', 'Rf', 'Rh', 'Rn', 'Ru', 'Sc', 'Sm', 'Sn', \
 				'Sr', 'Ta', 'Tb', 'Tc', 'Te', 'Th', 'Ti', 'Tl', 'Tm', 'U', \
 				'V', 'W', 'Y', 'Yb', 'Zn', 'Zr']
-	
 	green = ['F','Cl']
 	brown = ['Br']
 	purple = ['P','I']
 	orange = ['Si']
 	
-	
+	#get atom numbers from sel_dist2 data frame, e.g. C11 --> 11
 	atom1_num = sel_dist2['atom1_idx'].apply(lambda x: re.sub(r'\D+','', x)).astype(int).tolist()
 	atom2_num = sel_dist2['atom2_idx'].apply(lambda x: re.sub(r'\D+','', x)).astype(int).tolist()
+	#get atom labels from xyz_df
 	atom_label = xyz_df['atom1_idx'].tolist()
 	
-	atom1_coord = xyzarr[atom1_num] 
+	#atom1 and atom 2 coordinates
+	atom1_coord = xyzarr[atom1_num]
 	atom2_coord = xyzarr[atom2_num]
+	#put atom1 and atom2 coordinats in an numpy array (for bonds display)
 	atom1_2_coord = np.array(list(zip(atom1_coord,atom2_coord)))
 	
 	#clumsy but safe
+	#for assigning colors to different elemments
 	carr = xyz_df.index[xyz_df['element'].isin(['C'])].tolist()
 	harr = xyz_df.index[xyz_df['element'].isin(['H'])].tolist()
 	narr = xyz_df.index[xyz_df['element'].isin(['N'])].tolist()
@@ -974,13 +975,17 @@ if args.show:
 	restarr = [item for item in restarr if item not in parr]
 	restarr = [item for item in restarr if item not in orarr]
 	
+	#for atom labeling
 	atom_coord_name = zip(xyzarr,atom_label)
-	#scatter plot
+	
+	#prepare plot
 	fig = plt.figure(figsize=(10,8))
 	ax = plt.axes(projection='3d')
+	#otherwise molecule looks strange
 	ax.set_box_aspect((1, 1, 1))
 	
 	#clumsy but safe
+	#plot atom coordinates with different colors and point sizes
 	ax.scatter(*xyzarr[carr].T,s=100/len(xyzarr) * 50,color='black')
 	ax.scatter(*xyzarr[harr].T,s=80/len(xyzarr) * 50,color='tan')
 	ax.scatter(*xyzarr[narr].T,s=100/len(xyzarr) * 50,color='blue')
@@ -993,42 +998,53 @@ if args.show:
 	ax.scatter(*xyzarr[orarr].T,s=200/len(xyzarr) * 50,color='orange')
 	ax.scatter(*xyzarr[restarr].T,s=100/len(xyzarr) * 50,color='gray')
 	
-	
+	#label atoms
 	for coord, label in atom_coord_name:
 		ax.text(*(coord+0.12).T, label, fontsize=100/len(xyzarr) + 8 , color='black')
 	
+	#draw bonds
 	for bonds in atom1_2_coord:
 		ax.plot(*bonds.T, color='gray', linewidth=3.0)
 	
-	
+	#define ranges forplanes
 	x_pl=np.sort(xyzarr[:,0])
 	y_pl=np.sort(xyzarr[:,1])
 	z_pl=np.sort(xyzarr[:,2])
+	zz=ax.get_zlim3d()
 
 	if args.plane1:
+		#plane1 grid
 		xx1, yy1 = np.meshgrid((x_pl[0],x_pl[-1]),(y_pl[0],y_pl[-1]))
 		if args.plane2:
+			#plane2 grid
 			xx2, yy2 = np.meshgrid((x_pl[0],x_pl[-1]),(y_pl[0],y_pl[-1]))
-	
+		#plane 1 d
 		d1 = -c1.dot(n1)
 		
 		if args.plane2:
+			#plane 2 d
 			d2 = -c2.dot(n2)
-	
+		#plane 1 equation
 		z1 = (-n1[0] * xx1 - n1[1] * yy1 - d1) * 1. /n1[2]
 		
 		if args.plane2:
+			#plane 2 equation
 			z2 = (-n2[0] * xx2 - n2[1] * yy2 - d2) * 1. /n2[2]
-	
-	
+		#plot plane 1
 		ax.plot_surface(xx1, yy1, z1, color='blue', alpha=0.3, label='Plane 1')
 		
 		if args.plane2:
+			#plot plane 2
 			ax.plot_surface(xx2, yy2, z2, color='red', alpha=0.3, label='Plane 2')
-	
+	#no axes
 	ax.set_axis_off()
+	#tight layout 
 	fig.tight_layout()
 	#ax.legend(loc='upper left')
+	#set z limits for plots, otherwise planes are sometimes very large
 	plt.gca().set_zlim(z_pl[0],z_pl[-1])
+	#plt.gca().set_zlim(zz)
+	#adjust 3d drawing behavior, otherwise molecules are not correctly displayes
 	set_axes_equal(ax)
+	#show the plot
 	plt.show()
