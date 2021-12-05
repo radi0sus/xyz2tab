@@ -136,7 +136,8 @@ Open `formaldehyde.xyz` and show tables... Several options are shown.
 ```console
 python3 xyz2tab.py asa.xyz -ee H -s
 ```
-Open `asa.xyz`, exclude bonds to hydrogen atoms (`-ee H`), show tables and the molecule (`-s`).
+Open `asa.xyz`, exclude bonds to hydrogen atoms (`-ee H`), show tables and the molecule (`-s`). 
+Remark: The visualization always shows all atoms, `-ee` or `-ea` options are ignored. Included contacts ( `-ic` option) are shown.
 
 <p align="center">
 <img width="500" alt="asa" src="/examples/asa.png">
@@ -207,6 +208,7 @@ Covalent Radius + :  8.00 %
 python3 xyz2tab.py asa.xyz -ee H -ic O11 O12 -sa -v -s
 ```
 Open `asa.xyz`, exclude bonds to hydrogen atoms (`-ee H`), include the contat O11 O12 (`-ic O11 O12`), sort values ascending (`-sa`), show verbose tables (`-v`) and the molecule (`-s`).
+Remark: The visualization always shows all atoms, `-ee` or `-ea` options are ignored. Included contacts ( `-ic` option) are shown.
 
 <p align="center">
 <img width="500" alt="asa" src="/examples/asa3.png">
