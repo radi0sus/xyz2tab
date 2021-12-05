@@ -118,6 +118,7 @@ Sam. std. dev. = Sample standard deviation, Pop. std. dev. = Population standard
 ## Known Issues
 - The script makes extensive use of Unicode characters, which can cause problems with output or conversion.
 - Verbose output (`-v` option) can be very large and confusing (looks nicer after formatting).
+- When rotating the molecule in the matplotlib window, planes are sometimes shown in wrong positions. 
 
 ## Examples
 
