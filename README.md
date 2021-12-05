@@ -113,7 +113,7 @@ Sam. std. dev. = Sample standard deviation, Pop. std. dev. = Population standard
 - `-px C0 N11 : ` considers atom C0 and all atoms from N11 to the last atom in the xyz-file.
 - `-px C0 : C4 N11 : ` considers all atoms from C0 to C4 and all atoms from N11 to the last atom in the xyz-file.
 - To print more plane related parameters, remove the appropriate comments in the plane(s) section of the script.
-- If the `-s` option is invoked the molecule and calculated planes will be shown. Plane 1 is blue colored and plane 2 red.
+- If the `-s` option is invoked, the molecule and calculated planes will be shown. Plane 1 is blue colored and plane 2 red.
 
 ## Known Issues
 - The script makes extensive use of Unicode characters, which can cause problems with output or conversion.
