@@ -87,7 +87,7 @@ word processor. Convert the file to even more formats such as HTML, PDF or TeX w
 - `-p1` `atom(s)` or `atom(s) : atom(s)` or `atom(s) :`  or `: atom(s)`  or `:`, optional: calculate the best-fit plane through selected or all (`:`) atoms and prints the distance of the selected or all (`:`) for all atoms to the plane, e.g. an xyz-file containing 5 atoms:
     - `-p1 C0 C1 O2 N3 N4`, calculates the best-fit plane through C0 C1 O2 N3 and N4 and prints the distances
     - `-p1 C0 : N4`, calculates the best-fit plane through C0 C1 O2 N3 and N4 and prints the distances 
-    - `-p1 : N5`, calculates the best-fit plane through C0 C1 O2 N3 and N4 and prints the distances
+    - `-p1 : N4`, calculates the best-fit plane through C0 C1 O2 N3 and N4 and prints the distances
     - `-p1 C0 :`, calculates the best-fit plane through C0 C1 O2 N3 and N4 and prints the distances
     - `-p1 :`, calculates the best-fit plane through C0 C1 O2 N3 and N4 and prints the distances
     - `-p1 C0 : O2 N4`, calculates the best-fit plane through C0 C1 O2 and N4 and prints the distances
