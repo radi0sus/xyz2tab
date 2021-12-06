@@ -1020,7 +1020,6 @@ if args.show or args.showbl:
 	x_pl=np.sort(xyzarr[:,0])
 	y_pl=np.sort(xyzarr[:,1])
 	z_pl=np.sort(xyzarr[:,2])
-	zz=ax.get_zlim3d()
 
 	if args.plane1:
 		#plane1 grid
@@ -1036,16 +1035,15 @@ if args.show or args.showbl:
 			d2 = -c2.dot(n2)
 		#plane 1 equation
 		z1 = (-n1[0] * xx1 - n1[1] * yy1 - d1) * 1. /n1[2]
-		
 		if args.plane2:
 			#plane 2 equation
 			z2 = (-n2[0] * xx2 - n2[1] * yy2 - d2) * 1. /n2[2]
 		#plot plane 1
-		ax.plot_surface(xx1, yy1, z1, color='blue', alpha=0.3, label='Plane 1')
+		surf = ax.plot_surface(xx1, yy1, z1, color='blue', alpha=0.3, label='Plane 1')
 		
 		if args.plane2:
 			#plot plane 2
-			ax.plot_surface(xx2, yy2, z2, color='red', alpha=0.3, label='Plane 2')
+			surf = ax.plot_surface(xx2, yy2, z2, color='red', alpha=0.3, label='Plane 2')
 	#no axes
 	ax.set_axis_off()
 	#tight layout 
@@ -1053,7 +1051,6 @@ if args.show or args.showbl:
 	#ax.legend(loc='upper left')
 	#set z limits for plots, otherwise planes are sometimes very large
 	plt.gca().set_zlim(z_pl[0],z_pl[-1])
-	#plt.gca().set_zlim(zz)
 	#adjust 3d drawing behavior, otherwise molecules are not correctly displayes
 	set_axes_equal(ax)
 	#show the plot
