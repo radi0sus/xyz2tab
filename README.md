@@ -307,7 +307,7 @@ Angle between Plane 1 and Plane 2: 93.69°
 python3 xyz2tab.py h2o2.xyz -r 10 -d H2 O0 O1 H3 -p1 O0 O1 H2 -p2 O0 O1 H3 -s
 ```
 
-Open `h2o2.xyz`, add +10% to radii (`-r`), calculate the dihedral angle (`-d`) H2-O0-O1-H3 and calculate the best-fit plane number one (`-p1`) through O0, O1, H3 and the the best-fit plane number two (`-p2`) through O0, O1, H3, print the distances and the angle between the planes and show the molecule and the planes (`-s`).
+Open `h2o2.xyz`, add +10% to radii (`-r`), calculate the dihedral angle (`-d`) H2-O0-O1-H3 and calculate the best-fit plane number one (`-p1`) through O0, O1, H3 and the best-fit plane number two (`-p2`) through O0, O1, H3, print the distances and the angle between the planes and show the molecule and the planes (`-s`).
 <p align="center">
 <img width="500" alt="h2o2" src="/examples/h2o2png.png">
  </p>
