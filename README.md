@@ -212,7 +212,7 @@ Open `asa.xyz`, exclude bonds to hydrogen atoms (`-ee H`), include the contat O1
 Remark: The visualization always shows all atoms, `-ee` or `-ea` options are ignored. Included contacts (`-ic` option) are shown.
 
 <p align="center">
-<img width="500" alt="asa" src="/examples/asa4.png">
+<img width="550" alt="asa" src="/examples/asa4.png">
 </p>
 
 ...
