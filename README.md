@@ -275,7 +275,7 @@ Open `asa.xyz` and calculate the best-fit plane number one (`-p1`) through C0, C
 ```
 Best-fit Plane 1 through 9 atoms.
 
-| Atoms   |   Distances to Plane 1 /Å |
+| Atom    |    Distance to Plane 1 /Å |
 |---------|---------------------------|
 | C0      |                   -0.0056 |
 | C1      |                    0.0079 |
@@ -289,7 +289,7 @@ Best-fit Plane 1 through 9 atoms.
 
 Best-fit Plane 2 through 4 atoms.
 
-| Atoms   |   Distances to Plane 2 /Å |   Distances to Plane 1 /Å |
+| Atom    |    Distance to Plane 2 /Å |    Distance to Plane 1 /Å |
 |---------|---------------------------|---------------------------|
 | C4      |                   -0.0006 |                    1.2181 |
 | C8      |                    0.0023 |                    1.3202 |
@@ -315,7 +315,7 @@ Dihedral angle H2-O0-O1-H3: 113.89°
 
 Best-fit Plane 1 through 3 atoms.
 
-| Atoms   |   Distances to Plane 1 /Å |
+| Atom    |    Distance to Plane 1 /Å |
 |---------|---------------------------|
 | O0      |                    0.0000 |
 | O1      |                   -0.0000 |
@@ -323,7 +323,7 @@ Best-fit Plane 1 through 3 atoms.
 
 Best-fit Plane 2 through 3 atoms.
 
-| Atoms   |   Distances to Plane 2 /Å |   Distances to Plane 1 /Å |
+| Atom    |    Distance to Plane 2 /Å |    Distance to Plane 1 /Å |
 |---------|---------------------------|---------------------------|
 | O0      |                   -0.0000 |                    0.0000 |
 | O1      |                   -0.0000 |                   -0.0000 |
