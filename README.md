@@ -139,11 +139,9 @@ python3 xyz2tab.py asa.xyz -ee H -s
 ```
 Open `asa.xyz`, exclude bonds to hydrogen atoms (`-ee H`), show tables and the molecule (`-s`). 
 Remark: The visualization always shows all atoms, `-ee` or `-ea` options are ignored. Included contacts ( `-ic` option) are shown.
-
 <p align="center">
-<img width="500" alt="asa" src="/examples/asa.png">
+<img width="600" alt="asa" src="/examples/asa.png">
 </p>
-
 ```
 -------------------  ------------
 Filename          :  asa.xyz
