@@ -121,7 +121,7 @@ Sam. std. dev. = Sample standard deviation, Pop. std. dev. = Population standard
 - The script makes extensive use of Unicode characters, which can cause problems with output or conversion.
 - Verbose output (`-v` option) can be very large and confusing (looks nicer after formatting).
 - When rotating the molecule in the matplotlib window, planes are sometimes misplaced.
-- Xyz files containing more than one molecule are not supported. However, if you delete the two header lines between different molecules you can read the xyz as a whole.
+- XYZ files containing more than one molecule are not supported. However, if the two header lines between different molecules are removed, the script reads the xyz file as a whole.
 
 ## Examples
 
