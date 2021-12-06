@@ -77,7 +77,7 @@ word processor. Convert the file to even more formats such as HTML, PDF or TeX w
 ## Command-line options
 - `filename` , required: filename, e.g. `my_xyz.xyz`, first two lines will be ignored, file format must be `element x y z`, cartesian coordinates, units in Å
 - `-ea` `atom(s)`, optional: exclude atoms, e.g. `-ea H18` exclude bonds to H18, `-ea H18 H19` exclude bonds to H18 and H19
-- `-ee` `elements(s)`,  optional: exlude elements,  e.g. `-ee H` exclude bonds to hydrogen atoms, `-ea H O` exclude bonds to hydrogen and oxygen atoms
+- `-ee` `elements(s)`,  optional: exclude elements,  e.g. `-ee H` exclude bonds to hydrogen atoms, `-ea H O` exclude bonds to hydrogen and oxygen atoms
 - `-sa`, optional: sort values for bond lengths and angles ascending
 - `-sd`, optional: sort values for bond lengths and angles descending
 - `-sae`, optional: ascending alphabetical sort of elements
