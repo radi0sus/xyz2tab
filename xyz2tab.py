@@ -836,7 +836,7 @@ if args.plane1:
 	#print the table with atom names and distances to the plane
 	print('')
 	print(tabulate(plane1_df,
-	headers=['Atoms','Distances to Plane 1 /Å'], 
+	headers=['Atom','Distance to Plane 1 /Å'], 
 	tablefmt='github',
 	floatfmt=(".4f"),
 	showindex=False))
@@ -916,7 +916,7 @@ if args.plane2:
 	#print the table with atom names and distances to the plane 2 and plane 1 
 	print('')
 	print(tabulate(plane2_df,
-	headers=['Atoms','Distances to Plane 2 /Å','Distances to Plane 1 /Å'], 
+	headers=['Atom','Distance to Plane 2 /Å','Distance to Plane 1 /Å'], 
 	tablefmt='github',
 	floatfmt=(".4f"),
 	showindex=False))
