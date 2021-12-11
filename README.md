@@ -5,7 +5,7 @@ A Python 3 script for printing tables of bond lengths and (dihedral) angles from
 </p>
 
 ## External modules
-`pandas`, `numpy`, `scipy`, `tabulate`
+`pandas`, `numpy`, `scipy`, `tabulate`, `matplotlib`
  
 ## Quick start
  Start the script with:
