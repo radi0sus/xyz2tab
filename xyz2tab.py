@@ -345,7 +345,7 @@ print(tabulate([['Filename          :', args.filename],
 				['Excluded atoms    :', re.sub(r'[^a-zA-Z0-9,]','',str(args.excludeAt))],
 				['Excluded elements :', re.sub(r'[^a-zA-Z0-9,]','',str(args.excludeEl))],
 				['Included contacts :', re.sub(r'[^a-zA-Z0-9,]','',str(args.includeCon))],
-				['Covalent Radius + :', '{:.2f} %'.format(args.radius)]],
+				['Covalent radius + :', '{:.2f} %'.format(args.radius)]],
 				tablefmt='simple'))
 
 #print info table
