@@ -110,10 +110,10 @@ Sam. std. dev. = Sample standard deviation, Pop. std. dev. = Population standard
 - `-r 0` uses the unaltered covalent radii.
 - `-d`, `-p1`, `-p2` and `-s` ignore excluded atoms (`-ea`) or elements (`-ee`) and sorting (`-s...`).
 - Distances are in Å (Angstrom) and angles are in ° (Degree). Input coordinates are assumed to be in Å (Angstrom) as well.
-- `-p1 : N11` considers all atoms from the first atom in the xyz file to N11.
-- `-p1 N11 : ` considers all atoms from N11 to the last atom in the xyz file.
-- `-p1 C0 N11 : ` considers atom C0 and all atoms from N11 to the last atom in the xyz file.
-- `-p1 C0 : C4 N11 : ` considers all atoms from C0 to C4 and all atoms from N11 to the last atom in the xyz file.
+- `-p1 : N11` considers all atoms from the first atom in the xyz file to N11 for plane 1.
+- `-p1 N11 : ` considers all atoms from N11 to the last atom in the xyz file for plane 1.
+- `-p1 C0 N11 : ` considers atom C0 and all atoms from N11 to the last atom in the xyz file for plane 1.
+- `-p1 C0 : C4 N11 : ` considers all atoms from C0 to C4 and all atoms from N11 to the last atom in the xyz file for plane 1.
 - To print more plane related parameters, remove the appropriate comments in the plane(s) section of the script.
 - If the `-s` option is invoked, the molecule and calculated planes will be shown. Plane 1 is blue colored and plane 2 red. It gives a quick overview over the atomic numbering / labeling and the positions of the planes. One can also check whether all bonds have been calculated or considered and adjust bonding with the `-r` or `-ic` options in case.
 
