@@ -14,7 +14,7 @@ python3 xyz2tab.py filename.xyz
 ```
 to open the XYZ. It gives the following output:
 
-Tables with general information. Please note that the covalent radius (column `Cov. radius`) has been increased by `Covalent Radius +  = 8 %` and bonds have been calculated by the sum of the radii given in the column `Cov. radius +`.
+Tables with general information. Please note that the covalent radius (column `Cov. radius`) has been increased by `Covalent radius +  = 8 %` and bonds have been calculated by the sum of the radii given in the column `Cov. radius +`.
 ```
 -------------------  ------------
 Filename          :  asa.xyz
@@ -24,7 +24,7 @@ Formula weight    :  180.16 g/mol
 Excluded atoms    :  None
 Excluded elements :  None
 Included contacts :  None
-Covalent Radius + :  8.00 %
+Covalent radius + :  8.00 %
 -------------------  ------------
 
 | Element   |   Atom count |   Mass fraction /% |   Cov. radius /Å |   Cov. radius + /Å |
@@ -152,7 +152,7 @@ Formula weight    :  180.16 g/mol
 Excluded atoms    :  None
 Excluded elements :  H
 Included contacts :  None
-Covalent Radius + :  8.00 %
+Covalent radius + :  8.00 %
 -------------------  ------------
 ```
 
