@@ -273,6 +273,11 @@ parser.add_argument('-sb','--showbl',
 	default=0, action='store_true',
 	help='same as -s with bond lengths')
 
+#plot with no labels
+parser.add_argument('-sn','--shownl',
+	default=0, action='store_true',
+	help='same as -s with no labels')
+
 #parse arguments
 args = parser.parse_args()
 
@@ -928,7 +933,7 @@ if args.plane2:
 	print('')
 	print('Angle between Plane 1 and Plane 2:', f'{np.degrees(phi):.2f}°')
 
-if args.show or args.showbl:
+if args.show or args.showbl or args.shownl:
 	#show the molecule and planes
 	#lists for color asignment
 	metals = ['Ac', 'Ag', 'Al', 'Am', 'Ar', 'As', 'At', 'Au', 'Ba', 'Be', \
@@ -1005,8 +1010,10 @@ if args.show or args.showbl:
 	ax.scatter(*xyzarr[restarr].T,s=100/len(xyzarr) * 50,color='gray')
 	
 	#label atoms
-	for coord, label in atom_coord_name:
-		ax.text(*(coord+0.12).T, label, fontsize=100/len(xyzarr) + 8 , color='black')
+	#show no lables if -sn option is activated
+	if not args.shownl:
+		for coord, label in atom_coord_name:
+			ax.text(*(coord+0.12).T, label, fontsize=100/len(xyzarr) + 8 , color='black')
 	
 	#draw bonds
 	for bonds, labels in zip(atom1_2_coord, bond_label):
