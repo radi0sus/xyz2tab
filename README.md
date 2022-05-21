@@ -63,7 +63,7 @@ Three tables with angles in a likewise manner.
 
 Start the script with:
 ```console
-python3 cifpal.py filename.xyz > filename.md
+python3 xyz2tab.py filename.xyz > filename.md
 ```
 will save the output in markdown format.
 
@@ -128,7 +128,7 @@ Sam. std. dev. = Sample standard deviation, Pop. std. dev. = Population standard
 
 ### Example 1:
 ```console
-python3 xyt2tab.py formaldehyde.xyz
+python3 xyz2tab.py formaldehyde.xyz
 ```
 Open `formaldehyde.xyz` and show tables... Several options are shown.
 
