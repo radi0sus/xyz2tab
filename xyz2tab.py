@@ -12,6 +12,8 @@ from scipy.spatial.distance import pdist, squareform, cosine    #for the calcula
 from tabulate import tabulate                                   #nice table output
 import matplotlib.pyplot as plt                                 #for molecule display
 from mpl_toolkits.mplot3d import Axes3D                         #for molecule display
+from matplotlib.patches import FancyArrowPatch                  #for fancy arrows in xyz
+from mpl_toolkits.mplot3d import proj3d                       	#for fancy arrows in xyz
 
 #for windows console
 sys.stdout.reconfigure(encoding='utf-8')  
@@ -178,7 +180,39 @@ def set_axes_equal(ax):
 	ax.set_xlim3d([x_middle - plot_radius, x_middle + plot_radius])
 	ax.set_ylim3d([y_middle - plot_radius, y_middle + plot_radius])
 	ax.set_zlim3d([z_middle - plot_radius, z_middle + plot_radius])
+
+
+#draw fancy arrows in x y z
+#https://gist.github.com/WetHat/1d6cd0f7309535311a539b42cccca89c
+class Arrow3D(FancyArrowPatch):
+	def __init__(self, x, y, z, dx, dy, dz, *args, **kwargs):
+		super().__init__((0, 0), (0, 0), *args, **kwargs)
+		self._xyz = (x, y, z)
+		self._dxdydz = (dx, dy, dz)
+	def draw(self, renderer):
+		x1, y1, z1 = self._xyz
+		dx, dy, dz = self._dxdydz
+		x2, y2, z2 = (x1 + dx, y1 + dy, z1 + dz)
+		xs, ys, zs = proj3d.proj_transform((x1, x2), (y1, y2), (z1, z2), self.axes.M)
+		self.set_positions((xs[0], ys[0]), (xs[1], ys[1]))
+		super().draw(renderer)
+	def do_3d_projection(self, renderer=None):
+		x1, y1, z1 = self._xyz
+		dx, dy, dz = self._dxdydz
+		x2, y2, z2 = (x1 + dx, y1 + dy, z1 + dz)
+		
+		xs, ys, zs = proj3d.proj_transform((x1, x2), (y1, y2), (z1, z2), self.axes.M)
+		self.set_positions((xs[0], ys[0]), (xs[1], ys[1]))
+		return np.min(zs) 
 	
+def _arrow3D(ax, x, y, z, dx, dy, dz, *args, **kwargs):
+	'''Add an 3d arrow to an `Axes3D` instance.'''
+	arrow = Arrow3D(x, y, z, dx, dy, dz, *args, **kwargs)
+	ax.add_artist(arrow)
+setattr(Axes3D, 'arrow3D', _arrow3D)
+#end draw fancy arrows in x y z
+
+
 #argument parser
 parser = argparse.ArgumentParser(
 		prog='xyz2tab', 
@@ -277,6 +311,11 @@ parser.add_argument('-sb','--showbl',
 parser.add_argument('-sn','--shownl',
 	default=0, action='store_true',
 	help='same as -s with no labels')
+
+#show orientation
+parser.add_argument('-so','--showori',
+	default=0, action='store_true',
+	help='plot three arrows along the xyz-axes at 0,0,0 to show the orientation of the molecule')
 
 #parse arguments
 args = parser.parse_args()
@@ -1051,6 +1090,30 @@ if args.show or args.showbl or args.shownl:
 		if args.plane2:
 			#plot plane 2
 			surf = ax.plot_surface(xx2, yy2, z2, color='red', alpha=0.3, label='Plane 2')
+	
+	# show arrows representing the xyz-axes, starting from 0,0,0
+	if args.showori:
+		arrow_length =sum(abs(i) for i in ax.get_xlim())+sum(abs(i) for i in ax.get_ylim())+sum(abs(i) for i in ax.get_zlim())
+		arrow_length = (arrow_length/3)*0.5
+		if arrow_length > 3:
+			arrow_length = 3
+		ax.arrow3D(0,0,0, 0,0,arrow_length,
+					mutation_scale=20,
+					ec ='black',
+					fc='red')
+		ax.arrow3D(0,0,0, 0,arrow_length,0,
+					mutation_scale=20,
+					ec ='black',
+					fc='green')
+		ax.arrow3D(0,0,0, arrow_length,0,0,
+					mutation_scale=20,
+					ec ='black',
+					fc='blue')
+		ax.text(0, 0, arrow_length, 'z',color='red',fontsize=15)
+		ax.text(0, arrow_length, 0, 'y',color='green',fontsize=15)
+		ax.text(arrow_length, 0, 0, 'x',color='blue',fontsize=15)
+		ax.scatter(0,0,0,s=50,color='black',alpha=0.8)
+
 	#no axes
 	ax.set_axis_off()
 	#tight layout 
