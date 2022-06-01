@@ -339,7 +339,7 @@ Angle between Plane 1 and Plane 2: 113.89°
 python3 xyz2tab.py nipor.xyz -sn -so
 ```
 
-Open `nipor.xyz`, show the molecule with no labels (`-sn`) and show the orientation (`-sn`).
+Open `nipor.xyz`, show the molecule with no labels (`-sn`) and show the orientation (`-so`).
 <p align="center">
 <img width="500" alt="nipor3" src="/examples/nipor3.png">
  </p>
