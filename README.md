@@ -332,3 +332,13 @@ Best-fit Plane 2 through 3 atoms.
 
 Angle between Plane 1 and Plane 2: 113.89°
 ```
+
+### Example 7:
+```console
+python3 xyz2tab.py nipor.xyz -sn -so
+```
+
+Open `nipor.xyz`, show the molecule with no labels (`-sn`) and show the orientation (`-sn`).
+<p align="center">
+<img width="500" alt="nipor3" src="/examples/nipor3.png">
+ </p>
