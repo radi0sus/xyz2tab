@@ -98,7 +98,7 @@ word processor. Convert the file to even more formats such as HTML, PDF or TeX w
 - `-sn`, optional: same as `-s` with no atom labels.
 - `-so`, optional: show the orientation of the molecule with respect to the origin (x = 0 , y = 0, z = 0) and the xyz-axes of the cartesian coordinate system. The `-so` option can only be given in addition to `-s`, `-sb` or `-sn` and has no effect otherwise.
 - `-v`, optional: include two more tables (tables with general bond lengths and angles)
-- `-i`, optional: atom index starts with one. The first atom is now atom 1, e.g. C1.
+- `-i`, optional: atom index starts with one. The first atom is now atom 1, e.g. C1. 
 
 ## Statistics
 Statistics are derived from the values of the bonding parameters. 
@@ -106,7 +106,7 @@ Statistics are derived from the values of the bonding parameters.
 Sam. std. dev. = Sample standard deviation, Pop. std. dev. = Population standard deviation, Std. error = Standard error or standard error of mean. Please refer to literature or Wikipedia for the meaning of these terms. The population standard deviation is probably the value you are looking for.
 
 ## Remarks
-- Labels are in the format `Element + Position in xyz file`, e.g. `C11` is a carbon atom at position 11 in the xyz file. Counting starts with zero. With the option `-i` counting starts at one.
+- Labels are in the format `Element + Position in xyz file`, e.g. `C11` is a carbon atom at position 11 in the xyz file. Counting starts with zero. With the option `-i` counting starts at one, e.g. the atom `C11` from the previous example would be `C12`.
 - The format of the tabular output can be easily changed in the script using another formatting option of the `tabulate` module.
 - With the standard covalent radii, many potential bonds will not be considered. An 8% larger covalent radius includes almost all expected bonds. All C-C distances below 1.6 Å are considered as bonds, for example. 
 - For extreme cases (like in Jahn-Teller distorted geometries), radii can be increased even more (`-r` option) or contacts can be defined (`-ic` option).
