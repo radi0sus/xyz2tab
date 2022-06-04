@@ -297,6 +297,11 @@ parser.add_argument('-v','--verbose',
 	default=0, action='store_true',
 	help='verbose print, includes 2 more tables')
 
+#index
+parser.add_argument('-i','--index',
+	default=0, action='store_true',
+	help='the index for the first atom is 1 instead of 0')
+
 #plot
 parser.add_argument('-s','--show',
 	default=0, action='store_true',
@@ -338,6 +343,9 @@ radii_ext = args.radius / 100
 
 #element + position in xyz = atom + number, e.g. C --> C0; change to C(0) can be arranged here
 xyz_df['atom1_idx'] = ["{}{}".format(atm, idx) for atm, idx in zip(xyz_df.element, xyz_df.index.array)]
+#first atom has now index 1 in atom name, e.g. C --> C1
+if args.index:
+	xyz_df['atom1_idx'] = ["{}{}".format(atm, idx+1) for atm, idx in zip(xyz_df.element, xyz_df.index.array)]
 #atom 1 is atom 2
 xyz_df['atom2_idx'] = xyz_df['atom1_idx']
 #atomic weight gemmi
@@ -996,6 +1004,12 @@ if args.show or args.showbl or args.shownl:
 	atom_label = xyz_df['atom1_idx'].tolist()
 	#distance as bond label
 	bond_label = sel_dist2['distance_calc'].apply(lambda x: '{:.3f}'.format(x)).tolist()
+	
+	#if first atom has index 1
+	if args.index:
+		atom1_num  = [idx - 1 for idx in atom1_num]
+		atom2_num  = [idx - 1 for idx in atom2_num]
+
 	#atom1 and atom 2 coordinates
 	atom1_coord = xyzarr[atom1_num]
 	atom2_coord = xyzarr[atom2_num]
