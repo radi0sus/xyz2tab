@@ -13,7 +13,7 @@ from tabulate import tabulate                                   #nice table outp
 import matplotlib.pyplot as plt                                 #for molecule display
 from mpl_toolkits.mplot3d import Axes3D                         #for molecule display
 from matplotlib.patches import FancyArrowPatch                  #for fancy arrows in xyz
-from mpl_toolkits.mplot3d import proj3d                       	#for fancy arrows in xyz
+from mpl_toolkits.mplot3d import proj3d                           #for fancy arrows in xyz
 
 #for windows console
 sys.stdout.reconfigure(encoding='utf-8')  
@@ -26,301 +26,301 @@ sys.stdout.reconfigure(encoding='utf-8')
 #covalent radii from Alvarez (2008)
 #DOI: 10.1039/b801115j
 covalent_radii = {
-	'H': 0.31, 'He': 0.28, 'Li': 1.28,
-	'Be': 0.96, 'B': 0.84, 'C': 0.76, 
-	'N': 0.71, 'O': 0.66, 'F': 0.57, 'Ne': 0.58,
-	'Na': 1.66, 'Mg': 1.41, 'Al': 1.21, 'Si': 1.11, 
-	'P': 1.07, 'S': 1.05, 'Cl': 1.02, 'Ar': 1.06,
-	'K': 2.03, 'Ca': 1.76, 'Sc': 1.70, 'Ti': 1.60, 
-	'V': 1.53, 'Cr': 1.39, 'Mn': 1.61, 'Fe': 1.52, 
-	'Co': 1.50, 'Ni': 1.24, 'Cu': 1.32, 'Zn': 1.22, 
-	'Ga': 1.22, 'Ge': 1.20, 'As': 1.19, 'Se': 1.20, 
-	'Br': 1.20, 'Kr': 1.16, 'Rb': 2.20, 'Sr': 1.95,
-	'Y': 1.90, 'Zr': 1.75, 'Nb': 1.64, 'Mo': 1.54,
-	'Tc': 1.47, 'Ru': 1.46, 'Rh': 1.42, 'Pd': 1.39,
-	'Ag': 1.45, 'Cd': 1.44, 'In': 1.42, 'Sn': 1.39,
-	'Sb': 1.39, 'Te': 1.38, 'I': 1.39, 'Xe': 1.40,
-	'Cs': 2.44, 'Ba': 2.15, 'La': 2.07, 'Ce': 2.04,
-	'Pr': 2.03, 'Nd': 2.01, 'Pm': 1.99, 'Sm': 1.98,
-	'Eu': 1.98, 'Gd': 1.96, 'Tb': 1.94, 'Dy': 1.92,
-	'Ho': 1.92, 'Er': 1.89, 'Tm': 1.90, 'Yb': 1.87,
-	'Lu': 1.87, 'Hf': 1.75, 'Ta': 1.70, 'W': 1.62,
-	'Re': 1.51, 'Os': 1.44, 'Ir': 1.41, 'Pt': 1.36,
-	'Au': 1.36, 'Hg': 1.32, 'Tl': 1.45, 'Pb': 1.46,
-	'Bi': 1.48, 'Po': 1.40, 'At': 1.50, 'Rn': 1.50, 
-	'Fr': 2.60, 'Ra': 2.21, 'Ac': 2.15, 'Th': 2.06,
-	'Pa': 2.00, 'U': 1.96, 'Np': 1.90, 'Pu': 1.87,
-	'Am': 1.80, 'Cm': 1.69
+    'H': 0.31, 'He': 0.28, 'Li': 1.28,
+    'Be': 0.96, 'B': 0.84, 'C': 0.76, 
+    'N': 0.71, 'O': 0.66, 'F': 0.57, 'Ne': 0.58,
+    'Na': 1.66, 'Mg': 1.41, 'Al': 1.21, 'Si': 1.11, 
+    'P': 1.07, 'S': 1.05, 'Cl': 1.02, 'Ar': 1.06,
+    'K': 2.03, 'Ca': 1.76, 'Sc': 1.70, 'Ti': 1.60, 
+    'V': 1.53, 'Cr': 1.39, 'Mn': 1.61, 'Fe': 1.52, 
+    'Co': 1.50, 'Ni': 1.24, 'Cu': 1.32, 'Zn': 1.22, 
+    'Ga': 1.22, 'Ge': 1.20, 'As': 1.19, 'Se': 1.20, 
+    'Br': 1.20, 'Kr': 1.16, 'Rb': 2.20, 'Sr': 1.95,
+    'Y': 1.90, 'Zr': 1.75, 'Nb': 1.64, 'Mo': 1.54,
+    'Tc': 1.47, 'Ru': 1.46, 'Rh': 1.42, 'Pd': 1.39,
+    'Ag': 1.45, 'Cd': 1.44, 'In': 1.42, 'Sn': 1.39,
+    'Sb': 1.39, 'Te': 1.38, 'I': 1.39, 'Xe': 1.40,
+    'Cs': 2.44, 'Ba': 2.15, 'La': 2.07, 'Ce': 2.04,
+    'Pr': 2.03, 'Nd': 2.01, 'Pm': 1.99, 'Sm': 1.98,
+    'Eu': 1.98, 'Gd': 1.96, 'Tb': 1.94, 'Dy': 1.92,
+    'Ho': 1.92, 'Er': 1.89, 'Tm': 1.90, 'Yb': 1.87,
+    'Lu': 1.87, 'Hf': 1.75, 'Ta': 1.70, 'W': 1.62,
+    'Re': 1.51, 'Os': 1.44, 'Ir': 1.41, 'Pt': 1.36,
+    'Au': 1.36, 'Hg': 1.32, 'Tl': 1.45, 'Pb': 1.46,
+    'Bi': 1.48, 'Po': 1.40, 'At': 1.50, 'Rn': 1.50, 
+    'Fr': 2.60, 'Ra': 2.21, 'Ac': 2.15, 'Th': 2.06,
+    'Pa': 2.00, 'U': 1.96, 'Np': 1.90, 'Pu': 1.87,
+    'Am': 1.80, 'Cm': 1.69
 }
 
 #atomic weights
 atomic_weights = {
-	'H' : 1.008,'He' : 4.003, 'Li' : 6.941, 'Be' : 9.012,
-	'B' : 10.811, 'C' : 12.011, 'N' : 14.007, 'O' : 15.999,
-	'F' : 18.998, 'Ne' : 20.180, 'Na' : 22.990, 'Mg' : 24.305,
-	'Al' : 26.982, 'Si' : 28.086, 'P' : 30.974, 'S' : 32.066,
-	'Cl' : 35.453, 'Ar' : 39.948, 'K' : 39.098, 'Ca' : 40.078,
-	'Sc' : 44.956, 'Ti' : 47.867, 'V' : 50.942, 'Cr' : 51.996,
-	'Mn' : 54.938, 'Fe' : 55.845, 'Co' : 58.933, 'Ni' : 58.693,
-	'Cu' : 63.546, 'Zn' : 65.38, 'Ga' : 69.723, 'Ge' : 72.631,
-	'As' : 74.922, 'Se' : 78.971, 'Br' : 79.904, 'Kr' : 84.798,
-	'Rb' : 84.468, 'Sr' : 87.62, 'Y' : 88.906, 'Zr' : 91.224,
-	'Nb' : 92.906, 'Mo' : 95.95, 'Tc' : 98.907, 'Ru' : 101.07,
-	'Rh' : 102.906, 'Pd' : 106.42, 'Ag' : 107.868, 'Cd' : 112.414,
-	'In' : 114.818, 'Sn' : 118.711, 'Sb' : 121.760, 'Te' : 126.7,
-	'I' : 126.904, 'Xe' : 131.294, 'Cs' : 132.905, 'Ba' : 137.328,
-	'La' : 138.905, 'Ce' : 140.116, 'Pr' : 140.908, 'Nd' : 144.243,
-	'Pm' : 144.913, 'Sm' : 150.36, 'Eu' : 151.964, 'Gd' : 157.25,
-	'Tb' : 158.925, 'Dy': 162.500, 'Ho' : 164.930, 'Er' : 167.259,
-	'Tm' : 168.934, 'Yb' : 173.055, 'Lu' : 174.967, 'Hf' : 178.49,
-	'Ta' : 180.948, 'W' : 183.84, 'Re' : 186.207, 'Os' : 190.23,
-	'Ir' : 192.217, 'Pt' : 195.085, 'Au' : 196.967, 'Hg' : 200.592,
-	'Tl' : 204.383, 'Pb' : 207.2, 'Bi' : 208.980, 'Po' : 208.982,
-	'At' : 209.987, 'Rn' : 222.081, 'Fr' : 223.020, 'Ra' : 226.025,
-	'Ac' : 227.028, 'Th' : 232.038, 'Pa' : 231.036, 'U' : 238.029,
-	'Np' : 237, 'Pu' : 244, 'Am' : 243, 'Cm' : 247
+    'H' : 1.008,'He' : 4.003, 'Li' : 6.941, 'Be' : 9.012,
+    'B' : 10.811, 'C' : 12.011, 'N' : 14.007, 'O' : 15.999,
+    'F' : 18.998, 'Ne' : 20.180, 'Na' : 22.990, 'Mg' : 24.305,
+    'Al' : 26.982, 'Si' : 28.086, 'P' : 30.974, 'S' : 32.066,
+    'Cl' : 35.453, 'Ar' : 39.948, 'K' : 39.098, 'Ca' : 40.078,
+    'Sc' : 44.956, 'Ti' : 47.867, 'V' : 50.942, 'Cr' : 51.996,
+    'Mn' : 54.938, 'Fe' : 55.845, 'Co' : 58.933, 'Ni' : 58.693,
+    'Cu' : 63.546, 'Zn' : 65.38, 'Ga' : 69.723, 'Ge' : 72.631,
+    'As' : 74.922, 'Se' : 78.971, 'Br' : 79.904, 'Kr' : 84.798,
+    'Rb' : 84.468, 'Sr' : 87.62, 'Y' : 88.906, 'Zr' : 91.224,
+    'Nb' : 92.906, 'Mo' : 95.95, 'Tc' : 98.907, 'Ru' : 101.07,
+    'Rh' : 102.906, 'Pd' : 106.42, 'Ag' : 107.868, 'Cd' : 112.414,
+    'In' : 114.818, 'Sn' : 118.711, 'Sb' : 121.760, 'Te' : 126.7,
+    'I' : 126.904, 'Xe' : 131.294, 'Cs' : 132.905, 'Ba' : 137.328,
+    'La' : 138.905, 'Ce' : 140.116, 'Pr' : 140.908, 'Nd' : 144.243,
+    'Pm' : 144.913, 'Sm' : 150.36, 'Eu' : 151.964, 'Gd' : 157.25,
+    'Tb' : 158.925, 'Dy': 162.500, 'Ho' : 164.930, 'Er' : 167.259,
+    'Tm' : 168.934, 'Yb' : 173.055, 'Lu' : 174.967, 'Hf' : 178.49,
+    'Ta' : 180.948, 'W' : 183.84, 'Re' : 186.207, 'Os' : 190.23,
+    'Ir' : 192.217, 'Pt' : 195.085, 'Au' : 196.967, 'Hg' : 200.592,
+    'Tl' : 204.383, 'Pb' : 207.2, 'Bi' : 208.980, 'Po' : 208.982,
+    'At' : 209.987, 'Rn' : 222.081, 'Fr' : 223.020, 'Ra' : 226.025,
+    'Ac' : 227.028, 'Th' : 232.038, 'Pa' : 231.036, 'U' : 238.029,
+    'Np' : 237, 'Pu' : 244, 'Am' : 243, 'Cm' : 247
 }
 
 #dict for numbers to subscript numbers
 utf_sub_dict = {
-	"0" : "₀",
-	"1" : "₁",
-	"2" : "₂",
-	"3" : "₃",
-	"4" : "₄",
-	"5" : "₅",
-	"6" : "₆",
-	"7" : "₇",
-	"8" : "₈",
-	"9" : "₉",
+    "0" : "₀",
+    "1" : "₁",
+    "2" : "₂",
+    "3" : "₃",
+    "4" : "₄",
+    "5" : "₅",
+    "6" : "₆",
+    "7" : "₇",
+    "8" : "₈",
+    "9" : "₉",
 }
 
 #numbers to subscript (utf8) numbers
 def num_to_subnum(number):
-	utf_number=''
-	for letter in str(number):
-		utf_letter=utf_sub_dict[letter]
-		utf_number=utf_number+utf_letter
-	return(utf_number)
+    utf_number=''
+    for letter in str(number):
+        utf_letter=utf_sub_dict[letter]
+        utf_number=utf_number+utf_letter
+    return(utf_number)
 
 #removes the upper triangle of the distance matrix and zeros
 #e.g., from d(A-B) = 1.234 Å = d(B-A) =1.234 Å, d(B-A) will be removed 
 #d(A-B) = 0 Å will be removed as well
 def dm_to_series1(df):
-	df = df.astype(float) # do not comment this, angle list will be incomplete
-	df.values[np.triu_indices_from(df, k=1)] = np.nan
-	#replace zeros with nan
-	df = df.replace(0, np.nan)
-	#return and drop all nan
-	return df.unstack().dropna()
+    df = df.astype(float) # do not comment this, angle list will be incomplete
+    df.values[np.triu_indices_from(df, k=1)] = np.nan
+    #replace zeros with nan
+    df = df.replace(0, np.nan)
+    #return and drop all nan
+    return df.unstack().dropna()
 
 #calculate angle from 3 vectors / atomic coordinates: i(x,y,z); j(x,y,z); k(x,y,z) 
 #xyzarr is the array of all atomic coordinates
 def calc_angle(xyzarr, i, j, k):
-	rij = xyzarr[i] - xyzarr[j]
-	rkj = xyzarr[k] - xyzarr[j]
-	#remove if cosine fails
-	#cos_theta = np.dot(rij, rkj)
-	#sin_theta = np.linalg.norm(np.cross(rij, rkj))
-	#theta = np.arctan2(sin_theta, cos_theta)
-	#scipy pdist cosine instead of the 3 lines above
-	theta = cosine(rij,rkj)
-	theta = np.arccos(1-theta)
-	return 	np.degrees(theta)
+    rij = xyzarr[i] - xyzarr[j]
+    rkj = xyzarr[k] - xyzarr[j]
+    #remove if cosine fails
+    #cos_theta = np.dot(rij, rkj)
+    #sin_theta = np.linalg.norm(np.cross(rij, rkj))
+    #theta = np.arctan2(sin_theta, cos_theta)
+    #scipy pdist cosine instead of the 3 lines above
+    theta = cosine(rij,rkj)
+    theta = np.arccos(1-theta)
+    return     np.degrees(theta)
 
 #calculate the dihedral angle from 4 vectors / atomic coordinates: i(x,y,z); j(x,y,z); k(x,y,z); l(x,y,z)
 def calc_d_angle(xyzarr, i, j, k, l):
-	#no warning if division by zero
-	np.seterr(invalid='ignore')
-	rji = -1*(xyzarr[j] - xyzarr[i])
-	rkj = xyzarr[k] - xyzarr[j]
-	rlk = xyzarr[l] - xyzarr[k]
-	rkj /= np.linalg.norm(rkj)
-	v = rji - np.dot(rji, rkj)*rkj
-	w = rlk - np.dot(rlk, rkj)*rkj
-	x = np.dot(v, w)
-	y = np.dot(np.cross(rkj, v), w)
-	return 	np.degrees(np.arctan2(y,x))
+    #no warning if division by zero
+    np.seterr(invalid='ignore')
+    rji = -1*(xyzarr[j] - xyzarr[i])
+    rkj = xyzarr[k] - xyzarr[j]
+    rlk = xyzarr[l] - xyzarr[k]
+    rkj /= np.linalg.norm(rkj)
+    v = rji - np.dot(rji, rkj)*rkj
+    w = rlk - np.dot(rlk, rkj)*rkj
+    x = np.dot(v, w)
+    y = np.dot(np.cross(rkj, v), w)
+    return     np.degrees(np.arctan2(y,x))
 
 #calculation of the best-fit plane
 #https://gist.github.com/bdrown/a2bc1da0123b142916c2f343a20784b4
 def svd_fit(X):
-	C = np.average(X, axis=0)
-	# Create CX vector (centroid to point) matrix
-	CX = X - C
-	# Singular value decomposition
-	U, S, V = np.linalg.svd(CX)
-	# The last row of V matrix indicate the eigenvectors of
-	# smallest eigenvalues (singular values).
-	N = V[-1]
-	return C, N
+    C = np.average(X, axis=0)
+    # Create CX vector (centroid to point) matrix
+    CX = X - C
+    # Singular value decomposition
+    U, S, V = np.linalg.svd(CX)
+    # The last row of V matrix indicate the eigenvectors of
+    # smallest eigenvalues (singular values).
+    N = V[-1]
+    return C, N
 
 #https://stackoverflow.com/questions/13685386/matplotlib-equal-unit-length-with-equal-aspect-ratio-z-axis-is-not-equal-to
 def set_axes_equal(ax):
-	'''Make axes of 3D plot have equal scale so that spheres appear as spheres,
-	cubes as cubes, etc..  This is one possible solution to Matplotlib's
-	ax.set_aspect('equal') and ax.axis('equal') not working for 3D.
-	'''
-	x_limits = ax.get_xlim3d()
-	y_limits = ax.get_ylim3d()
-	z_limits = ax.get_zlim3d()
-	
-	x_range = abs(x_limits[1] - x_limits[0])
-	x_middle = np.mean(x_limits)
-	y_range = abs(y_limits[1] - y_limits[0])
-	y_middle = np.mean(y_limits)
-	z_range = abs(z_limits[1] - z_limits[0])
-	z_middle = np.mean(z_limits)
-	
-	# The plot bounding box is a sphere in the sense of the infinity
-	# norm, hence I call half the max range the plot radius.
-	# set to 0.38 --> bigger molecules 
-	plot_radius = 0.35*max([x_range, y_range, z_range])
-	
-	ax.set_xlim3d([x_middle - plot_radius, x_middle + plot_radius])
-	ax.set_ylim3d([y_middle - plot_radius, y_middle + plot_radius])
-	ax.set_zlim3d([z_middle - plot_radius, z_middle + plot_radius])
+    '''Make axes of 3D plot have equal scale so that spheres appear as spheres,
+    cubes as cubes, etc..  This is one possible solution to Matplotlib's
+    ax.set_aspect('equal') and ax.axis('equal') not working for 3D.
+    '''
+    x_limits = ax.get_xlim3d()
+    y_limits = ax.get_ylim3d()
+    z_limits = ax.get_zlim3d()
+    
+    x_range = abs(x_limits[1] - x_limits[0])
+    x_middle = np.mean(x_limits)
+    y_range = abs(y_limits[1] - y_limits[0])
+    y_middle = np.mean(y_limits)
+    z_range = abs(z_limits[1] - z_limits[0])
+    z_middle = np.mean(z_limits)
+    
+    # The plot bounding box is a sphere in the sense of the infinity
+    # norm, hence I call half the max range the plot radius.
+    # set to 0.38 --> bigger molecules 
+    plot_radius = 0.35*max([x_range, y_range, z_range])
+    
+    ax.set_xlim3d([x_middle - plot_radius, x_middle + plot_radius])
+    ax.set_ylim3d([y_middle - plot_radius, y_middle + plot_radius])
+    ax.set_zlim3d([z_middle - plot_radius, z_middle + plot_radius])
 
 
 #draw fancy arrows in x y z
 #https://gist.github.com/WetHat/1d6cd0f7309535311a539b42cccca89c
 class Arrow3D(FancyArrowPatch):
-	def __init__(self, x, y, z, dx, dy, dz, *args, **kwargs):
-		super().__init__((0, 0), (0, 0), *args, **kwargs)
-		self._xyz = (x, y, z)
-		self._dxdydz = (dx, dy, dz)
-	def draw(self, renderer):
-		x1, y1, z1 = self._xyz
-		dx, dy, dz = self._dxdydz
-		x2, y2, z2 = (x1 + dx, y1 + dy, z1 + dz)
-		xs, ys, zs = proj3d.proj_transform((x1, x2), (y1, y2), (z1, z2), self.axes.M)
-		self.set_positions((xs[0], ys[0]), (xs[1], ys[1]))
-		super().draw(renderer)
-	def do_3d_projection(self, renderer=None):
-		x1, y1, z1 = self._xyz
-		dx, dy, dz = self._dxdydz
-		x2, y2, z2 = (x1 + dx, y1 + dy, z1 + dz)
-		
-		xs, ys, zs = proj3d.proj_transform((x1, x2), (y1, y2), (z1, z2), self.axes.M)
-		self.set_positions((xs[0], ys[0]), (xs[1], ys[1]))
-		return np.min(zs) 
-	
+    def __init__(self, x, y, z, dx, dy, dz, *args, **kwargs):
+        super().__init__((0, 0), (0, 0), *args, **kwargs)
+        self._xyz = (x, y, z)
+        self._dxdydz = (dx, dy, dz)
+    def draw(self, renderer):
+        x1, y1, z1 = self._xyz
+        dx, dy, dz = self._dxdydz
+        x2, y2, z2 = (x1 + dx, y1 + dy, z1 + dz)
+        xs, ys, zs = proj3d.proj_transform((x1, x2), (y1, y2), (z1, z2), self.axes.M)
+        self.set_positions((xs[0], ys[0]), (xs[1], ys[1]))
+        super().draw(renderer)
+    def do_3d_projection(self, renderer=None):
+        x1, y1, z1 = self._xyz
+        dx, dy, dz = self._dxdydz
+        x2, y2, z2 = (x1 + dx, y1 + dy, z1 + dz)
+        
+        xs, ys, zs = proj3d.proj_transform((x1, x2), (y1, y2), (z1, z2), self.axes.M)
+        self.set_positions((xs[0], ys[0]), (xs[1], ys[1]))
+        return np.min(zs) 
+    
 def _arrow3D(ax, x, y, z, dx, dy, dz, *args, **kwargs):
-	'''Add an 3d arrow to an `Axes3D` instance.'''
-	arrow = Arrow3D(x, y, z, dx, dy, dz, *args, **kwargs)
-	ax.add_artist(arrow)
+    '''Add an 3d arrow to an `Axes3D` instance.'''
+    arrow = Arrow3D(x, y, z, dx, dy, dz, *args, **kwargs)
+    ax.add_artist(arrow)
 setattr(Axes3D, 'arrow3D', _arrow3D)
 #end draw fancy arrows in x y z
 
 
 #argument parser
 parser = argparse.ArgumentParser(
-		prog='xyz2tab', 
-		description = "Print bond, lengths angles and more from xyz files.")
+        prog='xyz2tab', 
+        description = "Print bond, lengths angles and more from xyz files.")
 
 #filename is required
 parser.add_argument("filename", 
-	help = "filename, xyz; e.g. mymolecule.xyz")
+    help = "filename, xyz; e.g. mymolecule.xyz")
 
 #exclude atoms
 parser.add_argument('-ea','--excludeAt',
-	nargs="+",
-	type=str,
-	help='exclude bonds and angles to specified atoms; e.g. -ea N1 or -ea N1 N2')
+    nargs="+",
+    type=str,
+    help='exclude bonds and angles to specified atoms; e.g. -ea N1 or -ea N1 N2')
 
 #exclude elements
 parser.add_argument('-ee','--excludeEl',
-	nargs="+",
-	type=str,
-	help='exclude bonds and angles to specified elements; e.g. -ee C or -ee C N')
+    nargs="+",
+    type=str,
+    help='exclude bonds and angles to specified elements; e.g. -ee C or -ee C N')
 
 #sort by value
 parser.add_argument('-sa','--sortasc',
-	default=0,
-	action='store_true',
-	help='sort values for bond lengths and angles ascending')
+    default=0,
+    action='store_true',
+    help='sort values for bond lengths and angles ascending')
 
 #sort by value
 parser.add_argument('-sd','--sortdes',
-	default=0, 
-	action='store_true',
-	help='sort values for bond lengths and angles descending')
+    default=0, 
+    action='store_true',
+    help='sort values for bond lengths and angles descending')
 
 #sort by name
 parser.add_argument('-sae','--sortascEl',
-	default=0, 
-	action='store_true',
-	help='ascending alphabetical sort of elements')
+    default=0, 
+    action='store_true',
+    help='ascending alphabetical sort of elements')
 
 #sort by name
 parser.add_argument('-sde','--sortdesEl',
-	default=0, 
-	action='store_true',
-	help='descending alphabetical sort of elements')
+    default=0, 
+    action='store_true',
+    help='descending alphabetical sort of elements')
 
 #include contacts
 parser.add_argument('-ic','--includeCon',
-	nargs="+",
-	type=str,
-	help='include contacts, e.g. -ic C0 C11 or -ic C0 C11 N14')
+    nargs="+",
+    type=str,
+    help='include contacts, e.g. -ic C0 C11 or -ic C0 C11 N14')
 
 #calculate dihedral angle of selected atoms
 parser.add_argument('-d','--dihedral',
-	nargs=4,
-	type=str,
-	help='calculate the dihedral angle of 4 atoms, e.g. -d C0 C11 C12 N13')
-	
+    nargs=4,
+    type=str,
+    help='calculate the dihedral angle of 4 atoms, e.g. -d C0 C11 C12 N13')
+    
 #calculate the best plane 1
 parser.add_argument('-p1','--plane1',
-	nargs='+',
-	type=str,
-	help='calculate the best plane through selected (A B C), a range of (A : C) or all atoms (:)\
-		and show the distances to plane 1, \
-		e.g. -p1 C0 C11 C12 N13 or -p1 C0 : N13 or -p1 :')
+    nargs='+',
+    type=str,
+    help='calculate the best plane through selected (A B C), a range of (A : C) or all atoms (:)\
+        and show the distances to plane 1, \
+        e.g. -p1 C0 C11 C12 N13 or -p1 C0 : N13 or -p1 :')
 
 #calculate the best plane 2
 parser.add_argument('-p2','--plane2',
-	nargs='+',
-	type=str,
-	help='calculate the best plane through selected (A B C), a range of (A : C) or all atoms (:)\
-		and show the distances to plane 1 and 2 and the angle to plane 1, \
-		e.g. -p2 C21 C22 C23 N23 or -p2 C21 : N23 or -p2 :')
+    nargs='+',
+    type=str,
+    help='calculate the best plane through selected (A B C), a range of (A : C) or all atoms (:)\
+        and show the distances to plane 1 and 2 and the angle to plane 1, \
+        e.g. -p2 C21 C22 C23 N23 or -p2 C21 : N23 or -p2 :')
 
 #add +x% to radius
 parser.add_argument('-r','--radius',
-	default=8,
-	type=float,
-	help='enlarge atomic radii by x %%, e.g. -r 15.2, default is 8 %%')
+    default=8,
+    type=float,
+    help='enlarge atomic radii by x %%, e.g. -r 15.2, default is 8 %%')
 
 #verbose
 parser.add_argument('-v','--verbose',
-	default=0, action='store_true',
-	help='verbose print, includes 2 more tables')
+    default=0, action='store_true',
+    help='verbose print, includes 2 more tables')
 
 #index
 parser.add_argument('-i','--index',
-	default=0, action='store_true',
-	help='the index for the first atom is 1 instead of 0')
+    default=0, action='store_true',
+    help='the index for the first atom is 1 instead of 0')
 
 #plot
 parser.add_argument('-s','--show',
-	default=0, action='store_true',
-	help='plot xyz coordinates, bonds and planes')
+    default=0, action='store_true',
+    help='plot xyz coordinates, bonds and planes')
 
 #plot with bond lengths
 parser.add_argument('-sb','--showbl',
-	default=0, action='store_true',
-	help='same as -s with bond lengths')
+    default=0, action='store_true',
+    help='same as -s with bond lengths')
 
 #plot with no labels
 parser.add_argument('-sn','--shownl',
-	default=0, action='store_true',
-	help='same as -s with no labels')
+    default=0, action='store_true',
+    help='same as -s with no labels')
 
 #show orientation
 parser.add_argument('-so','--showori',
-	default=0, action='store_true',
-	help='plot three arrows along the xyz-axes at 0,0,0 to show the orientation of the molecule')
+    default=0, action='store_true',
+    help='plot three arrows along the xyz-axes at 0,0,0 to show the orientation of the molecule')
 
 #parse arguments
 args = parser.parse_args()
@@ -329,14 +329,15 @@ args = parser.parse_args()
 #skip first two rows of the xyz file
 #only XMol xyz is supportet, atom(as element) x y z, e.g. C 1.58890 -1.44870 -0.47000
 try:
-	xyz_df = pd.read_csv(args.filename, 
-			 delim_whitespace=True, 
-			 skiprows=2, 
-			 names=["element", "x", "y", "z"])
+    xyz_df = pd.read_csv(args.filename,
+            sep=r'\s+', 
+            #delim_whitespace=True, #deprecated
+            skiprows=2, 
+            names=["element", "x", "y", "z"])
 #file not found
 except IOError:
-	print(f"'{args.filename}'" + " not found")
-	sys.exit(1)
+    print(f"'{args.filename}'" + " not found")
+    sys.exit(1)
 
 #xx.x% --> 0.xxx
 radii_ext = args.radius / 100
@@ -345,7 +346,7 @@ radii_ext = args.radius / 100
 xyz_df['atom1_idx'] = ["{}{}".format(atm, idx) for atm, idx in zip(xyz_df.element, xyz_df.index.array)]
 #first atom has now index 1 in atom name, e.g. C --> C1
 if args.index:
-	xyz_df['atom1_idx'] = ["{}{}".format(atm, idx+1) for atm, idx in zip(xyz_df.element, xyz_df.index.array)]
+    xyz_df['atom1_idx'] = ["{}{}".format(atm, idx+1) for atm, idx in zip(xyz_df.element, xyz_df.index.array)]
 #atom 1 is atom 2
 xyz_df['atom2_idx'] = xyz_df['atom1_idx']
 #atomic weight gemmi
@@ -391,22 +392,22 @@ info_df['radii_plus']=info_df.apply(lambda x: x.radii + x.radii*radii_ext, axis=
 #print summary table
 print('')
 print(tabulate([['Filename          :', args.filename],
-				['Number of atoms   :', xyz_df.shape[0]],
-	            ['Sum formula       :', ''.join(sum_formula_list)],
-				['Formula weight    :', '{:.2f} g/mol'.format(fw)],
-				['Excluded atoms    :', re.sub(r'[^a-zA-Z0-9,]','',str(args.excludeAt))],
-				['Excluded elements :', re.sub(r'[^a-zA-Z0-9,]','',str(args.excludeEl))],
-				['Included contacts :', re.sub(r'[^a-zA-Z0-9,]','',str(args.includeCon))],
-				['Covalent radius + :', '{:.2f} %'.format(args.radius)]],
-				tablefmt='simple'))
+                ['Number of atoms   :', xyz_df.shape[0]],
+                ['Sum formula       :', ''.join(sum_formula_list)],
+                ['Formula weight    :', '{:.2f} g/mol'.format(fw)],
+                ['Excluded atoms    :', re.sub(r'[^a-zA-Z0-9,]','',str(args.excludeAt))],
+                ['Excluded elements :', re.sub(r'[^a-zA-Z0-9,]','',str(args.excludeEl))],
+                ['Included contacts :', re.sub(r'[^a-zA-Z0-9,]','',str(args.includeCon))],
+                ['Covalent radius + :', '{:.2f} %'.format(args.radius)]],
+                tablefmt='simple'))
 
 #print info table
 print('')
 print(tabulate(info_df,
-			headers=['Element','Atom count','Mass fraction /%', 'Cov. radius /Å', 'Cov. radius + /Å'],
-			tablefmt='github',
-			floatfmt=(".2f"),
-			showindex=False))
+            headers=['Element','Atom count','Mass fraction /%', 'Cov. radius /Å', 'Cov. radius + /Å'],
+            tablefmt='github',
+            floatfmt=(".2f"),
+            showindex=False))
 
 #calculate the full distance matrix & put to square form, e.g.:
 #
@@ -416,8 +417,8 @@ print(tabulate(info_df,
 #C2 2.3 1.5 0.0
 #iloc [:,3:6] contains xyz coordinates
 dist_mat_full=pd.DataFrame(squareform(pdist(xyz_df.iloc[:,3:6],'euclid')),
-			  columns = xyz_df[['atom1_idx','element','cov_radius']],
-			  index = xyz_df[['atom2_idx','element','cov_radius']])
+              columns = xyz_df[['atom1_idx','element','cov_radius']],
+              index = xyz_df[['atom2_idx','element','cov_radius']])
 
 #remove the upper triangle and zeros, e.g.:
 #   C0  C1  C2
@@ -439,8 +440,8 @@ dist_df=dist_df[['atom1_idx','element1','cov_radius1','atom2_idx','element2','co
 
 #column with the sum of the atomic radii from two elements /atoms + x%
 dist_df['distance_radii'] = (dist_df['cov_radius1'] + 
-							dist_df['cov_radius2'])+(dist_df['cov_radius1'] + 
-							dist_df['cov_radius2'])*radii_ext
+                            dist_df['cov_radius2'])+(dist_df['cov_radius1'] + 
+                            dist_df['cov_radius2'])*radii_ext
 
 #distance is considered as bond if the calculated distance is smaller than the sum of the atomic radii
 #set to 'True' if this is a bond
@@ -449,14 +450,14 @@ dist_df['is_bond']=(dist_df['distance_calc'] < dist_df['distance_radii'])
 #include distances from selected atom (pairs) from args include connections
 #sets 'is_bond' to 'True' if 'False'
 if args.includeCon:
-	#must have atoms 1 and 2 and 'is_bond' must be 'False'
-	dist_df.loc[(dist_df.atom1_idx.isin(args.includeCon) & 
-				dist_df.atom2_idx.isin(args.includeCon) & 
-			   ~dist_df.is_bond), 'is_bond'] = True
-	#np variant of the above, slightly slower
-	#dist_df['is_bond'] = np.where((dist_df.atom1_idx.isin(args.includeCon)) &
-	#(dist_df.atom2_idx.isin(args.includeCon) & (~dist_df.is_bond)), True, dist_df['is_bond'])
-	
+    #must have atoms 1 and 2 and 'is_bond' must be 'False'
+    dist_df.loc[(dist_df.atom1_idx.isin(args.includeCon) & 
+                dist_df.atom2_idx.isin(args.includeCon) & 
+               ~dist_df.is_bond), 'is_bond'] = True
+    #np variant of the above, slightly slower
+    #dist_df['is_bond'] = np.where((dist_df.atom1_idx.isin(args.includeCon)) &
+    #(dist_df.atom2_idx.isin(args.includeCon) & (~dist_df.is_bond)), True, dist_df['is_bond'])
+    
 #fusion char, A B --> A-B
 dist_df['fusion_char']='–'
 
@@ -479,34 +480,34 @@ sel_dist=all_dist
 
 #exclude named atoms from input (in Atom1 and Atom2)
 if args.excludeAt:
-	sel_dist=all_dist[~all_dist.atom1_idx.isin(args.excludeAt) & ~all_dist.atom2_idx.isin(args.excludeAt)]
-	
+    sel_dist=all_dist[~all_dist.atom1_idx.isin(args.excludeAt) & ~all_dist.atom2_idx.isin(args.excludeAt)]
+    
 #exclude named elements from input (in Element1 and Element2)
 if args.excludeEl:
-	sel_dist=all_dist[~all_dist.element1.isin(args.excludeEl) & ~all_dist.element2.isin(args.excludeEl)]
+    sel_dist=all_dist[~all_dist.element1.isin(args.excludeEl) & ~all_dist.element2.isin(args.excludeEl)]
 
 #exit if selected bonds data frame is empty 
 if len(sel_dist) == 0:
-	print("No bonds found. Include more atoms or elements. Exit.")
-	sys.exit(1)
+    print("No bonds found. Include more atoms or elements. Exit.")
+    sys.exit(1)
 
 ############ Sort
 
 #sort bond length values ascending
 if args.sortasc:
-	sel_dist=sel_dist.sort_values(by=['distance_calc'])
-	
+    sel_dist=sel_dist.sort_values(by=['distance_calc'])
+    
 #sort bond length values descending
 if args.sortdes:
-	sel_dist=sel_dist.sort_values(by=['distance_calc'],ascending=False)
-	
+    sel_dist=sel_dist.sort_values(by=['distance_calc'],ascending=False)
+    
 #sort by elements ascending, A --> Z (not PSE like)
 if args.sortascEl:
-	sel_dist=sel_dist.sort_values(by=['element1','element2','distance_calc','atom1_idx','atom2_idx'])
-	
+    sel_dist=sel_dist.sort_values(by=['element1','element2','distance_calc','atom1_idx','atom2_idx'])
+    
 #sort by elements descending, A --> Z (not PSE like)
 if args.sortdesEl:
-	sel_dist=sel_dist.sort_values(by=['element1','element2','distance_calc','atom1_idx','atom2_idx'],ascending=False)
+    sel_dist=sel_dist.sort_values(by=['element1','element2','distance_calc','atom1_idx','atom2_idx'],ascending=False)
 
 ############ Print
 
@@ -514,10 +515,10 @@ if args.sortdesEl:
 pr_sel_dist=sel_dist[['A-B','distance_calc']]
 print('')
 print(tabulate(pr_sel_dist,
-	  headers=['Atoms','Bond length /Å'],
-	  tablefmt='github',
-	  floatfmt=(".4f"),
-	  showindex=False))
+      headers=['Atoms','Bond length /Å'],
+      tablefmt='github',
+      floatfmt=(".4f"),
+      showindex=False))
 
 #lists for printed tables
 summary_bond_table_1 = list()
@@ -529,56 +530,56 @@ grouped = sel_dist[['El1-El2','distance_calc']].groupby(sel_dist['ElEl'],sort=Fa
 
 #verbose table El1-El2 | bond length, e.g. C-C 1.223, 1.456, 1.511
 for groups in grouped:
-	summary_bond_table_1.append([groups[1].iloc[0].tolist()[0], 
-		', '.join(groups[1].sort_values(by=['distance_calc']).distance_calc.apply(lambda x: '{:.4f}'.format(x)).tolist())])
+    summary_bond_table_1.append([groups[1].iloc[0].tolist()[0], 
+        ', '.join(groups[1].sort_values(by=['distance_calc']).distance_calc.apply(lambda x: '{:.4f}'.format(x)).tolist())])
 
 #short table El1-El2 | bond length, e.g. C-C 1.223 - 1.511 (for >2), or C-C 1.223 / 1.511 (for 2), C-C 1.223 (for one)
 # float to 4 decimals, e.g. 0.1234 
 for groups in grouped:
-	if len(groups[1]) == 1:
-		summary_bond_table_2.append([groups[1].iloc[0].tolist()[0], 
-			groups[1].sort_values(by=['distance_calc']).distance_calc.apply(lambda x: '{:.4f}'.format(x)).tolist()[0]])
-	elif len(groups[1]) == 2:
-		summary_bond_table_2.append([groups[1].iloc[0].tolist()[0], 
-			groups[1].sort_values(by=['distance_calc']).distance_calc.apply(lambda x: '{:.4f}'.format(x)).tolist()[0] + 
-			' / ' + groups[1].sort_values(by=['distance_calc']).distance_calc.apply(lambda x: '{:.4f}'.format(x)).tolist()[-1]])
-	else:
-		summary_bond_table_2.append([groups[1].iloc[0].tolist()[0], 
-			groups[1].sort_values(by=['distance_calc']).distance_calc.apply(lambda x: '{:.4f}'.format(x)).tolist()[0] + 
-			' - ' + groups[1].sort_values(by=['distance_calc']).distance_calc.apply(lambda x: '{:.4f}'.format(x)).tolist()[-1]])
+    if len(groups[1]) == 1:
+        summary_bond_table_2.append([groups[1].iloc[0].tolist()[0], 
+            groups[1].sort_values(by=['distance_calc']).distance_calc.apply(lambda x: '{:.4f}'.format(x)).tolist()[0]])
+    elif len(groups[1]) == 2:
+        summary_bond_table_2.append([groups[1].iloc[0].tolist()[0], 
+            groups[1].sort_values(by=['distance_calc']).distance_calc.apply(lambda x: '{:.4f}'.format(x)).tolist()[0] + 
+            ' / ' + groups[1].sort_values(by=['distance_calc']).distance_calc.apply(lambda x: '{:.4f}'.format(x)).tolist()[-1]])
+    else:
+        summary_bond_table_2.append([groups[1].iloc[0].tolist()[0], 
+            groups[1].sort_values(by=['distance_calc']).distance_calc.apply(lambda x: '{:.4f}'.format(x)).tolist()[0] + 
+            ' - ' + groups[1].sort_values(by=['distance_calc']).distance_calc.apply(lambda x: '{:.4f}'.format(x)).tolist()[-1]])
 
 #grouped = sel_dist[['El1-El2','distance_calc']].groupby(sel_dist['ElEl'],sort=False)
 
 #generate table with statistics, | El1-El2 | Count | Mean | Median | Sam. std. dev. | Pop. std. dev. | Std. error |
 for groups in grouped:
-	summary_bond_table_3.append([groups[1].iloc[0].tolist()[0], groups[1].distance_calc.count(),f'{groups[1].distance_calc.mean():.4f}', \
-		f'{groups[1].distance_calc.median():.4f}', f'{groups[1].distance_calc.std():.4f}', f'{groups[1].distance_calc.std(ddof=0):.4f}', \
-		f'{groups[1].distance_calc.sem():.4f}',f'{groups[1].distance_calc.skew():.4f}'])
+    summary_bond_table_3.append([groups[1].iloc[0].tolist()[0], groups[1].distance_calc.count(),f'{groups[1].distance_calc.mean():.4f}', \
+        f'{groups[1].distance_calc.median():.4f}', f'{groups[1].distance_calc.std():.4f}', f'{groups[1].distance_calc.std(ddof=0):.4f}', \
+        f'{groups[1].distance_calc.sem():.4f}',f'{groups[1].distance_calc.skew():.4f}'])
 
 #print verbose table El1-El2 | bond length only by request
 if args.verbose:
-	print('')
-	print(tabulate(summary_bond_table_1,
-		  headers=['Atoms','Bond lengths /Å'], 
-		  tablefmt='github',
-		  floatfmt=(".4f"),
-		  showindex=False))
+    print('')
+    print(tabulate(summary_bond_table_1,
+          headers=['Atoms','Bond lengths /Å'], 
+          tablefmt='github',
+          floatfmt=(".4f"),
+          showindex=False))
 
 #print short table
 print('')
 print(tabulate(summary_bond_table_2,
-	  headers=['Atoms','Bond lengths /Å'],
-	  tablefmt='github',
-	  floatfmt=(".4f"),
-	  showindex=False))
+      headers=['Atoms','Bond lengths /Å'],
+      tablefmt='github',
+      floatfmt=(".4f"),
+      showindex=False))
 
 #print statistics table
 print('')
 print(tabulate(summary_bond_table_3,
-	  headers=['Atoms','Count','Mean /Å', 'Median /Å','Sam. std. dev.', \
-	  'Pop. std. dev.','Std. error','Skewness'], 
-	  tablefmt='github',
-	  showindex=False))
+      headers=['Atoms','Count','Mean /Å', 'Median /Å','Sam. std. dev.', \
+      'Pop. std. dev.','Std. error','Skewness'], 
+      tablefmt='github',
+      showindex=False))
 
 ############ Angles
 
@@ -600,8 +601,8 @@ dist2_df.drop(['level_0'], axis=1,inplace=True)
 dist2_df.drop(['level_1'], axis=1,inplace=True)
 #column with the sum of the atomic radii from two elements /atoms + x%
 dist2_df['distance_radii'] = (dist2_df['cov_radius1'] + 
-							  dist2_df['cov_radius2'])+(dist2_df['cov_radius1'] + 
-							  dist2_df['cov_radius2'])*radii_ext
+                              dist2_df['cov_radius2'])+(dist2_df['cov_radius1'] + 
+                              dist2_df['cov_radius2'])*radii_ext
 #distance is considered as bond if the calculated distance is smaller than the sum of the atomic radii
 #set to 'True' if this is a bond
 dist2_df['is_bond']=((dist2_df['distance_calc'] > 0) & (dist2_df['distance_calc'] < dist2_df['distance_radii']))
@@ -609,16 +610,16 @@ dist2_df['is_bond']=((dist2_df['distance_calc'] > 0) & (dist2_df['distance_calc'
 #include distances from selected atom (pairs) from args include connections
 #sets 'is_bond' to 'True' if 'False'
 if args.includeCon:
-	#must have Atoms 1 and 2 and is_bond must be false
-	dist2_df.loc[((dist2_df.distance_calc > 0) & 
-				   dist2_df.atom1_idx.isin(args.includeCon) & 
-				   dist2_df.atom2_idx.isin(args.includeCon) & 
-				  ~dist2_df.is_bond), 'is_bond'] = True
-	#np variant of the above, slightly slower
-	#dist2_df['is_bond'] = np.where((dist2_df.distance_calc > 0) & 
-	#(dist2_df.atom1_idx.isin(args.includeCon)) & 
-	#(dist2_df.atom2_idx.isin(args.includeCon) & 
-	#(~dist2_df.is_bond)), True, dist2_df['is_bond'])
+    #must have Atoms 1 and 2 and is_bond must be false
+    dist2_df.loc[((dist2_df.distance_calc > 0) & 
+                   dist2_df.atom1_idx.isin(args.includeCon) & 
+                   dist2_df.atom2_idx.isin(args.includeCon) & 
+                  ~dist2_df.is_bond), 'is_bond'] = True
+    #np variant of the above, slightly slower
+    #dist2_df['is_bond'] = np.where((dist2_df.distance_calc > 0) & 
+    #(dist2_df.atom1_idx.isin(args.includeCon)) & 
+    #(dist2_df.atom2_idx.isin(args.includeCon) & 
+    #(~dist2_df.is_bond)), True, dist2_df['is_bond'])
 
 #reoder data frame - maybe not necessary
 dist2_df=dist2_df[['atom1_idx','cov_radius1','atom2_idx','cov_radius2','distance_calc','distance_radii','is_bond']]
@@ -646,26 +647,26 @@ anglelist = list()
 #middle atom 'B' (for angle A-B-C) is in name of the group
 #get x,y,z coordinates (a2) of 'B' from xyz data frame
 for name, group in group1:
-	a2=xyz_df.index[xyz_df['atom1_idx'] == name].tolist()
-	#'A' and 'C' atoms are in the group
-	#get x,y,z coordinates of 'A' (a1) and 'C' (a3) from xyz data frame 
-	for s in itertools.combinations(group,2):
-		#very nice itertool, e.g.:
-		#a1 (central atom) binds to a2, a3, a4, a5
-		#angles will be a2-a1-a3, a2-a1-a4, a2-a1-a5, a3-a1-a4, a3-a1-a5, a4-a1-a5
-		#exludes double entries like a3-a1-a2, a4-a1-a2,....
-		a1=xyz_df.index[xyz_df['atom1_idx'] == s[0]].tolist()
-		a3=xyz_df.index[xyz_df['atom1_idx'] == s[1]].tolist()
-		#calculate the angle
-		angle = calc_angle(xyzarr, *a1, *a2, *a3)
-		#name of atom1 ('A') --> atom1 list
-		atom1.append(s[0])
-		#name of atom2 ('B') --> atom2 list
-		atom2.append(name)
-		#name of atom3 ('C') --> atom3 list
-		atom3.append(s[1])
-		#calculated angle to list of angles
-		anglelist.append(angle)
+    a2=xyz_df.index[xyz_df['atom1_idx'] == name].tolist()
+    #'A' and 'C' atoms are in the group
+    #get x,y,z coordinates of 'A' (a1) and 'C' (a3) from xyz data frame 
+    for s in itertools.combinations(group,2):
+        #very nice itertool, e.g.:
+        #a1 (central atom) binds to a2, a3, a4, a5
+        #angles will be a2-a1-a3, a2-a1-a4, a2-a1-a5, a3-a1-a4, a3-a1-a5, a4-a1-a5
+        #exludes double entries like a3-a1-a2, a4-a1-a2,....
+        a1=xyz_df.index[xyz_df['atom1_idx'] == s[0]].tolist()
+        a3=xyz_df.index[xyz_df['atom1_idx'] == s[1]].tolist()
+        #calculate the angle
+        angle = calc_angle(xyzarr, *a1, *a2, *a3)
+        #name of atom1 ('A') --> atom1 list
+        atom1.append(s[0])
+        #name of atom2 ('B') --> atom2 list
+        atom2.append(name)
+        #name of atom3 ('C') --> atom3 list
+        atom3.append(s[1])
+        #calculated angle to list of angles
+        anglelist.append(angle)
 
 #all 4 lists in angles_df data frame
 angles_df=pd.DataFrame(({'atom1_idx': atom1, 'atom2_idx': atom2, 'atom3_idx': atom3, 'angle_calc': anglelist}))
@@ -694,34 +695,34 @@ sel_angles=angles_df
 
 #exclude named atoms from input (in Atom1 and Atom2 and Atom3)
 if args.excludeAt:
-	sel_angles=angles_df[~angles_df.atom1_idx.isin(args.excludeAt) & ~angles_df.atom2_idx.isin(args.excludeAt) & ~angles_df.atom3_idx.isin(args.excludeAt)] 
-	
+    sel_angles=angles_df[~angles_df.atom1_idx.isin(args.excludeAt) & ~angles_df.atom2_idx.isin(args.excludeAt) & ~angles_df.atom3_idx.isin(args.excludeAt)] 
+    
 #exclude named elements from input (in Element1 and Element2 and Element3)
 if args.excludeEl:
-	sel_angles=angles_df[~angles_df.element1.isin(args.excludeEl) & ~angles_df.element2.isin(args.excludeEl) & ~angles_df.element3.isin(args.excludeEl)]
-	
+    sel_angles=angles_df[~angles_df.element1.isin(args.excludeEl) & ~angles_df.element2.isin(args.excludeEl) & ~angles_df.element3.isin(args.excludeEl)]
+    
 #exit if selected angles data frame is empty 
 if len(sel_angles) == 0:
-	print("No angles found. Include more atoms or elements. Exit.")
-	sys.exit(1)
+    print("No angles found. Include more atoms or elements. Exit.")
+    sys.exit(1)
 
 ############ Sort
 
 #sort angle values ascending
 if args.sortasc:
-	sel_angles=sel_angles.sort_values(by=['angle_calc'])
-	
+    sel_angles=sel_angles.sort_values(by=['angle_calc'])
+    
 #sort angle values descending
 if args.sortdes:
-	sel_angles=sel_angles.sort_values(by=['angle_calc'],ascending=False)
-	
+    sel_angles=sel_angles.sort_values(by=['angle_calc'],ascending=False)
+    
 #sort by elements ascending, A --> Z (not PSE like)
 if args.sortascEl:
-	sel_angles=sel_angles.sort_values(by=['element1','element2','element3','angle_calc','atom1_idx','atom2_idx','atom3_idx'])
-	
+    sel_angles=sel_angles.sort_values(by=['element1','element2','element3','angle_calc','atom1_idx','atom2_idx','atom3_idx'])
+    
 #sort by elements descending, A --> Z (not PSE like)
 if args.sortdesEl:
-	sel_angles=sel_angles.sort_values(by=['element1','element2','element3','angle_calc','atom1_idx','atom2_idx','atom3_idx'],ascending=False)
+    sel_angles=sel_angles.sort_values(by=['element1','element2','element3','angle_calc','atom1_idx','atom2_idx','atom3_idx'],ascending=False)
 
 ############ Print
 
@@ -729,10 +730,10 @@ if args.sortdesEl:
 pr_sel_angles=sel_angles[['A-B-C','angle_calc']]
 print('')
 print(tabulate(pr_sel_angles,
-	  headers=['Atoms','Angle /°'],
-	  tablefmt='github',
-	  floatfmt=(".2f"),
-	  showindex=False))
+      headers=['Atoms','Angle /°'],
+      tablefmt='github',
+      floatfmt=(".2f"),
+      showindex=False))
 
 #lists for printed tables
 summary_angle_table_1 = list()
@@ -744,398 +745,398 @@ grouped = sel_angles[['El1-El2-El3','angle_calc']].groupby(sel_angles['ElEl_ElEl
 
 #verbose table El1-El2-El3 | angle, e.g. C-C-C 122.31, 145.61, 151.11
 for groups in grouped:
-	summary_angle_table_1.append([groups[1].iloc[0].tolist()[0], 
-		', '.join(groups[1].sort_values(by=['angle_calc']).angle_calc.apply(lambda x: '{:.2f}'.format(x)).tolist())])
+    summary_angle_table_1.append([groups[1].iloc[0].tolist()[0], 
+        ', '.join(groups[1].sort_values(by=['angle_calc']).angle_calc.apply(lambda x: '{:.2f}'.format(x)).tolist())])
 
 #short table El1-El2-El3 | angle, e.g.C-C-C 122.32 - 151.11 (for >2), 
 #or C-C-C 122.32 / 151.11 (for 2), C-C-C 122.32 (for one)
 for groups in grouped:
-	if len(groups[1]) == 1:
-		summary_angle_table_2.append([groups[1].iloc[0].tolist()[0], 
-			groups[1].sort_values(by=['angle_calc']).angle_calc.apply(lambda x: '{:.2f}'.format(x)).tolist()[0]])
-	elif len(groups[1]) == 2:
-		summary_angle_table_2.append([groups[1].iloc[0].tolist()[0], 
-			groups[1].sort_values(by=['angle_calc']).angle_calc.apply(lambda x: '{:.2f}'.format(x)).tolist()[0] + 
-			' / ' + groups[1].sort_values(by=['angle_calc']).angle_calc.apply(lambda x: '{:.2f}'.format(x)).tolist()[-1]])
-	else:
-		summary_angle_table_2.append([groups[1].iloc[0].tolist()[0], 
-			groups[1].sort_values(by=['angle_calc']).angle_calc.apply(lambda x: '{:.2f}'.format(x)).tolist()[0] + 
-			' - ' + groups[1].sort_values(by=['angle_calc']).angle_calc.apply(lambda x: '{:.2f}'.format(x)).tolist()[-1]])
-		
+    if len(groups[1]) == 1:
+        summary_angle_table_2.append([groups[1].iloc[0].tolist()[0], 
+            groups[1].sort_values(by=['angle_calc']).angle_calc.apply(lambda x: '{:.2f}'.format(x)).tolist()[0]])
+    elif len(groups[1]) == 2:
+        summary_angle_table_2.append([groups[1].iloc[0].tolist()[0], 
+            groups[1].sort_values(by=['angle_calc']).angle_calc.apply(lambda x: '{:.2f}'.format(x)).tolist()[0] + 
+            ' / ' + groups[1].sort_values(by=['angle_calc']).angle_calc.apply(lambda x: '{:.2f}'.format(x)).tolist()[-1]])
+    else:
+        summary_angle_table_2.append([groups[1].iloc[0].tolist()[0], 
+            groups[1].sort_values(by=['angle_calc']).angle_calc.apply(lambda x: '{:.2f}'.format(x)).tolist()[0] + 
+            ' - ' + groups[1].sort_values(by=['angle_calc']).angle_calc.apply(lambda x: '{:.2f}'.format(x)).tolist()[-1]])
+        
 #grouped = sel_angles[['El1-El2-El3','angle_calc']].groupby(sel_angles['ElEl_ElElEl'],sort=False)
 
 #generate table with statistics, | El1-El2-El3 | Count | Mean | Median | Sam. std. dev. | Pop. std. dev. | Std. error |
 for groups in grouped:
-	summary_angle_table_3.append([groups[1].iloc[0].tolist()[0], groups[1].angle_calc.count(),f'{groups[1].angle_calc.mean():.2f}', \
-		f'{groups[1].angle_calc.median():.2f}', f'{groups[1].angle_calc.std():.2f}', f'{groups[1].angle_calc.std(ddof=0):.2f}', \
-		f'{groups[1].angle_calc.sem():.2f}',f'{groups[1].angle_calc.skew():.2f}'])
+    summary_angle_table_3.append([groups[1].iloc[0].tolist()[0], groups[1].angle_calc.count(),f'{groups[1].angle_calc.mean():.2f}', \
+        f'{groups[1].angle_calc.median():.2f}', f'{groups[1].angle_calc.std():.2f}', f'{groups[1].angle_calc.std(ddof=0):.2f}', \
+        f'{groups[1].angle_calc.sem():.2f}',f'{groups[1].angle_calc.skew():.2f}'])
 
 #print verbose table El1-El2-El3 | angle only by request
 if args.verbose:
-	print('')
-	print(tabulate(summary_angle_table_1,
-		  headers=['Atoms','Angle /°'], 
-		  tablefmt='github',
-		  floatfmt=(".2f"),
-		  showindex=False))
+    print('')
+    print(tabulate(summary_angle_table_1,
+          headers=['Atoms','Angle /°'], 
+          tablefmt='github',
+          floatfmt=(".2f"),
+          showindex=False))
 
 #print short table
 print('')
 print(tabulate(summary_angle_table_2,
-	  headers=['Atoms','Angle /°'], 
-	  tablefmt='github',
-	  floatfmt=(".2f"),
-	  showindex=False))
+      headers=['Atoms','Angle /°'], 
+      tablefmt='github',
+      floatfmt=(".2f"),
+      showindex=False))
 
 #print statistics table
 print('')
 print(tabulate(summary_angle_table_3,
-	  headers=['Atoms','Count','Mean /°', 'Median /°','Sam. std. dev.', \
-	 'Pop. std. dev.','Std. error','Skewness'], 
-	  tablefmt='github',
-	  showindex=False))
-	
+      headers=['Atoms','Count','Mean /°', 'Median /°','Sam. std. dev.', \
+     'Pop. std. dev.','Std. error','Skewness'], 
+      tablefmt='github',
+      showindex=False))
+    
 #print the dihedral angle on request
 if args.dihedral:
-	a1=xyz_df.index[xyz_df['atom1_idx'] == args.dihedral[0]].tolist()
-	a2=xyz_df.index[xyz_df['atom1_idx'] == args.dihedral[1]].tolist()
-	a3=xyz_df.index[xyz_df['atom1_idx'] == args.dihedral[2]].tolist()
-	a4=xyz_df.index[xyz_df['atom1_idx'] == args.dihedral[3]].tolist()
-	try:
-		d_angle = calc_d_angle(xyzarr, *a1, *a2, *a3, *a4)
-	except TypeError:
-		print('')
-		print('Warning! Dihedral angle: One or more atoms could not be found in the input file.')
-		sys.exit(1)
-	print('')
-	print('Dihedral angle ' + args.dihedral[0] + '-' +args.dihedral[1] + '-' + \
-		    args.dihedral[2] + '-' + args.dihedral[3] + ':', f'{d_angle:.2f}°')
+    a1=xyz_df.index[xyz_df['atom1_idx'] == args.dihedral[0]].tolist()
+    a2=xyz_df.index[xyz_df['atom1_idx'] == args.dihedral[1]].tolist()
+    a3=xyz_df.index[xyz_df['atom1_idx'] == args.dihedral[2]].tolist()
+    a4=xyz_df.index[xyz_df['atom1_idx'] == args.dihedral[3]].tolist()
+    try:
+        d_angle = calc_d_angle(xyzarr, *a1, *a2, *a3, *a4)
+    except TypeError:
+        print('')
+        print('Warning! Dihedral angle: One or more atoms could not be found in the input file.')
+        sys.exit(1)
+    print('')
+    print('Dihedral angle ' + args.dihedral[0] + '-' +args.dihedral[1] + '-' + \
+            args.dihedral[2] + '-' + args.dihedral[3] + ':', f'{d_angle:.2f}°')
 
 #Plane No. 1 through selected or all atoms on request
 if args.plane1:
-	#get the index of the selected atoms
-	a1 = xyz_df.index[xyz_df['atom1_idx'].isin(args.plane1)].tolist()
-	#check for range notation symbol ':'
-	if ':' in args.plane1:
-		#get indices for ':'
-		sep_indices = [i for i, x in enumerate(args.plane1) if x == ":"]
-		#avoid error message for strange input
-		start = xyz_df.index[0]
-		#loop over indices for ':'
-		for sep_idx in sep_indices: 
-			#start is at atom index 0 if 0
-			if sep_idx == 0:
-				start = xyz_df.index[0]
-			else:
-				try:
-					#start index is the atom index of the atom in input, left from ':'
-					start = xyz_df.index[xyz_df['atom1_idx'] == args.plane1[sep_idx-1]].values.astype(int)[0]
-				except IndexError:
-					#catch malformed inputs
-					print('')
-					print('Warning! Malformed input.')
-			try: 
-				#stop index is the atom index of the atom in input, right from ':'
-				stop = xyz_df.index[xyz_df['atom1_idx'] == args.plane1[sep_idx+1]].values.astype(int)[0]
-			except IndexError:
-				#if there is no atom right from ':' take the last atom
-				stop = xyz_df.index[-1]	
-			#atom index range, stop+1 because of numpy 
-			atm_range = np.arange(start, stop+1)
-			#get unique index, avoid duplicates from range input and singel ato input 
-			#e.g. 1 2 4 + range 3 4 5 --> 1 2 3 4 4 5 --> 1 2 3 4 5
-			a1 = np.unique(list(a1) + list(atm_range))
-		
-	#get atom names from the selected atoms
-	atom_names1 = xyz_df.iloc[a1,1].tolist()
-	#get the x,y,z coordinates from the selected atoms
-	xyz_pl1_arr = xyzarr[a1]
-	
-	#check if atom names from input are in the atom list
-	#if not, warning
-	atom_names_in_arg = [x for x in args.plane1 if x != ':']
-	if not all(elem in atom_names1 for elem in atom_names_in_arg):
-		print('')
-		print('Warning! One or more atoms could not be found in the input file.')
-	
-	#no atoms / coordinates for calculation --> exit
-	if len(xyz_pl1_arr) == 0:
-		#if the list is empty --> exit
-		print('')
-		print('Warning! No atoms for Plane 1. Exit.')
-		sys.exit(1)
-	
-	#calculate the best fit plane
-	c1, n1 = svd_fit(np.asarray(xyz_pl1_arr))
-	
-	#create data frame for output
-	plane1_df = pd.DataFrame()
-	plane1_df['Atom'] = atom_names1
-	#calculate the distance of each atom to the plane 
-	plane1_df['Distance'] = np.dot(np.asarray(xyz_pl1_arr)-c1, n1)
-	#sum of squares error
-	#sosqf_p1  = plane1_df['Distance'].apply(lambda x: abs(x)**2)
-	
-	print('')
-	print('Best-fit Plane 1 through', len(atom_names1), 'atoms.')
-	
-	#print some plane related parameters
-	#print('')
-	#print('Centroid: ', *c1, 'Å')
-	#print('Plane normal: ', *n1, 'Å')
-	#print('Sum-of-squares error:', f'{sosqf_p1.sum():.4f} Å²')
-	
-	#print the table with atom names and distances to the plane
-	print('')
-	print(tabulate(plane1_df,
-	headers=['Atom','Distance to Plane 1 /Å'], 
-	tablefmt='github',
-	floatfmt=(".4f"),
-	showindex=False))
-	
+    #get the index of the selected atoms
+    a1 = xyz_df.index[xyz_df['atom1_idx'].isin(args.plane1)].tolist()
+    #check for range notation symbol ':'
+    if ':' in args.plane1:
+        #get indices for ':'
+        sep_indices = [i for i, x in enumerate(args.plane1) if x == ":"]
+        #avoid error message for strange input
+        start = xyz_df.index[0]
+        #loop over indices for ':'
+        for sep_idx in sep_indices: 
+            #start is at atom index 0 if 0
+            if sep_idx == 0:
+                start = xyz_df.index[0]
+            else:
+                try:
+                    #start index is the atom index of the atom in input, left from ':'
+                    start = xyz_df.index[xyz_df['atom1_idx'] == args.plane1[sep_idx-1]].values.astype(int)[0]
+                except IndexError:
+                    #catch malformed inputs
+                    print('')
+                    print('Warning! Malformed input.')
+            try: 
+                #stop index is the atom index of the atom in input, right from ':'
+                stop = xyz_df.index[xyz_df['atom1_idx'] == args.plane1[sep_idx+1]].values.astype(int)[0]
+            except IndexError:
+                #if there is no atom right from ':' take the last atom
+                stop = xyz_df.index[-1]    
+            #atom index range, stop+1 because of numpy 
+            atm_range = np.arange(start, stop+1)
+            #get unique index, avoid duplicates from range input and singel ato input 
+            #e.g. 1 2 4 + range 3 4 5 --> 1 2 3 4 4 5 --> 1 2 3 4 5
+            a1 = np.unique(list(a1) + list(atm_range))
+        
+    #get atom names from the selected atoms
+    atom_names1 = xyz_df.iloc[a1,1].tolist()
+    #get the x,y,z coordinates from the selected atoms
+    xyz_pl1_arr = xyzarr[a1]
+    
+    #check if atom names from input are in the atom list
+    #if not, warning
+    atom_names_in_arg = [x for x in args.plane1 if x != ':']
+    if not all(elem in atom_names1 for elem in atom_names_in_arg):
+        print('')
+        print('Warning! One or more atoms could not be found in the input file.')
+    
+    #no atoms / coordinates for calculation --> exit
+    if len(xyz_pl1_arr) == 0:
+        #if the list is empty --> exit
+        print('')
+        print('Warning! No atoms for Plane 1. Exit.')
+        sys.exit(1)
+    
+    #calculate the best fit plane
+    c1, n1 = svd_fit(np.asarray(xyz_pl1_arr))
+    
+    #create data frame for output
+    plane1_df = pd.DataFrame()
+    plane1_df['Atom'] = atom_names1
+    #calculate the distance of each atom to the plane 
+    plane1_df['Distance'] = np.dot(np.asarray(xyz_pl1_arr)-c1, n1)
+    #sum of squares error
+    #sosqf_p1  = plane1_df['Distance'].apply(lambda x: abs(x)**2)
+    
+    print('')
+    print('Best-fit Plane 1 through', len(atom_names1), 'atoms.')
+    
+    #print some plane related parameters
+    #print('')
+    #print('Centroid: ', *c1, 'Å')
+    #print('Plane normal: ', *n1, 'Å')
+    #print('Sum-of-squares error:', f'{sosqf_p1.sum():.4f} Å²')
+    
+    #print the table with atom names and distances to the plane
+    print('')
+    print(tabulate(plane1_df,
+    headers=['Atom','Distance to Plane 1 /Å'], 
+    tablefmt='github',
+    floatfmt=(".4f"),
+    showindex=False))
+    
 #Plane No. 2 through selected atoms on request
 #check comments for plane 1
 if args.plane2:
-	
-	if not args.plane1:
-		print('')
-		print('Warning! Plane 1 must be defined first. Exit.')
-		sys.exit()
-	
-	#get the index of the selected atoms
-	a2 = xyz_df.index[xyz_df['atom1_idx'].isin(args.plane2)].tolist()
-	
-	if ':' in args.plane2:
-		
-		sep_indices2 = [i for i, x in enumerate(args.plane2) if x == ":"]
-		start2 = xyz_df.index[0]
-		for sep_idx2 in sep_indices2: 
-			
-			if sep_idx2 == 0:
-				start2 = xyz_df.index[0]
-			else:
-				try:
-					start2 = xyz_df.index[xyz_df['atom1_idx'] == args.plane2[sep_idx2-1]].values.astype(int)[0]
-				except IndexError:
-					print('')
-					print('Warning! Malformed input.')
-			try: 
-				stop2 = xyz_df.index[xyz_df['atom1_idx'] == args.plane2[sep_idx2+1]].values.astype(int)[0]
-			except IndexError:
-				stop2 = xyz_df.index[-1]	
-				
-			atm_range2 = np.arange(start2, stop2+1)
-			a2 = np.unique(list(a2) + list(atm_range2))
-			
-	#get atom names from the selected atoms
-	atom_names2 = xyz_df.iloc[a2,1].tolist()
-	#get the x,y,z coordinates from the selected atoms
-	xyz_pl2_arr = xyzarr[a2]
-	
-	atom_names_in_arg2 = [x for x in args.plane2 if x != ':']
-	if not all(elem in atom_names2 for elem in atom_names_in_arg2):
-		print('')
-		print('Warning! One or more atoms could not be found in the input file.')
+    
+    if not args.plane1:
+        print('')
+        print('Warning! Plane 1 must be defined first. Exit.')
+        sys.exit()
+    
+    #get the index of the selected atoms
+    a2 = xyz_df.index[xyz_df['atom1_idx'].isin(args.plane2)].tolist()
+    
+    if ':' in args.plane2:
+        
+        sep_indices2 = [i for i, x in enumerate(args.plane2) if x == ":"]
+        start2 = xyz_df.index[0]
+        for sep_idx2 in sep_indices2: 
+            
+            if sep_idx2 == 0:
+                start2 = xyz_df.index[0]
+            else:
+                try:
+                    start2 = xyz_df.index[xyz_df['atom1_idx'] == args.plane2[sep_idx2-1]].values.astype(int)[0]
+                except IndexError:
+                    print('')
+                    print('Warning! Malformed input.')
+            try: 
+                stop2 = xyz_df.index[xyz_df['atom1_idx'] == args.plane2[sep_idx2+1]].values.astype(int)[0]
+            except IndexError:
+                stop2 = xyz_df.index[-1]    
+                
+            atm_range2 = np.arange(start2, stop2+1)
+            a2 = np.unique(list(a2) + list(atm_range2))
+            
+    #get atom names from the selected atoms
+    atom_names2 = xyz_df.iloc[a2,1].tolist()
+    #get the x,y,z coordinates from the selected atoms
+    xyz_pl2_arr = xyzarr[a2]
+    
+    atom_names_in_arg2 = [x for x in args.plane2 if x != ':']
+    if not all(elem in atom_names2 for elem in atom_names_in_arg2):
+        print('')
+        print('Warning! One or more atoms could not be found in the input file.')
 
-	if len(xyz_pl2_arr) == 0:
-		#if the list is empty --> exit
-		print('')
-		print('Warning! No atoms for Plane 2. Exit.')
-		sys.exit(1)
-		
-	#calculate the best fit plane
-	c2, n2 = svd_fit(np.asarray(xyz_pl2_arr))
-	
-	#create data frame for output
-	plane2_df = pd.DataFrame()
-	plane2_df['Atom'] = atom_names2
-	#calculate the distance of each atom to plane 2 
-	plane2_df['DistanceP2'] = np.dot(np.asarray(xyz_pl2_arr)-c2, n2)
-	#calculate the distance of each atom to plane 1 
-	plane2_df['DistanceP1'] = np.dot(np.asarray(xyz_pl2_arr)-c1, n1)
-	#sum of squares error
-	#sosqf_p2 = plane2_df['DistanceP2'].apply(lambda x: abs(x)**2)
-	
-	print('')
-	print('Best-fit Plane 2 through', len(atom_names2), 'atoms.')
-	
-	#print some plane related parameters
-	#print('')
-	#print('Centroid: ', *c2, 'Å')
-	#print('Plane normal: ', *n2, 'Å')
-	#print('Sum-of-squares error:', f'{sosqf_p2.sum():.4f} Å²')
-	
-	#print the table with atom names and distances to the plane 2 and plane 1 
-	print('')
-	print(tabulate(plane2_df,
-	headers=['Atom','Distance to Plane 2 /Å','Distance to Plane 1 /Å'], 
-	tablefmt='github',
-	floatfmt=(".4f"),
-	showindex=False))
-	
-	#calculate the angle between plane 1 and plane 2
-	#no warning if senseless result, e.g. plane 1 = plane 2
-	np.seterr(invalid='ignore')
-	phi = np.arccos(np.dot(n1,n2))
-	print('')
-	print('Angle between Plane 1 and Plane 2:', f'{np.degrees(phi):.2f}°')
+    if len(xyz_pl2_arr) == 0:
+        #if the list is empty --> exit
+        print('')
+        print('Warning! No atoms for Plane 2. Exit.')
+        sys.exit(1)
+        
+    #calculate the best fit plane
+    c2, n2 = svd_fit(np.asarray(xyz_pl2_arr))
+    
+    #create data frame for output
+    plane2_df = pd.DataFrame()
+    plane2_df['Atom'] = atom_names2
+    #calculate the distance of each atom to plane 2 
+    plane2_df['DistanceP2'] = np.dot(np.asarray(xyz_pl2_arr)-c2, n2)
+    #calculate the distance of each atom to plane 1 
+    plane2_df['DistanceP1'] = np.dot(np.asarray(xyz_pl2_arr)-c1, n1)
+    #sum of squares error
+    #sosqf_p2 = plane2_df['DistanceP2'].apply(lambda x: abs(x)**2)
+    
+    print('')
+    print('Best-fit Plane 2 through', len(atom_names2), 'atoms.')
+    
+    #print some plane related parameters
+    #print('')
+    #print('Centroid: ', *c2, 'Å')
+    #print('Plane normal: ', *n2, 'Å')
+    #print('Sum-of-squares error:', f'{sosqf_p2.sum():.4f} Å²')
+    
+    #print the table with atom names and distances to the plane 2 and plane 1 
+    print('')
+    print(tabulate(plane2_df,
+    headers=['Atom','Distance to Plane 2 /Å','Distance to Plane 1 /Å'], 
+    tablefmt='github',
+    floatfmt=(".4f"),
+    showindex=False))
+    
+    #calculate the angle between plane 1 and plane 2
+    #no warning if senseless result, e.g. plane 1 = plane 2
+    np.seterr(invalid='ignore')
+    phi = np.arccos(np.dot(n1,n2))
+    print('')
+    print('Angle between Plane 1 and Plane 2:', f'{np.degrees(phi):.2f}°')
 
 if args.show or args.showbl or args.shownl:
-	#show the molecule and planes
-	#lists for color asignment
-	metals = ['Ac', 'Ag', 'Al', 'Am', 'Ar', 'As', 'At', 'Au', 'Ba', 'Be', \
-				'Bi', 'Ca', 'Cd', 'Ce', 'Cf', 'Cm', 'Co', 'Cr', 'Cs', 'Cu', \
-				'Db', 'Dy', 'Er', 'Es', 'Eu', 'Fe', 'Fm', 'Fr', 'Ga', 'Gd', \
-				'Ge', 'Hf', 'Hg', 'Ho', 'Hs', 'In', 'Ir', 'K', 'La', 'Li', \
-				'Lr', 'Lu', 'Md', 'Mg', 'Mn', 'Mo', 'Na', 'Nb', 'Nd', 'Ni', \
-				'Np', 'Os', 'Pa', 'Pb', 'Pd', 'Pm', 'Po', 'Pr', 'Pt', 'Pu', \
-				'Ra', 'Rb', 'Re', 'Rf', 'Rh', 'Rn', 'Ru', 'Sc', 'Sm', 'Sn', \
-				'Sr', 'Ta', 'Tb', 'Tc', 'Te', 'Th', 'Ti', 'Tl', 'Tm', 'U', \
-				'V', 'W', 'Y', 'Yb', 'Zn', 'Zr']
-	green = ['F','Cl']
-	brown = ['Br']
-	purple = ['P','I']
-	orange = ['Si']
-	
-	#get atom numbers from sel_dist2 data frame, e.g. C11 --> 11
-	atom1_num = sel_dist2['atom1_idx'].apply(lambda x: re.sub(r'\D+','', x)).astype(int).tolist()
-	atom2_num = sel_dist2['atom2_idx'].apply(lambda x: re.sub(r'\D+','', x)).astype(int).tolist()
-	#get atom labels from xyz_df
-	atom_label = xyz_df['atom1_idx'].tolist()
-	#distance as bond label
-	bond_label = sel_dist2['distance_calc'].apply(lambda x: '{:.3f}'.format(x)).tolist()
-	
-	#if first atom has index 1
-	if args.index:
-		atom1_num  = [idx - 1 for idx in atom1_num]
-		atom2_num  = [idx - 1 for idx in atom2_num]
+    #show the molecule and planes
+    #lists for color asignment
+    metals = ['Ac', 'Ag', 'Al', 'Am', 'Ar', 'As', 'At', 'Au', 'Ba', 'Be', \
+                'Bi', 'Ca', 'Cd', 'Ce', 'Cf', 'Cm', 'Co', 'Cr', 'Cs', 'Cu', \
+                'Db', 'Dy', 'Er', 'Es', 'Eu', 'Fe', 'Fm', 'Fr', 'Ga', 'Gd', \
+                'Ge', 'Hf', 'Hg', 'Ho', 'Hs', 'In', 'Ir', 'K', 'La', 'Li', \
+                'Lr', 'Lu', 'Md', 'Mg', 'Mn', 'Mo', 'Na', 'Nb', 'Nd', 'Ni', \
+                'Np', 'Os', 'Pa', 'Pb', 'Pd', 'Pm', 'Po', 'Pr', 'Pt', 'Pu', \
+                'Ra', 'Rb', 'Re', 'Rf', 'Rh', 'Rn', 'Ru', 'Sc', 'Sm', 'Sn', \
+                'Sr', 'Ta', 'Tb', 'Tc', 'Te', 'Th', 'Ti', 'Tl', 'Tm', 'U', \
+                'V', 'W', 'Y', 'Yb', 'Zn', 'Zr']
+    green = ['F','Cl']
+    brown = ['Br']
+    purple = ['P','I']
+    orange = ['Si']
+    
+    #get atom numbers from sel_dist2 data frame, e.g. C11 --> 11
+    atom1_num = sel_dist2['atom1_idx'].apply(lambda x: re.sub(r'\D+','', x)).astype(int).tolist()
+    atom2_num = sel_dist2['atom2_idx'].apply(lambda x: re.sub(r'\D+','', x)).astype(int).tolist()
+    #get atom labels from xyz_df
+    atom_label = xyz_df['atom1_idx'].tolist()
+    #distance as bond label
+    bond_label = sel_dist2['distance_calc'].apply(lambda x: '{:.3f}'.format(x)).tolist()
+    
+    #if first atom has index 1
+    if args.index:
+        atom1_num  = [idx - 1 for idx in atom1_num]
+        atom2_num  = [idx - 1 for idx in atom2_num]
 
-	#atom1 and atom 2 coordinates
-	atom1_coord = xyzarr[atom1_num]
-	atom2_coord = xyzarr[atom2_num]
-	#put atom1 and atom2 coordinats in an numpy array (for bonds display)
-	atom1_2_coord = np.array(list(zip(atom1_coord,atom2_coord)))
+    #atom1 and atom 2 coordinates
+    atom1_coord = xyzarr[atom1_num]
+    atom2_coord = xyzarr[atom2_num]
+    #put atom1 and atom2 coordinats in an numpy array (for bonds display)
+    atom1_2_coord = np.array(list(zip(atom1_coord,atom2_coord)))
 
-	#clumsy but safe
-	#for assigning colors to different elemments
-	carr = xyz_df.index[xyz_df['element'].isin(['C'])].tolist()
-	harr = xyz_df.index[xyz_df['element'].isin(['H'])].tolist()
-	narr = xyz_df.index[xyz_df['element'].isin(['N'])].tolist()
-	oarr = xyz_df.index[xyz_df['element'].isin(['O'])].tolist()
-	sarr = xyz_df.index[xyz_df['element'].isin(['S'])].tolist()
-	marr = xyz_df.index[xyz_df['element'].isin(metals)].tolist()
-	grarr = xyz_df.index[xyz_df['element'].isin(green)].tolist()
-	brarr = xyz_df.index[xyz_df['element'].isin(brown)].tolist()
-	parr = xyz_df.index[xyz_df['element'].isin(purple)].tolist()
-	orarr = xyz_df.index[xyz_df['element'].isin(orange)].tolist()
-	restarr = [item for item in atom1_num if item not in carr]
-	restarr = [item for item in restarr if item not in harr]
-	restarr = [item for item in restarr if item not in narr]
-	restarr = [item for item in restarr if item not in oarr]
-	restarr = [item for item in restarr if item not in sarr]
-	restarr = [item for item in restarr if item not in marr]
-	restarr = [item for item in restarr if item not in grarr]
-	restarr = [item for item in restarr if item not in brarr]
-	restarr = [item for item in restarr if item not in parr]
-	restarr = [item for item in restarr if item not in orarr]
-	
-	#for atom labeling
-	atom_coord_name = zip(xyzarr,atom_label)
+    #clumsy but safe
+    #for assigning colors to different elemments
+    carr = xyz_df.index[xyz_df['element'].isin(['C'])].tolist()
+    harr = xyz_df.index[xyz_df['element'].isin(['H'])].tolist()
+    narr = xyz_df.index[xyz_df['element'].isin(['N'])].tolist()
+    oarr = xyz_df.index[xyz_df['element'].isin(['O'])].tolist()
+    sarr = xyz_df.index[xyz_df['element'].isin(['S'])].tolist()
+    marr = xyz_df.index[xyz_df['element'].isin(metals)].tolist()
+    grarr = xyz_df.index[xyz_df['element'].isin(green)].tolist()
+    brarr = xyz_df.index[xyz_df['element'].isin(brown)].tolist()
+    parr = xyz_df.index[xyz_df['element'].isin(purple)].tolist()
+    orarr = xyz_df.index[xyz_df['element'].isin(orange)].tolist()
+    restarr = [item for item in atom1_num if item not in carr]
+    restarr = [item for item in restarr if item not in harr]
+    restarr = [item for item in restarr if item not in narr]
+    restarr = [item for item in restarr if item not in oarr]
+    restarr = [item for item in restarr if item not in sarr]
+    restarr = [item for item in restarr if item not in marr]
+    restarr = [item for item in restarr if item not in grarr]
+    restarr = [item for item in restarr if item not in brarr]
+    restarr = [item for item in restarr if item not in parr]
+    restarr = [item for item in restarr if item not in orarr]
+    
+    #for atom labeling
+    atom_coord_name = zip(xyzarr,atom_label)
 
-	#prepare plot
-	fig = plt.figure(figsize=(10,8))
-	ax = plt.axes(projection='3d')
-	#otherwise molecule looks strange
-	ax.set_box_aspect((1, 1, 1))
-	
-	#clumsy but safe
-	#plot atom coordinates with different colors and point sizes
-	ax.scatter(*xyzarr[carr].T,s=100/len(xyzarr) * 50,color='black')
-	ax.scatter(*xyzarr[harr].T,s=80/len(xyzarr) * 50,color='tan')
-	ax.scatter(*xyzarr[narr].T,s=100/len(xyzarr) * 50,color='blue')
-	ax.scatter(*xyzarr[oarr].T,s=100/len(xyzarr) * 50,color='green')
-	ax.scatter(*xyzarr[sarr].T,s=200/len(xyzarr) * 50,color='yellow')
-	ax.scatter(*xyzarr[marr].T,s=300/len(xyzarr) * 50,color='red',alpha=0.85)
-	ax.scatter(*xyzarr[grarr].T,s=200/len(xyzarr) * 50,color='green')
-	ax.scatter(*xyzarr[brarr].T,s=200/len(xyzarr) * 50,color='brown')
-	ax.scatter(*xyzarr[parr].T,s=200/len(xyzarr) * 50,color='purple')
-	ax.scatter(*xyzarr[orarr].T,s=200/len(xyzarr) * 50,color='orange')
-	ax.scatter(*xyzarr[restarr].T,s=100/len(xyzarr) * 50,color='gray')
-	
-	#label atoms
-	#show no lables if -sn option is activated
-	if not args.shownl:
-		for coord, label in atom_coord_name:
-			ax.text(*(coord+0.12).T, label, fontsize=100/len(xyzarr) + 8 , color='black')
-	
-	#draw bonds
-	for bonds, labels in zip(atom1_2_coord, bond_label):
-		ax.plot(*bonds.T, color='gray', linewidth=3.0)
-		if args.showbl:
-			#show bond labels
-			ax.text(*np.average(bonds+0.06,axis=0).T,labels,fontsize=(100/len(xyzarr) + 8)/1.5,color='gray')
-	
-	ax.scatter(*xyzarr[restarr].T,s=100/len(xyzarr) * 50,color='red')
-	#define ranges forplanes
-	x_pl=np.sort(xyzarr[:,0])
-	y_pl=np.sort(xyzarr[:,1])
-	z_pl=np.sort(xyzarr[:,2])
+    #prepare plot
+    fig = plt.figure(figsize=(10,8))
+    ax = plt.axes(projection='3d')
+    #otherwise molecule looks strange
+    ax.set_box_aspect((1, 1, 1))
+    
+    #clumsy but safe
+    #plot atom coordinates with different colors and point sizes
+    ax.scatter(*xyzarr[carr].T,s=100/len(xyzarr) * 50,color='black')
+    ax.scatter(*xyzarr[harr].T,s=80/len(xyzarr) * 50,color='tan')
+    ax.scatter(*xyzarr[narr].T,s=100/len(xyzarr) * 50,color='blue')
+    ax.scatter(*xyzarr[oarr].T,s=100/len(xyzarr) * 50,color='green')
+    ax.scatter(*xyzarr[sarr].T,s=200/len(xyzarr) * 50,color='yellow')
+    ax.scatter(*xyzarr[marr].T,s=300/len(xyzarr) * 50,color='red',alpha=0.85)
+    ax.scatter(*xyzarr[grarr].T,s=200/len(xyzarr) * 50,color='green')
+    ax.scatter(*xyzarr[brarr].T,s=200/len(xyzarr) * 50,color='brown')
+    ax.scatter(*xyzarr[parr].T,s=200/len(xyzarr) * 50,color='purple')
+    ax.scatter(*xyzarr[orarr].T,s=200/len(xyzarr) * 50,color='orange')
+    ax.scatter(*xyzarr[restarr].T,s=100/len(xyzarr) * 50,color='gray')
+    
+    #label atoms
+    #show no lables if -sn option is activated
+    if not args.shownl:
+        for coord, label in atom_coord_name:
+            ax.text(*(coord+0.12).T, label, fontsize=100/len(xyzarr) + 8 , color='black')
+    
+    #draw bonds
+    for bonds, labels in zip(atom1_2_coord, bond_label):
+        ax.plot(*bonds.T, color='gray', linewidth=3.0)
+        if args.showbl:
+            #show bond labels
+            ax.text(*np.average(bonds+0.06,axis=0).T,labels,fontsize=(100/len(xyzarr) + 8)/1.5,color='gray')
+    
+    ax.scatter(*xyzarr[restarr].T,s=100/len(xyzarr) * 50,color='red')
+    #define ranges forplanes
+    x_pl=np.sort(xyzarr[:,0])
+    y_pl=np.sort(xyzarr[:,1])
+    z_pl=np.sort(xyzarr[:,2])
 
-	if args.plane1:
-		#plane1 grid
-		xx1, yy1 = np.meshgrid((x_pl[0],x_pl[-1]),(y_pl[0],y_pl[-1]))
-		if args.plane2:
-			#plane2 grid
-			xx2, yy2 = np.meshgrid((x_pl[0],x_pl[-1]),(y_pl[0],y_pl[-1]))
-		#plane 1 d
-		d1 = -c1.dot(n1)
-		
-		if args.plane2:
-			#plane 2 d
-			d2 = -c2.dot(n2)
-		#plane 1 equation
-		z1 = (-n1[0] * xx1 - n1[1] * yy1 - d1) * 1. /n1[2]
-		if args.plane2:
-			#plane 2 equation
-			z2 = (-n2[0] * xx2 - n2[1] * yy2 - d2) * 1. /n2[2]
-		#plot plane 1
-		surf = ax.plot_surface(xx1, yy1, z1, color='blue', alpha=0.3, label='Plane 1')
-		
-		if args.plane2:
-			#plot plane 2
-			surf = ax.plot_surface(xx2, yy2, z2, color='red', alpha=0.3, label='Plane 2')
-	
-	# show arrows representing the xyz-axes, starting from 0,0,0
-	if args.showori:
-		arrow_length =sum(abs(i) for i in ax.get_xlim())+sum(abs(i) for i in ax.get_ylim())+sum(abs(i) for i in ax.get_zlim())
-		arrow_length = (arrow_length/3)*0.5
-		if arrow_length > 3:
-			arrow_length = 3
-		ax.arrow3D(0,0,0, 0,0,arrow_length,
-					mutation_scale=20,
-					ec ='black',
-					fc='red')
-		ax.arrow3D(0,0,0, 0,arrow_length,0,
-					mutation_scale=20,
-					ec ='black',
-					fc='green')
-		ax.arrow3D(0,0,0, arrow_length,0,0,
-					mutation_scale=20,
-					ec ='black',
-					fc='blue')
-		ax.text(0, 0, arrow_length, 'z',color='red',fontsize=15)
-		ax.text(0, arrow_length, 0, 'y',color='green',fontsize=15)
-		ax.text(arrow_length, 0, 0, 'x',color='blue',fontsize=15)
-		ax.scatter(0,0,0,s=50,color='black',alpha=0.8)
+    if args.plane1:
+        #plane1 grid
+        xx1, yy1 = np.meshgrid((x_pl[0],x_pl[-1]),(y_pl[0],y_pl[-1]))
+        if args.plane2:
+            #plane2 grid
+            xx2, yy2 = np.meshgrid((x_pl[0],x_pl[-1]),(y_pl[0],y_pl[-1]))
+        #plane 1 d
+        d1 = -c1.dot(n1)
+        
+        if args.plane2:
+            #plane 2 d
+            d2 = -c2.dot(n2)
+        #plane 1 equation
+        z1 = (-n1[0] * xx1 - n1[1] * yy1 - d1) * 1. /n1[2]
+        if args.plane2:
+            #plane 2 equation
+            z2 = (-n2[0] * xx2 - n2[1] * yy2 - d2) * 1. /n2[2]
+        #plot plane 1
+        surf = ax.plot_surface(xx1, yy1, z1, color='blue', alpha=0.3, label='Plane 1')
+        
+        if args.plane2:
+            #plot plane 2
+            surf = ax.plot_surface(xx2, yy2, z2, color='red', alpha=0.3, label='Plane 2')
+    
+    # show arrows representing the xyz-axes, starting from 0,0,0
+    if args.showori:
+        arrow_length =sum(abs(i) for i in ax.get_xlim())+sum(abs(i) for i in ax.get_ylim())+sum(abs(i) for i in ax.get_zlim())
+        arrow_length = (arrow_length/3)*0.5
+        if arrow_length > 3:
+            arrow_length = 3
+        ax.arrow3D(0,0,0, 0,0,arrow_length,
+                    mutation_scale=20,
+                    ec ='black',
+                    fc='red')
+        ax.arrow3D(0,0,0, 0,arrow_length,0,
+                    mutation_scale=20,
+                    ec ='black',
+                    fc='green')
+        ax.arrow3D(0,0,0, arrow_length,0,0,
+                    mutation_scale=20,
+                    ec ='black',
+                    fc='blue')
+        ax.text(0, 0, arrow_length, 'z',color='red',fontsize=15)
+        ax.text(0, arrow_length, 0, 'y',color='green',fontsize=15)
+        ax.text(arrow_length, 0, 0, 'x',color='blue',fontsize=15)
+        ax.scatter(0,0,0,s=50,color='black',alpha=0.8)
 
-	#no axes
-	ax.set_axis_off()
-	#tight layout 
-	fig.tight_layout()
-	#ax.legend(loc='upper left')
-	#set z limits for plots, otherwise planes are sometimes very large
-	plt.gca().set_zlim(z_pl[0],z_pl[-1])
-	#adjust 3d drawing behavior, otherwise molecules are not correctly displayes
-	set_axes_equal(ax)
-	#show the plot
-	plt.show()
+    #no axes
+    ax.set_axis_off()
+    #tight layout 
+    fig.tight_layout()
+    #ax.legend(loc='upper left')
+    #set z limits for plots, otherwise planes are sometimes very large
+    plt.gca().set_zlim(z_pl[0],z_pl[-1])
+    #adjust 3d drawing behavior, otherwise molecules are not correctly displayes
+    set_axes_equal(ax)
+    #show the plot
+    plt.show()
