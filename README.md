@@ -1,3 +1,8 @@
+> [!TIP]
+> **Trusty `xyz2tab.py` is now available as a web app (thanks to AI)! Enjoy a brand-new interactive interface.**  
+> 👉 Try it here: https://radi0sus.github.io/advanced_xyz2tab/    
+> 👉 Dive into the [code](https://github.com/radi0sus/advanced_xyz2tab)
+
 # xyz2tab
 A Python 3 script for printing tables of bond lengths and (dihedral) angles from xyz files to the console. The script furthermore calculates average values, including a variety of statistical parameters, and is able to group bonding parameters. Two best-fit planes through selected or all atoms can be defined and atomic distances and angles between the planes can be calculated. Selected atoms or elements can be excluded from bond or angle tables. Contacts of two or more atoms can be included. The output should result in nicely rendered mark down tables. Molecules (atomic positions & bonds) and planes can be visualized. 
 <p align="center">
